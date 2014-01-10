@@ -9,7 +9,11 @@ import com.badrobot.subsystems.ExampleSubsystem;
  * The base for all commands. All atomic commands should subclass CommandBase.
  * CommandBase stores creates and stores each control system. To access a
  * subsystem elsewhere in your code in your code use CommandBase.exampleSubsystem
+<<<<<<< HEAD
  * @author Author
+=======
+ * @author Team 1014
+>>>>>>> 1a28f0dea95b0496366bed8e04d09ac404b1d125
  */
 public abstract class CommandBase extends Command {
 
