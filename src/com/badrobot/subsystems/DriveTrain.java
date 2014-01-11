@@ -5,6 +5,7 @@
 package com.badrobot.subsystems;
 
 import com.badrobot.RobotMap;
+import com.badrobot.commands.DriveRobot;
 import com.badrobot.subsystems.interfaces.IDriveTrain;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -29,8 +30,6 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
     Relay leftShifterRelay;
     DoubleSolenoid rightShifter;
     SpeedController leftSpeedController, rightSpeedController;
-    
-    //
     
     public static DriveTrain getInstance()
     {
@@ -77,7 +76,7 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
 
     protected void initDefaultCommand() 
     {
-        //this.setDefaultCommand(new DriveRobot());
+        this.setDefaultCommand(new DriveRobot());
     }
 
     /**
