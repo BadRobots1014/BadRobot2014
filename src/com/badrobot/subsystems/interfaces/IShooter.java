@@ -23,7 +23,7 @@ public interface IShooter
     public void cock();
     
     /** 
-     * @return Returns the current angle of the shooter during cocking 
+     * @return Returns the angle of the shooter during cocking 
      */
     public int getShooterAngle();
 }

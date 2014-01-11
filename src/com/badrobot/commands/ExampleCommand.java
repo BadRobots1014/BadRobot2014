@@ -1,11 +1,11 @@
 
-package edu.wpi.first.wpilibj.templates.commands;
+package com.badrobot.commands;
 
 /**
  *
  * @author bradmiller
  */
-public class ExampleCommand extends CommandBase {
+public class ExampleCommand extends BadCommand {
 
     public ExampleCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -32,5 +32,10 @@ public class ExampleCommand extends CommandBase {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    }
+
+    public String getConsoleIdentity() 
+    {
+        return "ExampleCommand";
     }
 }
