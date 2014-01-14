@@ -31,6 +31,7 @@ public class RobotMain extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+        RobotMap.isPrototype = true;
         // instantiate the command used for the autonomous period
         autonomousCommand = new ExampleCommand();
 
