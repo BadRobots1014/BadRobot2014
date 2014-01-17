@@ -17,13 +17,28 @@ public class RobotMap {
     // public static final int rangefinderPort = 1;
     // public static final int rangefinderModule = 1;
     
-    public static boolean isPrototype;
     
-    public static int rightSpeedController, leftSpeedController;
+    //Misc Important Robot Variables
+    public static final boolean isPrototype = true;
     
-    public static int compressorSwitch;
-    public static int compressorLimitSwitch;
+    //~~~~~~~~OUTPUT~~~~~~~~//
     
-    public static int leftShifterRelay;
-    public static int rightShifterDown, rightShifterUp;
+    //PWM Speed Controllers
+    public static final int frontLeftControllerPWM = 2;
+    public static final int backLeftControllerPWM = 1;
+    public static final int frontRightControllerPWM = 3;
+    public static final int backRightControllerPWM = 4;
+    
+    //Relay Compressor Ports
+    public static final int compressorSwitchRelay = -1;
+    
+    //PWM Solenoid Ports
+    public static final int shiftUpSolenoidPWM = -1;
+    public static final int shiftDownSolenoidPWM = -1;
+    
+    
+    //~~~~~~~~INPUT~~~~~~~~//
+    
+    //Digital Input Pressure Switch
+    public static final int pressureSwitchDigitalIn = 6;
 }

@@ -5,12 +5,15 @@
 package com.badrobot.subsystems;
 
 import com.badrobot.RobotMap;
+import com.badrobot.commands.DriveRobot;
 import com.badrobot.subsystems.interfaces.IDriveTrain;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 
 /**
@@ -19,18 +22,14 @@ import edu.wpi.first.wpilibj.Victor;
  */
 public class DriveTrain extends BadSubsystem implements IDriveTrain
 {
-    //instance variables
     private static DriveTrain instance;
     private static boolean shiftedUp;
     
     RobotDrive train;
-    DigitalInput compressorLimitSwitch;
+    DigitalInput pressureSwitch;
     Relay compressorSwitch;
-    Relay leftShifterRelay;
-    DoubleSolenoid rightShifter;
-    SpeedController leftSpeedController, rightSpeedController;
-    
-    //
+    Solenoid shiftUpSolenoid, shiftDownSolenoid;
+    SpeedController frontLeft, backLeft, frontRight, backRight;
     
     public static DriveTrain getInstance()
     {
@@ -56,17 +55,19 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
         {
             shiftedUp = false;
             
-            compressorLimitSwitch = new DigitalInput(RobotMap.compressorLimitSwitch);
-            compressorSwitch = new Relay(RobotMap.compressorSwitch);
+            pressureSwitch = new DigitalInput(RobotMap.pressureSwitchDigitalIn);
+            compressorSwitch = new Relay(RobotMap.compressorSwitchRelay);
             compressorSwitch.setDirection(Relay.Direction.kForward);
 
-            leftShifterRelay = new Relay(RobotMap.leftShifterRelay);
-            rightShifter = new DoubleSolenoid(RobotMap.rightShifterUp, RobotMap.rightShifterDown);
-
-            leftSpeedController = new Victor(RobotMap.leftSpeedController);
-            rightSpeedController = new Victor(RobotMap.rightSpeedController);
+            shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoidPWM);
+            shiftDownSolenoid = new Solenoid(RobotMap.shiftDownSolenoidPWM);
             
-            train = new RobotDrive(leftSpeedController, rightSpeedController);
+            frontLeft = new Talon(RobotMap.frontLeftControllerPWM);
+            backLeft = new Talon(RobotMap.backLeftControllerPWM);
+            frontRight = new Talon(RobotMap.frontRightControllerPWM);
+            backRight = new Talon(RobotMap.backRightControllerPWM);
+            
+            train = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
         }
     }
 
@@ -77,18 +78,9 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
 
     protected void initDefaultCommand() 
     {
-        //this.setDefaultCommand(new DriveRobot());
+        this.setDefaultCommand(new DriveRobot());
     }
 
-    /**
-     * Drives the robot in tank drive--two sticks represent the left and right
-     * sides of the robot; pushing forward on the left stick moves the left side
-     * forward, pushing backwards on the right stick moves the right side of the
-     * robot backwards.
-     *
-     * @param left the left side joystick value (-1 to 1)
-     * @param right the right joystick value (-1 to 1)
-     */
     public void tankDrive(double left, double right) 
     {
         train.tankDrive(left, right);
@@ -98,16 +90,14 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
     {
         if (!shiftedUp && up)
         {
-            log("shifting up");
-            rightShifter.set(DoubleSolenoid.Value.kForward);
-            leftShifterRelay.set(Relay.Value.kForward);
+            shiftDownSolenoid.set(false);
+            shiftUpSolenoid.set(true);
             shiftedUp = true;
         }
         else if (shiftedUp && !up)
         {
-            log("shifting down");
-            rightShifter.set(DoubleSolenoid.Value.kReverse);
-            leftShifterRelay.set(Relay.Value.kReverse);
+            shiftUpSolenoid.set(false);
+            shiftDownSolenoid.set(true);
             shiftedUp = false;
         }
     }
@@ -126,7 +116,7 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
 
     public boolean getCompressorLimit() 
     {
-        return compressorLimitSwitch.get();
+        return pressureSwitch.get();
     }
     
 }

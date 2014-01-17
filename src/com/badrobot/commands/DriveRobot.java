@@ -32,16 +32,23 @@ public class DriveRobot extends BadCommand
 
     protected void execute() 
     {
-        driveTrain.tankDrive(OI.primaryController.getLeftStickY(), OI.secondaryController.getRightStickY());
+        driveTrain.tankDrive(OI.primaryController.getLeftStickY(), OI.primaryController.getRightStickY());
+        
+        if (OI.primaryController.isRBButtonPressed())
+        {
+            driveTrain.tankDrive(BUMPER_SPEED, -BUMPER_SPEED);
+        }
+        else if (OI.primaryController.isLBButtonPressed())
+        {
+            driveTrain.tankDrive(-BUMPER_SPEED, BUMPER_SPEED);
+        }
         
         if (OI.primaryController.getRightTrigger() > 0)
         {
-            log("shift right");
             driveTrain.shift(true);
         }  
         else if (OI.primaryController.getLeftTrigger() > 0)
         {
-            log("shift left");
             driveTrain.shift(false);
         }
         
