@@ -45,12 +45,10 @@ public class DriveRobot extends BadCommand
         
         if (OI.primaryController.getRightTrigger() > 0)
         {
-            log("shift right");
             driveTrain.shift(true);
         }  
         else if (OI.primaryController.getLeftTrigger() > 0)
         {
-            log("shift left");
             driveTrain.shift(false);
         }
         
