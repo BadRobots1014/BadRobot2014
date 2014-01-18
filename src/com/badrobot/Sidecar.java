@@ -13,15 +13,15 @@ be hooked up to the available ports).
 public class Sidecar
 {
     // DO NOT CHANGE THIS CODE UNLESS THE cRIO Sidecar changes
-    public static final int PWMOut1 = 1;
-    public static final int PWMOut2 = 2;
-    public static final int PWMOut3 = 3;
-    public static final int PWMOut4 = 4;
-    public static final int PWMOut5 = 5;
-    public static final int PWMOut6 = 6;    
-    public static final int PWMOut7 = 7;    
-    public static final int PWMOut8 = 8;    
-    public static final int PWMOut9 = 9;    
+    public static final int PWMOUT1 = 1;
+    public static final int PWMOUT2 = 2;
+    public static final int PWMOUT3 = 3;
+    public static final int PWMOUT4 = 4;
+    public static final int PWMOUT5 = 5;
+    public static final int PWMOUT6 = 6;    
+    public static final int PWMOUT7 = 7;    
+    public static final int PWMOUT8 = 8;    
+    public static final int PWMOUT9 = 9;    
     
     public static final int DIO1 = 1;
     public static final int DIO2 = 2;
@@ -40,6 +40,13 @@ public class Sidecar
     
     public static final int RELAY1 = 1;
     public static final int RELAY2 = 2;    
+    
+    //These are not actually on the sidecar...
+    public static final int SOLENOID1 = 1;
+    public static final int SOLENOID2 = 2;
+    public static final int SOLENOID3 = 3;
+    public static final int SOLENOID4 = 4;
+    //There are more solenoids
 }
 
 

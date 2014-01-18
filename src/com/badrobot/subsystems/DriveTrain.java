@@ -116,7 +116,7 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
 
     public boolean getCompressorLimit() 
     {
-        return pressureSwitch.get();
+        return !pressureSwitch.get();
     }
     
 }

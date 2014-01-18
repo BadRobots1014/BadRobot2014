@@ -14,11 +14,10 @@ public class XboxController extends Joystick
 {
     public static double DEADZONE_MAGIC_NUMBER = .15;
     
-    private static int LEFT_STICK_X = 1, LEFT_STICK_Y = 2, RIGHT_STICK_X = 3, RIGHT_STICK_Y = 5;
+    private static int LEFT_STICK_X = 1, LEFT_STICK_Y = 2, RIGHT_STICK_X = 4, RIGHT_STICK_Y = 5;
     private static int A_BUTTON = 1, B_BUTTON = 2, X_BUTTON = 3, Y_BUTTON = 4, 
                         LB = 5, RB = 6, SELECT = 7, START = 8, LEFT_JOY_CLICK = 9, RIGHT_JOY_CLICK = 10;
-    
-    // TODO: Add triggers?
+    private static int TRIGGERS = 3;
     
     public XboxController(int port)
     {
@@ -40,14 +39,15 @@ public class XboxController extends Joystick
         if (Math.abs(d) < DEADZONE_MAGIC_NUMBER) {
             return 0;
         }
-
+        
+        if (d == 0)
+        {
+            return 0;
+        }
         //When the joystick is used for a purpose (passes the if statements, 
         //hence not just being loose), do math
-        
-        // QUESTION: What happens if d is zero?
-        // TODO: Fix this code to not blow up
         return (d / Math.abs(d)) //gets the sign of d, negative or positive
-                * ((Math.abs(d) - DEADZONE_MAGIC_NUMBER) / (1 - DEADZONE_MAGIC_NUMBER)); //scales it
+            * ((Math.abs(d) - DEADZONE_MAGIC_NUMBER) / (1 - DEADZONE_MAGIC_NUMBER)); //scales it
     }
     
     public double getLeftStickX() {
@@ -107,8 +107,7 @@ public class XboxController extends Joystick
     }
     
     public double getRightTrigger() {
-        // TODO: fix this - this looks incorrect
-        double triggerValue = this.getRawAxis(3);
+        double triggerValue = this.getRawAxis(TRIGGERS);
         if (triggerValue < 0) {
             return Math.abs(deadzone(triggerValue));
         } else {
@@ -117,12 +116,16 @@ public class XboxController extends Joystick
     }
 
     public double getLeftTrigger() {
-        // TODO: fix this - this looks incorrect
-        double triggerValue = this.getRawAxis(3);
+        double triggerValue = this.getRawAxis(TRIGGERS);
         if (triggerValue > 0) {
             return deadzone(triggerValue);
         } else {
             return 0;
         }
+    }
+    
+    public void checkControllerPorts()
+    {
+        
     }
 }

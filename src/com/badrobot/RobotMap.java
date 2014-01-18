@@ -8,15 +8,10 @@ package com.badrobot;
  */
 public class RobotMap 
 {
-    public static Sidecar Sidecar;
-    
-    public static final int DriverStation_ControllerPort1 = 1;
-    public static final int DriverStation_ControllerPort2 = 2;
+    public static final int driverStation_ControllerPort1 = 1;
+    public static final int driverStation_ControllerPort2 = 2;
     
     public static final int NI9102_AnalogIn1 = 1;
-
-    
-    
     
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
@@ -35,21 +30,21 @@ public class RobotMap
     //~~~~~~~~OUTPUT~~~~~~~~//
     
     //PWM Speed Controllers
-    public static final int frontLeftControllerPWM = 2;
-    public static final int backLeftControllerPWM = 1;
-    public static final int frontRightControllerPWM = 3;
-    public static final int backRightControllerPWM = 4;
+    public static final int frontLeftControllerPWM = Sidecar.PWMOUT2;
+    public static final int backLeftControllerPWM = Sidecar.PWMOUT1;
+    public static final int frontRightControllerPWM = Sidecar.PWMOUT3;
+    public static final int backRightControllerPWM = Sidecar.PWMOUT4;
     
     //Relay Compressor Ports
-    public static final int compressorSwitchRelay = -1;
+    public static final int compressorSwitchRelay = Sidecar.RELAY1;
     
     //PWM Solenoid Ports
-    public static final int shiftUpSolenoidPWM = -1;
-    public static final int shiftDownSolenoidPWM = -1;
+    public static final int shiftUpSolenoidPWM = Sidecar.SOLENOID1;
+    public static final int shiftDownSolenoidPWM = Sidecar.SOLENOID2;
     
     
     //~~~~~~~~INPUT~~~~~~~~//
     
     //Digital Input Pressure Switch
-    public static final int pressureSwitchDigitalIn = 6;
+    public static final int pressureSwitchDigitalIn = Sidecar.DIO1;
 }

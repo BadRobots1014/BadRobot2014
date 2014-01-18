@@ -51,8 +51,8 @@ public class OI {
     public void init()
     {
         driverStation = DriverStation.getInstance();
-        primaryController = new XboxController(RobotMap.DriverStation_ControllerPort1);
-        secondaryController = new XboxController(RobotMap.DriverStation_ControllerPort2);
+        primaryController = new XboxController(RobotMap.driverStation_ControllerPort1);
+        secondaryController = new XboxController(RobotMap.driverStation_ControllerPort2);
     }
     
     public static boolean getDigitalInput(int channel){
