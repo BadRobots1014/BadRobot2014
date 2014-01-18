@@ -46,8 +46,6 @@ public class OI {
     
     public static boolean CONSOLE_OUTPUT_ENABLED = true;
     
-    public static double DEADZONE_MAGIC_NUMBER = .15;
-    
     public static XboxController primaryController, secondaryController;
     
     public void init()
@@ -55,28 +53,6 @@ public class OI {
         driverStation = DriverStation.getInstance();
         primaryController = new XboxController(RobotMap.DriverStation_ControllerPort1);
         secondaryController = new XboxController(RobotMap.DriverStation_ControllerPort2);
-    }
-
-    /**
-     * Creates a deadzone for joysticks, the controllers sticks are a little
-     * loose and so there is a margin of error for where they should be
-     * considered "neutral/not pushed"
-     *
-     * @param d Double between -1 and 1 to be deadzoned
-     * @return The deadzone value
-     */
-    public static double deadzone(double d) {
-        //whenever the controller moves LESS than the magic number, the 
-        //joystick is in the loose position so return zero - as if the 
-        //joystick was not moved
-        if (Math.abs(d) < DEADZONE_MAGIC_NUMBER) {
-            return 0;
-        }
-
-        //When the joystick is used for a purpose (passes the if statements, 
-        //hence not just being loose), do math
-        return (d / Math.abs(d)) //gets the sign of d, negative or positive
-                * ((Math.abs(d) - DEADZONE_MAGIC_NUMBER) / (1 - DEADZONE_MAGIC_NUMBER)); //scales it
     }
     
     public static boolean getDigitalInput(int channel){
