@@ -18,6 +18,8 @@ public class XboxController extends Joystick
     private static int A_BUTTON = 1, B_BUTTON = 2, X_BUTTON = 3, Y_BUTTON = 4, 
                         LB = 5, RB = 6, SELECT = 7, START = 8, LEFT_JOY_CLICK = 9, RIGHT_JOY_CLICK = 10;
     
+    // TODO: Add triggers?
+    
     public XboxController(int port)
     {
         super(port);
@@ -29,7 +31,7 @@ public class XboxController extends Joystick
      * considered "neutral/not pushed"
      *
      * @param d Double between -1 and 1 to be deadzoned
-     * @return The deadzone value
+     * @return The deadzoned value
      */
     public static double deadzone(double d) {
         //whenever the controller moves LESS than the magic number, the 
@@ -41,6 +43,9 @@ public class XboxController extends Joystick
 
         //When the joystick is used for a purpose (passes the if statements, 
         //hence not just being loose), do math
+        
+        // QUESTION: What happens if d is zero?
+        // TODO: Fix this code to not blow up
         return (d / Math.abs(d)) //gets the sign of d, negative or positive
                 * ((Math.abs(d) - DEADZONE_MAGIC_NUMBER) / (1 - DEADZONE_MAGIC_NUMBER)); //scales it
     }
@@ -102,6 +107,7 @@ public class XboxController extends Joystick
     }
     
     public double getRightTrigger() {
+        // TODO: fix this - this looks incorrect
         double triggerValue = this.getRawAxis(3);
         if (triggerValue < 0) {
             return Math.abs(deadzone(triggerValue));
@@ -111,6 +117,7 @@ public class XboxController extends Joystick
     }
 
     public double getLeftTrigger() {
+        // TODO: fix this - this looks incorrect
         double triggerValue = this.getRawAxis(3);
         if (triggerValue > 0) {
             return deadzone(triggerValue);
