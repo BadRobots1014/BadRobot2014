@@ -6,7 +6,18 @@ package com.badrobot;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap {
+public class RobotMap 
+{
+    public static Sidecar Sidecar;
+    
+    public static final int DriverStation_ControllerPort1 = 1;
+    public static final int DriverStation_ControllerPort2 = 2;
+    
+    public static final int NI9102_AnalogIn1 = 1;
+
+    
+    
+    
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
     // public static final int leftMotor = 1;
