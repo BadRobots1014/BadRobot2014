@@ -53,8 +53,8 @@ public class OI {
     public void init()
     {
         driverStation = DriverStation.getInstance();
-        primaryController = new XboxController(1);
-        secondaryController = new XboxController(2);
+        primaryController = new XboxController(RobotMap.DriverStation_ControllerPort1);
+        secondaryController = new XboxController(RobotMap.DriverStation_ControllerPort2);
     }
 
     /**
