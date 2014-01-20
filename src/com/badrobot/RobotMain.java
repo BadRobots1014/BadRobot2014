@@ -71,4 +71,8 @@ public class RobotMain extends IterativeRobot {
     public void testPeriodic() {
         LiveWindow.run();
     }
+
+    private void log(String input) {
+        System.out.println("RobotMain: "+input);
+    }
 }
