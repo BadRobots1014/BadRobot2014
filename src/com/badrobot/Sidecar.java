@@ -46,6 +46,8 @@ public class Sidecar
     public static final int SOLENOID2 = 2;
     public static final int SOLENOID3 = 3;
     public static final int SOLENOID4 = 4;
+    public static final int SOLENOID5 = 5;
+    public static final int SOLENOID6 = 6;
     //There are more solenoids
 }
 

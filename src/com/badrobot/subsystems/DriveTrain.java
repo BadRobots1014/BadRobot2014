@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.Victor;
 public class DriveTrain extends BadSubsystem implements IDriveTrain
 {
     private static DriveTrain instance;
-    private static boolean shiftedUp;
+    private static boolean shiftedUp, hasShifted;
     
     RobotDrive train;
     DigitalInput pressureSwitch;
@@ -59,13 +59,13 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
             compressorSwitch = new Relay(RobotMap.compressorSwitchRelay);
             compressorSwitch.setDirection(Relay.Direction.kForward);
 
-            shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoidPWM);
-            shiftDownSolenoid = new Solenoid(RobotMap.shiftDownSolenoidPWM);
+            shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoid);
+            shiftDownSolenoid = new Solenoid(RobotMap.shiftDownSolenoid);
             
-            frontLeft = new Talon(RobotMap.frontLeftControllerPWM);
-            backLeft = new Talon(RobotMap.backLeftControllerPWM);
-            frontRight = new Talon(RobotMap.frontRightControllerPWM);
-            backRight = new Talon(RobotMap.backRightControllerPWM);
+            frontLeft = new Talon(RobotMap.frontLeftController);
+            backLeft = new Talon(RobotMap.backLeftController);
+            frontRight = new Talon(RobotMap.frontRightController);
+            backRight = new Talon(RobotMap.backRightController);
             
             train = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
         }
@@ -93,12 +93,14 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
             shiftDownSolenoid.set(false);
             shiftUpSolenoid.set(true);
             shiftedUp = true;
+            hasShifted = true;
         }
-        else if (shiftedUp && !up)
+        else if ((shiftedUp && !up) || (!hasShifted && !up))
         {
             shiftUpSolenoid.set(false);
             shiftDownSolenoid.set(true);
             shiftedUp = false;
+            hasShifted = true;
         }
     }
 

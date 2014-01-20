@@ -30,17 +30,20 @@ public class RobotMap
     //~~~~~~~~OUTPUT~~~~~~~~//
     
     //PWM Speed Controllers
-    public static final int frontLeftControllerPWM = Sidecar.PWMOUT2;
-    public static final int backLeftControllerPWM = Sidecar.PWMOUT1;
-    public static final int frontRightControllerPWM = Sidecar.PWMOUT3;
-    public static final int backRightControllerPWM = Sidecar.PWMOUT4;
+    public static final int frontLeftController = Sidecar.PWMOUT2;
+    public static final int backLeftController = Sidecar.PWMOUT1;
+    public static final int frontRightController = Sidecar.PWMOUT3;
+    public static final int backRightController = Sidecar.PWMOUT4;
+    public static final int winchController = Sidecar.PWMOUT5;
     
     //Relay Compressor Ports
     public static final int compressorSwitchRelay = Sidecar.RELAY1;
     
     //PWM Solenoid Ports
-    public static final int shiftUpSolenoidPWM = Sidecar.SOLENOID1;
-    public static final int shiftDownSolenoidPWM = Sidecar.SOLENOID2;
+    public static final int shiftUpSolenoid = Sidecar.SOLENOID1;
+    public static final int shiftDownSolenoid = Sidecar.SOLENOID2;
+    public static final int engageWinchSolenoid = Sidecar.SOLENOID5;
+    public static final int disengageWinchSolenoid = Sidecar.SOLENOID6;
     
     
     //~~~~~~~~INPUT~~~~~~~~//

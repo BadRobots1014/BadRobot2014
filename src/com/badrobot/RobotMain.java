@@ -31,17 +31,14 @@ public class RobotMain extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-        log("robot init");
         // instantiate the command used for the autonomous period
         autonomousCommand = new ExampleCommand();
 
         // Initialize all subsystems
         CommandBase.init();
-        log("robot init finished");
     }
 
     public void autonomousInit() {
-        log("auton init");
         // schedule the autonomous command (example)
         autonomousCommand.start();
     }
@@ -54,7 +51,6 @@ public class RobotMain extends IterativeRobot {
     }
 
     public void teleopInit() {
-        log("teleop Init");
 	// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
