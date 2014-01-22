@@ -23,12 +23,12 @@ import edu.wpi.first.wpilibj.Victor;
 public class DriveTrain extends BadSubsystem implements IDriveTrain
 {
     private static DriveTrain instance;
-    private static boolean shiftedUp, hasShifted;
+    private static boolean shiftedUp;
     
     RobotDrive train;
     DigitalInput pressureSwitch;
     Relay compressorSwitch;
-    Solenoid shiftUpSolenoid, shiftDownSolenoid;
+    Solenoid shiftDownSolenoid;
     SpeedController frontLeft, backLeft, frontRight, backRight;
     
     public static DriveTrain getInstance()
@@ -53,13 +53,12 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
         }
         else
         {
-            shiftedUp = false;
+            shiftedUp = true;
             
             pressureSwitch = new DigitalInput(RobotMap.pressureSwitchDigitalIn);
             compressorSwitch = new Relay(RobotMap.compressorSwitchRelay);
             compressorSwitch.setDirection(Relay.Direction.kForward);
-
-            shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoid);
+            
             shiftDownSolenoid = new Solenoid(RobotMap.shiftDownSolenoid);
             
             frontLeft = new Talon(RobotMap.frontLeftController);
@@ -86,21 +85,23 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
         train.tankDrive(left, right);
     }
 
-    public void shift(boolean up) 
+    public void shift(boolean down) 
     {
-        if (!shiftedUp && up)
+        if (down)
         {
-            shiftDownSolenoid.set(false);
-            shiftUpSolenoid.set(true);
-            shiftedUp = true;
-            hasShifted = true;
+            if(shiftedUp)
+            {
+                shiftDownSolenoid.set(true);
+                shiftedUp = false;
+            }
         }
-        else if ((shiftedUp && !up) || (!hasShifted && !up))
+        else
         {
-            shiftUpSolenoid.set(false);
-            shiftDownSolenoid.set(true);
-            shiftedUp = false;
-            hasShifted = true;
+            if(!shiftedUp)
+            {
+                shiftDownSolenoid.set(false);
+                shiftedUp = true;
+            }
         }
     }
 
