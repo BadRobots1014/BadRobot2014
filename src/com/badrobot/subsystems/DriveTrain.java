@@ -23,12 +23,12 @@ import edu.wpi.first.wpilibj.Victor;
 public class DriveTrain extends BadSubsystem implements IDriveTrain
 {
     private static DriveTrain instance;
-    private static boolean shiftedUp;
+    private static boolean shiftedUp, compressorOn;
     
     RobotDrive train;
     DigitalInput pressureSwitch;
     Relay compressorSwitch;
-    Solenoid shiftDownSolenoid;
+    Solenoid shiftDownSolenoid, shiftUpSolenoid;
     SpeedController frontLeft, backLeft, frontRight, backRight;
     
     public static DriveTrain getInstance()
@@ -54,12 +54,14 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
         else
         {
             shiftedUp = true;
+            compressorOn = false;
             
             pressureSwitch = new DigitalInput(RobotMap.pressureSwitchDigitalIn);
             compressorSwitch = new Relay(RobotMap.compressorSwitchRelay);
             compressorSwitch.setDirection(Relay.Direction.kForward);
             
             shiftDownSolenoid = new Solenoid(RobotMap.shiftDownSolenoid);
+            shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoid);
             
             frontLeft = new Talon(RobotMap.frontLeftController);
             backLeft = new Talon(RobotMap.backLeftController);
@@ -87,33 +89,31 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
 
     public void shift(boolean down) 
     {
-        if (down)
+        if (down && shiftedUp)
         {
-            if(shiftedUp)
-            {
-                shiftDownSolenoid.set(true);
-                shiftedUp = false;
-            }
+            shiftUpSolenoid.set(false);
+            shiftDownSolenoid.set(true);
+            shiftedUp = false;
         }
-        else
+        else if (!down && !shiftedUp)
         {
-            if(!shiftedUp)
-            {
-                shiftDownSolenoid.set(false);
-                shiftedUp = true;
-            }
+            shiftDownSolenoid.set(false);
+            shiftUpSolenoid.set(true);
+            shiftedUp = true;
         }
     }
 
     public void compressorEnabled(boolean on) 
     {
-        if (on)
+        if (on && !compressorOn)
         {
             compressorSwitch.set(Relay.Value.kOn);
+            compressorOn = true;
         }
-        else
+        else if (!on && compressorOn)
         {
             compressorSwitch.set(Relay.Value.kOff);
+            compressorOn = false;
         }
     }
 
