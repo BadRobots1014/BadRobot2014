@@ -8,7 +8,6 @@ package com.badrobot.subsystems.interfaces;
  *
  * @author Steve
  */
-public interface IVisionTracking 
-{
+public interface IRetroLight {
     
 }
