@@ -10,6 +10,6 @@ package com.badrobot.subsystems.interfaces;
  */
 public interface IGatherer {
     
-    public void gathererBall(int state);
+    public void gatherBall(boolean on, boolean forward);
     
 }

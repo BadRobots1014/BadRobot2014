@@ -87,19 +87,19 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
         train.tankDrive(left, right);
     }
 
-    public void shift(boolean down) 
+    public void shift(boolean up) 
     {
-        if (down && shiftedUp)
-        {
-            shiftUpSolenoid.set(false);
-            shiftDownSolenoid.set(true);
-            shiftedUp = false;
-        }
-        else if (!down && !shiftedUp)
+        if (up && !shiftedUp)
         {
             shiftDownSolenoid.set(false);
             shiftUpSolenoid.set(true);
             shiftedUp = true;
+        }
+        else if (!up && shiftedUp)
+        {
+            shiftUpSolenoid.set(false);
+            shiftDownSolenoid.set(true);
+            shiftedUp = false;
         }
     }
 

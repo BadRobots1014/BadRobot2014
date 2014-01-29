@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.Relay;
 public class Gatherer extends BadSubsystem implements IGatherer
 {
     public static Gatherer instance;
-    public static boolean gathererOn;
+    public static boolean gathererOn, gathererForward;
     
     Relay gathererSwitch;
 
@@ -35,9 +35,15 @@ public class Gatherer extends BadSubsystem implements IGatherer
     
     protected void initialize() 
     {
-        gathererOn = false;
-        
-        gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
+        if (!RobotMap.isPrototype)
+        {
+            //final robot code goes here
+        }
+        else
+        {
+            gathererOn = false;
+            gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
+        }
     }
 
     public String getConsoleIdentity() 
@@ -50,22 +56,28 @@ public class Gatherer extends BadSubsystem implements IGatherer
         this.setDefaultCommand(new GatherBall());
     }
     
-    // 0 is off, 1 is gather ball, 2 is eject ball
-    public void gathererBall(int state)
+    public void gatherBall(boolean on, boolean forward)
     {
-        if (state == 0)
-        {
-            gathererSwitch.set(Relay.Value.kOff);
-        }
-        else if (state == 1)
+        if (forward && !gathererForward)
         {
             gathererSwitch.setDirection(Relay.Direction.kForward);
-            gathererSwitch.set(Relay.Value.kOn);
+            gathererForward = true;
         }
-        else if (state == 2)
+        else if (!forward && gathererForward)
         {
             gathererSwitch.setDirection(Relay.Direction.kReverse);
+            gathererForward = false;
+        }
+        
+        if (on && !gathererOn)
+        {
             gathererSwitch.set(Relay.Value.kOn);
+            gathererOn = true;
+        }
+        else if (!on && gathererOn)
+        {
+            gathererSwitch.set(Relay.Value.kOff);
+            gathererOn = false;
         }
     }
 }

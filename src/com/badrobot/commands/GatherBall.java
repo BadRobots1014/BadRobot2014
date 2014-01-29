@@ -5,6 +5,8 @@
 package com.badrobot.commands;
 
 import com.badrobot.OI;
+import com.badrobot.RobotMap;
+import com.badrobot.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -13,7 +15,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class GatherBall extends BadCommand
 {
-
+    
+    public static boolean gatherOn, rButtonPressed, lButtonPressed; 
+    
     public GatherBall()
     {
         requires ((Subsystem) gatherer);
@@ -21,9 +25,11 @@ public class GatherBall extends BadCommand
     
     protected void initialize() 
     {
-        
+        gatherOn = false;
+        rButtonPressed = false;
+        lButtonPressed = false;
     }
-
+    
     public String getConsoleIdentity() 
     {
         return "GatherBall";
@@ -31,17 +37,60 @@ public class GatherBall extends BadCommand
 
     protected void execute() 
     {
-        if (OI.primaryController.isXButtonPressed())
+        if (!RobotMap.singleControllerMode)
         {
-            gatherer.gathererBall(1);
-        }
-        else if (OI.primaryController.isYButtonPressed())
-        {
-            gatherer.gathererBall(2);
+            if (OI.secondaryController.isRBButtonPressed())
+            {
+                gatherer.gatherBall(true, true);
+            }
+            else if (OI.secondaryController.isLBButtonPressed())
+            {
+                gatherer.gatherBall(true, false);
+            }
+            else
+            {
+                gatherer.gatherBall(false, true);
+            }
         }
         else
         {
-            gatherer.gathererBall(0);
+            if (OI.primaryController.isXButtonPressed())
+            {
+                rButtonPressed = true;
+            }
+            else if (!OI.primaryController.isXButtonPressed() && rButtonPressed)
+            {
+                if (!gatherOn)
+                {
+                    gatherer.gatherBall(true, true);
+                    gatherOn = true;
+                }
+                else
+                {
+                    gatherer.gatherBall(false, true);
+                    gatherOn = false;
+                }
+                rButtonPressed = false;
+            }
+
+            if (OI.primaryController.isYButtonPressed())
+            {
+                lButtonPressed = true;
+            }
+            else if (!OI.primaryController.isYButtonPressed() && lButtonPressed)
+            {
+                lButtonPressed = false;
+                if (!gatherOn)
+                {
+                    gatherer.gatherBall(true, false);
+                    gatherOn = true;
+                }
+                else
+                {
+                    gatherer.gatherBall(false, false);
+                    gatherOn = false;
+                }
+            }
         }
     }
 
