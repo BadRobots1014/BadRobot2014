@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 MIDlet-Name: BadRobot2014
 MIDlet-Version: 1.0.0
 MIDlet-Vendor: FIRST
@@ -15,6 +16,14 @@ MIDlet-1: RobotMain, ,  com.badrobot.RobotMain
 =======
 MIDlet-1: RobotMain, , com.badrobot.RobotMain
 >>>>>>> 1a28f0dea95b0496366bed8e04d09ac404b1d125
+MicroEdition-Profile: IMP-1.0
+MicroEdition-Configuration: CLDC-1.1
+>>>>>>> branch 'master' of github.com:BadRobots1014/BadRobot2014.git
+=======
+MIDlet-Name: BadRobot2014
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: FIRST
+MIDlet-1: RobotMain, , com.badrobot.RobotMain
 MicroEdition-Profile: IMP-1.0
 MicroEdition-Configuration: CLDC-1.1
 >>>>>>> branch 'master' of github.com:BadRobots1014/BadRobot2014.git

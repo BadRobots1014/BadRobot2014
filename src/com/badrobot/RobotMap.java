@@ -40,7 +40,6 @@ public class RobotMap
     public static final int compressorSwitchRelay = Sidecar.RELAY1;
     
     //PWM Solenoid Ports
-    public static final int shiftUpSolenoid = Sidecar.SOLENOID1;
     public static final int shiftDownSolenoid = Sidecar.SOLENOID2;
     public static final int engageWinchSolenoid = Sidecar.SOLENOID5;
     public static final int disengageWinchSolenoid = Sidecar.SOLENOID6;
