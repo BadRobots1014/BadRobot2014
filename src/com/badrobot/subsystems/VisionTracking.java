@@ -11,10 +11,8 @@ import com.badrobot.subsystems.interfaces.IVisionTracking;
  */
 public class VisionTracking extends BadSubsystem implements IVisionTracking {
 
-    public double getScore() 
-    {
-        return 0.0;
-    }
+    Camera camera;
+    
 
     protected void initialize() 
     {
