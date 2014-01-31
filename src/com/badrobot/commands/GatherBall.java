@@ -37,7 +37,8 @@ public class GatherBall extends BadCommand
 
     protected void execute() 
     {
-        if (!RobotMap.singleControllerMode)
+        //Used when two controllers will be used
+        if (!OI.isSingleControllerMode())
         {
             if (OI.secondaryController.isRBButtonPressed())
             {
@@ -52,6 +53,7 @@ public class GatherBall extends BadCommand
                 gatherer.gatherBall(false, true);
             }
         }
+        //Used when one controller will be used
         else
         {
             if (OI.primaryController.isXButtonPressed())

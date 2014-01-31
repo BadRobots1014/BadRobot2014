@@ -33,7 +33,8 @@ public class Shoot extends BadCommand
 
     protected void execute() 
     {
-        if (!RobotMap.singleControllerMode)
+        //Used when two controllers will be used
+        if (!OI.isSingleControllerMode())
         {
             if (OI.secondaryController.isAButtonPressed())
             {
@@ -53,6 +54,7 @@ public class Shoot extends BadCommand
                 shooter.engageWinch();
             }
         }
+        //Used when one controller will be used
         else
         {
             if (OI.primaryController.isAButtonPressed())

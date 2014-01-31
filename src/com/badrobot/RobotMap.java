@@ -26,7 +26,6 @@ public class RobotMap
     
     //Misc Important Robot Variables
     public static final boolean isPrototype = true;
-    public static final boolean singleControllerMode = true/*OI.driverStation.getDigitalIn(1)*/;
     
     //~~~~~~~~OUTPUT~~~~~~~~//
     
