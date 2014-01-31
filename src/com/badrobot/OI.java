@@ -58,5 +58,10 @@ public class OI {
     public static boolean getDigitalInput(int channel){
         return driverStation.getDigitalIn(channel);
     }
+    
+    public static boolean isSingleControllerMode()
+    {
+        return driverStation.getDigitalIn(1);
+    }
 }
 
