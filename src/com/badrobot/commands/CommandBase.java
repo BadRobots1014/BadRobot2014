@@ -5,8 +5,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.badrobot.OI;
 import com.badrobot.subsystems.DriveTrain;
 import com.badrobot.subsystems.ExampleSubsystem;
+import com.badrobot.subsystems.Gatherer;
 import com.badrobot.subsystems.Shooter;
 import com.badrobot.subsystems.interfaces.IDriveTrain;
+import com.badrobot.subsystems.interfaces.IGatherer;
 import com.badrobot.subsystems.interfaces.IShooter;
 
 /**
@@ -22,6 +24,7 @@ public abstract class CommandBase extends Command {
     
     public static IDriveTrain driveTrain;
     public static IShooter shooter;
+    public static IGatherer gatherer;
     
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
@@ -34,6 +37,7 @@ public abstract class CommandBase extends Command {
 
         driveTrain = DriveTrain.getInstance();
         shooter = Shooter.getInstance();
+        gatherer = Gatherer.getInstance();
 
         // Show what command your subsystem is running on the SmartDashboard
         //SmartDashboard.putData(exampleSubsystem);

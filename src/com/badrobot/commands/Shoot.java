@@ -5,6 +5,7 @@
 package com.badrobot.commands;
 
 import com.badrobot.OI;
+import com.badrobot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -32,22 +33,47 @@ public class Shoot extends BadCommand
 
     protected void execute() 
     {
-        if (OI.primaryController.isAButtonPressed())
+        //Used when two controllers will be used
+        if (!OI.isSingleControllerMode())
         {
-            shooter.cockBack(COCK_BACK_SPEED);
+            if (OI.secondaryController.isAButtonPressed())
+            {
+                shooter.cockBack(COCK_BACK_SPEED);
+            }
+            else
+            {
+                shooter.cockBack(0);
+            }
+
+            if (OI.secondaryController.isBButtonPressed())
+            {
+                shooter.disengageWinch();
+            }
+            else
+            {
+                shooter.engageWinch();
+            }
         }
+        //Used when one controller will be used
         else
         {
-            shooter.cockBack(0);
-        }
-        
-        if (OI.primaryController.isBButtonPressed())
-        {
-            shooter.disengageWinch();
-        }
-        else
-        {
-            shooter.engageWinch();
+            if (OI.primaryController.isAButtonPressed())
+            {
+                shooter.cockBack(COCK_BACK_SPEED);
+            }
+            else
+            {
+                shooter.cockBack(0);
+            }
+
+            if (OI.primaryController.isBButtonPressed())
+            {
+                shooter.disengageWinch();
+            }
+            else
+            {
+                shooter.engageWinch();
+            }
         }
     }
 
