@@ -9,6 +9,7 @@ import com.badrobot.commands.DriveRobot;
 import com.badrobot.subsystems.interfaces.IDriveTrain;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -24,6 +25,8 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
 {
     private static DriveTrain instance;
     private static boolean shiftedUp, compressorOn;
+    Gyro gyro;
+    
     
     RobotDrive train;
     DigitalInput pressureSwitch;
@@ -69,6 +72,9 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
             backRight = new Talon(RobotMap.backRightController);
             
             train = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
+            
+            gyro = new Gyro(RobotMap.driveTrainGyro);
+            gyro.reset();
         }
     }
 

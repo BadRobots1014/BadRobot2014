@@ -13,6 +13,9 @@ public class RobotMap
     
     public static final int NI9102_AnalogIn1 = 1;
     
+    // Drive Train
+    public static final int driveTrainGyro;
+    
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
     // public static final int leftMotor = 1;
