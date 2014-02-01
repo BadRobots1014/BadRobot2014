@@ -4,6 +4,8 @@
  */
 package com.badrobot.subsystems.interfaces;
 
+import edu.wpi.first.wpilibj.Gyro;
+
 /**
  * Interface for the drive train subsystem;
  * 
@@ -46,4 +48,8 @@ public interface IDriveTrain
      * @return the pressure switch output
      */
     public boolean getCompressorLimit();
+    
+    public Gyro getGyro();
+    
+    public double getDistanceToWall();
 }
