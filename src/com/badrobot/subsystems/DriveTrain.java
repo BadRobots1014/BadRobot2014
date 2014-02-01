@@ -9,11 +9,13 @@ import com.badrobot.commands.DriveRobot;
 import com.badrobot.subsystems.interfaces.IDriveTrain;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.Victor;
 
 /**
@@ -30,6 +32,8 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
     Relay compressorSwitch;
     Solenoid shiftDownSolenoid, shiftUpSolenoid;
     SpeedController frontLeft, backLeft, frontRight, backRight;
+    Gyro gyro;
+    Ultrasonic ultrasonic;
     
     public static DriveTrain getInstance()
     {
@@ -55,6 +59,12 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
         {
             shiftedUp = true;
             compressorOn = false;
+            
+            gyro = new Gyro(RobotMap.driveTrainGyro);
+            ultrasonic = new Ultrasonic(RobotMap.ultrasonicPing, 
+                    RobotMap.ultrasonicEcho, Ultrasonic.Unit.kInches);
+            ultrasonic.setEnabled(true);
+            ultrasonic.setAutomaticMode(true);
             
             pressureSwitch = new DigitalInput(RobotMap.pressureSwitchDigitalIn);
             compressorSwitch = new Relay(RobotMap.compressorSwitchRelay);
@@ -120,6 +130,17 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
     public boolean getCompressorLimit() 
     {
         return !pressureSwitch.get();
+    }
+    
+    public Gyro getGyro()
+    {
+        return gyro;
+    }
+    
+    public double getDistanceToWall()
+    {
+        log("valid? : "+ultrasonic.isRangeValid()+"  ,  enabled: "+ultrasonic.isEnabled());
+        return ultrasonic.getRangeInches();
     }
     
 }

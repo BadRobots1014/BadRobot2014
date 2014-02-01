@@ -22,6 +22,7 @@ public class Sidecar
     public static final int PWMOUT7 = 7;    
     public static final int PWMOUT8 = 8;    
     public static final int PWMOUT9 = 9;    
+    public static final int PWMOUT10 = 10;
     
     public static final int DIO1 = 1;
     public static final int DIO2 = 2;
@@ -39,16 +40,31 @@ public class Sidecar
     public static final int DIO14 = 14;
     
     public static final int RELAY1 = 1;
-    public static final int RELAY2 = 2;    
+    public static final int RELAY2 = 2;
+    public static final int RELAY3 = 3;
+    public static final int RELAY4 = 4;
+    public static final int RELAY5 = 5;
+    public static final int RELAY6 = 6;
+    public static final int RELAY7 = 7;
+    public static final int RELAY8 = 8;    
     
-    //These are not actually on the sidecar...
-    public static final int SOLENOID1 = 1;
-    public static final int SOLENOID2 = 2;
-    public static final int SOLENOID3 = 3;
-    public static final int SOLENOID4 = 4;
-    public static final int SOLENOID5 = 5;
-    public static final int SOLENOID6 = 6;
-    //There are more solenoids
+    public static final int ANALOG_BREAKOUT1 = 1;
+    public static final int ANALOG_BREAKOUT2 = 2;
+    public static final int ANALOG_BREAKOUT3 = 3;
+    public static final int ANALOG_BREAKOUT4 = 4;
+    public static final int ANALOG_BREAKOUT5 = 5;
+    public static final int ANALOG_BREAKOUT6 = 6;
+    public static final int ANALOG_BREAKOUT7 = 7;
+    public static final int ANALOG_BREAKOUT8 = 8;
+    
+    public static final int PNEUMATIC_BUMPER1 = 1;
+    public static final int PNEUMATIC_BUMPER2 = 2;
+    public static final int PNEUMATIC_BUMPER3 = 3;
+    public static final int PNEUMATIC_BUMPER4 = 4;
+    public static final int PNEUMATIC_BUMPER5 = 5;
+    public static final int PNEUMATIC_BUMPER6 = 6;
+    public static final int PNEUMATIC_BUMPER7 = 7;
+    public static final int PNEUMATIC_BUMPER8 = 8;
 }
 
 
