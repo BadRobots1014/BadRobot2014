@@ -139,7 +139,7 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
     
     public double getDistanceToWall()
     {
-        log("valid? : "+ultrasonic.isRangeValid()+"  ,  enabled: "+ultrasonic.isEnabled());
+        log("valid? : " + ultrasonic.isRangeValid() + "  ,  enabled: "+ultrasonic.isEnabled());
         return ultrasonic.getRangeInches();
     }
     

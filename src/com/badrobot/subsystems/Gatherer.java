@@ -16,10 +16,17 @@ import edu.wpi.first.wpilibj.Relay;
 public class Gatherer extends BadSubsystem implements IGatherer
 {
     public static Gatherer instance;
+    // is the gatherer on and forward
     public static boolean gathererOn, gathererForward;
     
+    // main system of gatherer
     Relay gathererSwitch;
 
+    /**
+     * Gets the current instance of Gatherer.
+     * If one doesn't exist, make one.
+     * @return the current instance of Gatherer
+     */
     public static Gatherer getInstance()
     {
         if (instance == null)
@@ -33,6 +40,10 @@ public class Gatherer extends BadSubsystem implements IGatherer
     {
     }
     
+    /**
+     * Initializes the instance variables.
+     * Done here because this can be called twice.
+     */
     protected void initialize() 
     {
         if (!RobotMap.isPrototype)
@@ -45,7 +56,12 @@ public class Gatherer extends BadSubsystem implements IGatherer
             gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
         }
     }
-
+    
+    /**
+     * Returns the console identity, which is
+     * generally the class name.
+     * @return the class name
+     */
     public String getConsoleIdentity() 
     {
         return "Gatherer";
@@ -56,6 +72,12 @@ public class Gatherer extends BadSubsystem implements IGatherer
         this.setDefaultCommand(new GatherBall());
     }
     
+    /**
+     * Controls the gatherer's gathering system.
+     * @param on - should the gatherer be on?
+     * @param forward - should the gatherer be moving
+     * forward or backward?
+     */
     public void gatherBall(boolean on, boolean forward)
     {
         if (forward && !gathererForward)
