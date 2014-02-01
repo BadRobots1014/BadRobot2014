@@ -5,7 +5,9 @@
 package com.badrobot.commands;
 
 import com.badrobot.OI;
+//import static com.badrobot.commands.CommandBase.driveTrain;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -60,6 +62,8 @@ public class DriveRobot extends BadCommand
         {
             driveTrain.compressorEnabled(false);
         }
+        
+        SmartDashboard.putNumber("gyro angle", driveTrain.getGyro().getAngle());
     }
 
     protected boolean isFinished() 

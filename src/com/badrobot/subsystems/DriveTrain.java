@@ -128,4 +128,9 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
         return !pressureSwitch.get();
     }
     
+    
+    public Gyro getGyro()
+    {
+        return gyro;
+    }
 }
