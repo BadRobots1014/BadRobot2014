@@ -4,6 +4,7 @@
  */
 package com.badrobot.subsystems.interfaces;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 
 /**
@@ -50,6 +51,10 @@ public interface IDriveTrain
     public boolean getCompressorLimit();
     
     public Gyro getGyro();
+    
+    public Encoder getRightEncoder();
+    
+    public Encoder getLeftEncoder();
     
     public double getDistanceToWall();
 }
