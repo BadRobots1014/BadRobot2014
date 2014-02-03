@@ -9,6 +9,7 @@ import com.badrobot.commands.DriveRobot;
 import com.badrobot.subsystems.interfaces.IDriveTrain;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -34,6 +35,7 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
     SpeedController frontLeft, backLeft, frontRight, backRight;
     Gyro gyro;
     Ultrasonic ultrasonic;
+    Encoder rightEncoder, leftEncoder;
     
     public static DriveTrain getInstance()
     {
@@ -60,7 +62,14 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
             shiftedUp = true;
             compressorOn = false;
             
+            rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
+            leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
+            rightEncoder.start();
+            leftEncoder.start();
+            
             gyro = new Gyro(RobotMap.driveTrainGyro);
+            gyro.reset();
+            
             ultrasonic = new Ultrasonic(RobotMap.ultrasonicPing, 
                     RobotMap.ultrasonicEcho, Ultrasonic.Unit.kInches);
             ultrasonic.setEnabled(true);
@@ -137,9 +146,19 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
         return gyro;
     }
     
+    public Encoder getRightEncoder()
+    {
+        return rightEncoder;
+    }
+    
+    public Encoder getLeftEncoder()
+    {
+        return leftEncoder;
+    }
+    
     public double getDistanceToWall()
     {
-        log("valid? : "+ultrasonic.isRangeValid()+"  ,  enabled: "+ultrasonic.isEnabled());
+        log("valid? : " + ultrasonic.isRangeValid() + "  ,  enabled: "+ultrasonic.isEnabled());
         return ultrasonic.getRangeInches();
     }
     

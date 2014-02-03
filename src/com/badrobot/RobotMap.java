@@ -29,26 +29,35 @@ public class RobotMap
     
     //~~~~~~~~OUTPUT~~~~~~~~//
     
-    //PWM Speed Controllers
-    public static final int frontLeftController = Sidecar.PWMOUT2;
-    public static final int backLeftController = Sidecar.PWMOUT1;
-    public static final int frontRightController = Sidecar.PWMOUT3;
-    public static final int backRightController = Sidecar.PWMOUT4;
+    //Speed Controller Ports
+    public static final int frontLeftController = Sidecar.PWMOUT4;
+    public static final int backLeftController = Sidecar.PWMOUT3;
+    public static final int frontRightController = Sidecar.PWMOUT1;
+    public static final int backRightController = Sidecar.PWMOUT2;
     public static final int winchController = Sidecar.PWMOUT5;
     
+    //Gyro Ports
     public static final int driveTrainGyro = Sidecar.ANALOG_BREAKOUT1;
-    public static final int ultrasonicPing = Sidecar.DIO10;
-    public static final int ultrasonicEcho = Sidecar.DIO9;
     
-    //Relay Compressor Ports
+    //Ultrasonic Ports
+    public static final int ultrasonicPing = Sidecar.DIO3;
+    public static final int ultrasonicEcho = Sidecar.DIO2;
+    
+    //Encoder Ports
+    public static final int rightEncoderA = Sidecar.DIO4;
+    public static final int rightEncoderB = Sidecar.DIO5;
+    public static final int leftEncoderA = Sidecar.DIO6;
+    public static final int leftEncoderB = Sidecar.DIO7;
+    
+    //Compressor Ports
     public static final int compressorSwitchRelay = Sidecar.RELAY1;
     public static final int gathererMotorRelay = Sidecar.RELAY2;
     
-    //PWM Solenoid Ports
-    public static final int shiftDownSolenoid = Sidecar.PNEUMATIC_BUMPER1;
-    public static final int shiftUpSolenoid = Sidecar.PNEUMATIC_BUMPER2;
-    public static final int engageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER5;
-    public static final int disengageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER6;
+    //Solenoid Ports
+    public static final int shiftDownSolenoid = Sidecar.PNEUMATIC_BUMPER7;
+    public static final int shiftUpSolenoid = Sidecar.PNEUMATIC_BUMPER8;
+    public static final int engageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER2;
+    public static final int disengageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER1;
     
     
     //~~~~~~~~INPUT~~~~~~~~//
