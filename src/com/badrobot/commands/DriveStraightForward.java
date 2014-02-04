@@ -5,7 +5,9 @@
  */
 
 package com.badrobot.commands;
+import com.badrobot.OI;
 import edu.wpi.first.wpilibj.Utility;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 
 /**
@@ -22,14 +24,23 @@ public class DriveStraightForward extends BadCommand{
     private static double Kp = .05;
     private static double driveSpeed;
     
+    public DriveStraightForward()
+    {
+        requires((Subsystem) driveTrain);
+        driveTime = -1;
+        driveDistance = -1;
+    }
+    
     public DriveStraightForward(double t)
     {
+        requires((Subsystem) driveTrain);
         driveTime = (long) t*1000000;
         driveDistance = -1;
     }
     
     public DriveStraightForward(double d, double t)
     {
+        requires((Subsystem) driveTrain);
         driveDistance = d;
         driveTime = -1;
     }
@@ -55,6 +66,10 @@ public class DriveStraightForward extends BadCommand{
         {
             driveTrain.getTrain().drive(driveSpeed, -(driveTrain.getGyro().getAngle()-initialAngle)*Kp);
         }
+        else
+        {
+            driveTrain.getTrain().drive(driveSpeed, -(driveTrain.getGyro().getAngle()-initialAngle)*Kp);
+        }
     }
     
     protected boolean isFinished() {
@@ -63,6 +78,10 @@ public class DriveStraightForward extends BadCommand{
             return true;
         }
         else if(driveDistance > 0 && driveTrain.getDistanceToWall() <= driveDistance)
+        {
+            return true;
+        }
+        else if(driveDistance < 0 && driveTime < 0 && !OI.primaryController.isAButtonPressed())
         {
             return true;
         }
