@@ -18,6 +18,9 @@ public class DriveStraightForward extends BadCommand{
     public double driveDistance;
     public long startTime;
     public long currentTime;
+    private double initialAngle;
+    private static double Kp = .05;
+    private static double driveSpeed;
     
     public DriveStraightForward(double t)
     {
@@ -33,6 +36,8 @@ public class DriveStraightForward extends BadCommand{
         
     protected void initialize() {
         startTime = Utility.getFPGATime();
+        initialAngle = driveTrain.getGyro().getAngle();
+        driveSpeed = 1.0;
     }
 
     public String getConsoleIdentity() {
@@ -43,12 +48,12 @@ public class DriveStraightForward extends BadCommand{
         if (driveTime > 0)
         {
             currentTime = Utility.getFPGATime();
-            driveTrain.tankDrive(.75, .75);
+            driveTrain.getTrain().drive(driveSpeed, -(driveTrain.getGyro().getAngle()-initialAngle)*Kp);
             
         }
         else if (driveDistance > 0)
         {
-            driveTrain.tankDrive(.75, .75);
+            driveTrain.getTrain().drive(driveSpeed, -(driveTrain.getGyro().getAngle()-initialAngle)*Kp);
         }
     }
     

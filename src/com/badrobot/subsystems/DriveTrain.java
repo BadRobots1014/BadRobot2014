@@ -162,4 +162,9 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
         return ultrasonic.getRangeInches();
     }
     
+    public RobotDrive getTrain()
+    {
+         return train;
+    }
+    
 }
