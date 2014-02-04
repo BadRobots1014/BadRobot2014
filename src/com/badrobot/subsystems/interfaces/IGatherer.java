@@ -13,6 +13,7 @@ public interface IGatherer
     
     public void gatherBall(boolean on, boolean forward);
     
+    //folds gatherer into robot
     public void foldGatherer(boolean pull);
     
 }

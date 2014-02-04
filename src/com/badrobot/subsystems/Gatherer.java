@@ -115,13 +115,13 @@ public class Gatherer extends BadSubsystem implements IGatherer
         
         if(pull)
         {
-            pullGatherer.set(pull);
-            pushGatherer.set(!pull);
+            pushGatherer.set(false);
+            pullGatherer.set(true);
         }
         else
         {
-            pullGatherer.set(!pull);
-            pushGatherer.set(pull);
+            pullGatherer.set(false);
+            pushGatherer.set(true);
         }
     }
 }
