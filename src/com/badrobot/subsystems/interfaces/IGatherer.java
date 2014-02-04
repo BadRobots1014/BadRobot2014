@@ -8,8 +8,13 @@ package com.badrobot.subsystems.interfaces;
  *
  * @author Isaac
  */
-public interface IGatherer {
+public interface IGatherer 
+{
     
     public void gatherBall(boolean on, boolean forward);
     
+    public void foldGatherer(boolean pull);
+    
 }
+
+

@@ -8,6 +8,7 @@ import com.badrobot.RobotMap;
 import com.badrobot.commands.GatherBall;
 import com.badrobot.subsystems.interfaces.IGatherer;
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Solenoid;
 
 /**
  *
@@ -15,6 +16,9 @@ import edu.wpi.first.wpilibj.Relay;
  */
 public class Gatherer extends BadSubsystem implements IGatherer
 {
+    Solenoid pullGatherer;
+    Solenoid pushGatherer;
+    
     public static Gatherer instance;
     // is the gatherer on and forward
     public static boolean gathererOn, gathererForward;
@@ -54,6 +58,9 @@ public class Gatherer extends BadSubsystem implements IGatherer
         {
             gathererOn = false;
             gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
+            pullGatherer = new Solenoid(RobotMap.pullGatherer);
+            pushGatherer = new Solenoid(RobotMap.pushGatherer);
+        
         }
     }
     
@@ -100,6 +107,21 @@ public class Gatherer extends BadSubsystem implements IGatherer
         {
             gathererSwitch.set(Relay.Value.kOff);
             gathererOn = false;
+        }
+    }
+
+    public void foldGatherer(boolean pull) 
+    {
+        
+        if(pull)
+        {
+            pullGatherer.set(pull);
+            pushGatherer.set(!pull);
+        }
+        else
+        {
+            pullGatherer.set(!pull);
+            pushGatherer.set(pull);
         }
     }
 }
