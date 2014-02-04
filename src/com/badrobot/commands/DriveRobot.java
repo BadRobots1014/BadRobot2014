@@ -6,6 +6,7 @@ package com.badrobot.commands;
 
 import com.badrobot.OI;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -31,7 +32,7 @@ public class DriveRobot extends BadCommand
     }
 
     protected void execute() 
-    {
+    {   
         driveTrain.tankDrive(OI.primaryController.getLeftStickY(), OI.primaryController.getRightStickY());
         
         if (OI.primaryController.isRBButtonPressed())
@@ -60,6 +61,11 @@ public class DriveRobot extends BadCommand
         {
             driveTrain.compressorEnabled(false);
         }
+        
+        SmartDashboard.putNumber("ultrasonic distance", driveTrain.getDistanceToWall());
+        SmartDashboard.putNumber("gyro angle", driveTrain.getGyro().getAngle());
+        SmartDashboard.putNumber("right encoder", driveTrain.getRightEncoder().get());
+        SmartDashboard.putNumber("left encoder", driveTrain.getLeftEncoder().get());
     }
 
     protected boolean isFinished() 
