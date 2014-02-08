@@ -68,6 +68,15 @@ public class GatherBall extends BadCommand
                 // and move it forward?
                 gatherer.gatherBall(false, true);
             }
+            
+            if (OI.secondaryController.isXButtonPressed())
+            {
+                gatherer.foldGatherer(true);
+            }
+            else if (OI.secondaryController.isYButtonPressed())
+            {
+                gatherer.foldGatherer(false);
+            }
         }
         //Used when one controller will be used
         else
