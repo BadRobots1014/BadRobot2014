@@ -60,7 +60,10 @@ public class RobotMap
     public static final int engageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER2;
     public static final int disengageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER1;
     
-    
+    //Lights
+    public static int redChannel;
+    public static int greenChannel;
+    public static int blueChannel;
     //~~~~~~~~INPUT~~~~~~~~//
     
     //Digital Input Pressure Switch
