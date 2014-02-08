@@ -34,6 +34,9 @@ public class DriveRobot extends BadCommand
 
     protected void execute() 
     {
+        log("angle: "+driveTrain.getGyro().getAngle());
+        log("distance: "+driveTrain.getDistanceToWall());
+        
         driveTrain.tankDrive(OI.primaryController.getLeftStickY(), OI.primaryController.getRightStickY());
         
         if (OI.primaryController.isRBButtonPressed())
@@ -63,6 +66,7 @@ public class DriveRobot extends BadCommand
             driveTrain.compressorEnabled(false);
         }
         
+        SmartDashboard.putNumber("ultrasonic distance", driveTrain.getDistanceToWall());
         SmartDashboard.putNumber("gyro angle", driveTrain.getGyro().getAngle());
     }
 

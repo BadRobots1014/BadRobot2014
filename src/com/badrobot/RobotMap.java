@@ -42,15 +42,19 @@ public class RobotMap
     public static final int backRightController = Sidecar.PWMOUT4;
     public static final int winchController = Sidecar.PWMOUT5;
     
+    public static final int driveTrainGyro = Sidecar.ANALOG_BREAKOUT1;
+    public static final int ultrasonicPing = Sidecar.DIO10;
+    public static final int ultrasonicEcho = Sidecar.DIO9;
+    
     //Relay Compressor Ports
     public static final int compressorSwitchRelay = Sidecar.RELAY1;
     public static final int gathererMotorRelay = Sidecar.RELAY2;
     
     //PWM Solenoid Ports
-    public static final int shiftDownSolenoid = Sidecar.SOLENOID1;
-    public static final int shiftUpSolenoid = Sidecar.SOLENOID2;
-    public static final int engageWinchSolenoid = Sidecar.SOLENOID5;
-    public static final int disengageWinchSolenoid = Sidecar.SOLENOID6;
+    public static final int shiftDownSolenoid = Sidecar.PNEUMATIC_BUMPER1;
+    public static final int shiftUpSolenoid = Sidecar.PNEUMATIC_BUMPER2;
+    public static final int engageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER5;
+    public static final int disengageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER6;
     
     
     //~~~~~~~~INPUT~~~~~~~~//

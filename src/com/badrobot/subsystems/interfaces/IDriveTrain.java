@@ -49,9 +49,7 @@ public interface IDriveTrain
      */
     public boolean getCompressorLimit();
     
-    /**
-     * 
-     * @return Gyro
-     */
     public Gyro getGyro();
+    
+    public double getDistanceToWall();
 }
