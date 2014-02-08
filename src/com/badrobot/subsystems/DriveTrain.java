@@ -26,7 +26,6 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
 {
     private static DriveTrain instance;
     private static boolean shiftedUp, compressorOn;
-    Gyro gyro;
     
     
     RobotDrive train;

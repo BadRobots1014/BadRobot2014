@@ -28,11 +28,6 @@ public class RobotMap
     //Misc Important Robot Variables
     public static final boolean isPrototype = true;
     
-    
-     // Drive Train
-    public static final int driveTrainGyro = 1;
-    
-    
     //~~~~~~~~OUTPUT~~~~~~~~//
     
     //PWM Speed Controllers
