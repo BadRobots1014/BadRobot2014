@@ -37,7 +37,7 @@ public abstract class CommandBase extends Command {
 
         driveTrain = DriveTrain.getInstance();
         shooter = Shooter.getInstance();
-        //gatherer = Gatherer.getInstance();
+        gatherer = Gatherer.getInstance();
 
         // Show what command your subsystem is running on the SmartDashboard
         //SmartDashboard.putData(exampleSubsystem);
