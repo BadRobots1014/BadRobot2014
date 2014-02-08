@@ -28,6 +28,7 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
     private static DriveTrain instance;
     private static boolean shiftedUp, compressorOn;
     
+    
     RobotDrive train;
     DigitalInput pressureSwitch;
     Relay compressorSwitch;
@@ -88,6 +89,9 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
             backRight = new Talon(RobotMap.backRightController);
             
             train = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
+            
+            gyro = new Gyro(RobotMap.driveTrainGyro);
+            gyro.reset();
         }
     }
 
