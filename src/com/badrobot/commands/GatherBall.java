@@ -23,18 +23,28 @@ public class GatherBall extends BadCommand
         requires ((Subsystem) gatherer);
     }
     
+    /**
+     * Sets values to the instance variables.
+     */
     protected void initialize() 
     {
         gatherOn = false;
         rButtonPressed = false;
         lButtonPressed = false;
     }
-    
+    /**
+     * Gets the console identity. Usually this 
+     * is the class name.
+     * @return the class name.
+     */
     public String getConsoleIdentity() 
     {
         return "GatherBall";
     }
 
+    /**
+     * Stuff that will be getting called over and over again.
+     */
     protected void execute() 
     {
         //Used when two controllers will be used
@@ -42,14 +52,20 @@ public class GatherBall extends BadCommand
         {
             if (OI.secondaryController.isRBButtonPressed())
             {
+                // turn gatherer on and move it forward
+                // to gather balls
                 gatherer.gatherBall(true, true);
             }
             else if (OI.secondaryController.isLBButtonPressed())
             {
+                // turn gatherer on but
+                // move it backwards
                 gatherer.gatherBall(true, false);
             }
             else
             {
+                // turn gatherer off
+                // and move it forward?
                 gatherer.gatherBall(false, true);
             }
         }
