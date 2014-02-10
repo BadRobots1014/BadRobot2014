@@ -39,6 +39,9 @@ public class RobotMap
     //Relay Compressor Ports
     public static final int compressorSwitchRelay = Sidecar.RELAY1;
     
+    //Relay Ring Light
+    public static final int ringLightSwitchRelay = Sidecar.RELAY2;
+    
     //PWM Solenoid Ports
     public static final int shiftUpSolenoid = Sidecar.SOLENOID1;
     public static final int shiftDownSolenoid = Sidecar.SOLENOID2;

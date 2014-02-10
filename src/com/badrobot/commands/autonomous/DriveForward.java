@@ -8,6 +8,6 @@ package com.badrobot.commands.autonomous;
  *
  * @author Steve
  */
-public class FindHotLights {
+public class DriveForward {
     
 }

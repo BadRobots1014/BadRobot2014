@@ -4,7 +4,9 @@
  */
 package com.badrobot.subsystems;
 
+import com.badrobot.RobotMap;
 import com.badrobot.subsystems.interfaces.IRetroLight;
+import edu.wpi.first.wpilibj.Relay;
 
 /**
  *
@@ -12,7 +14,22 @@ import com.badrobot.subsystems.interfaces.IRetroLight;
  */
 public class RetroLight extends BadSubsystem implements IRetroLight {
 
-    protected void initialize() {
+    public Relay ringLightRelay;
+    
+    private static RetroLight instance;
+    
+    public static RetroLight getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new RetroLight();
+        }
+        return instance;
+    }
+    
+    protected void initialize()
+    {
+        ringLightRelay = new Relay(RobotMap.ringLightSwitchRelay);//2nd relay
     }
 
     public String getConsoleIdentity()
@@ -23,4 +40,14 @@ public class RetroLight extends BadSubsystem implements IRetroLight {
     protected void initDefaultCommand() {
     }
     
+    public boolean ringLightIsOn()
+    {   
+        boolean isHot = false;
+        if(ringLightRelay.get() == Relay.Value.kOff)
+            isHot = false;
+        else if(ringLightRelay.get() == Relay.Value.kOn)
+            isHot = true;
+        
+        return isHot;
+    }
 }
