@@ -59,33 +59,39 @@ public class DriveStraightForward extends BadCommand{
         driveTime = -1;
     }
     
-    //gets initial time and angle and gives their values to variables
+    /**
+     * Gets initial time and angle and gives their values to variables.
+     */
     protected void initialize() {
         startTime = Utility.getFPGATime();
         initialAngle = driveTrain.getGyro().getAngle();
         driveSpeed = 1.0;
     }
     
-    //class identidier for use in logging to the console
+    /**
+     * Class identifier for use in logging to the console.
+     * @return Class name
+     */
     public String getConsoleIdentity() {
         return "DriveStraightForward";
     }
 
-    //runs continuously once command is called
+    /**
+     * Runs continuously once command is called.
+     */
     protected void execute() {
         //if in time mode, update the time variable and drive the robot forward while correcting its angle
         if (driveTime > 0)
         {
             currentTime = Utility.getFPGATime();
             driveTrain.getTrain().drive(driveSpeed, -(driveTrain.getGyro().getAngle()-initialAngle)*Kp);
-            
         }
         //if in distance mode, drive the robot forward while correcting its angle
         else if (driveDistance > 0)
         {
             driveTrain.getTrain().drive(driveSpeed, -(driveTrain.getGyro().getAngle()-initialAngle)*Kp);
         }
-        //if being used in teleop mode, drive the robot forward while correcting its angle
+        //if in tele-op mode, drive the robot forward while correcting its angle
         //for now this is at a constant speed (driveSpeed), change later for operator input determined speed?
         else
         {
@@ -93,7 +99,10 @@ public class DriveStraightForward extends BadCommand{
         }
     }
     
-    //stops the command from running when true is returned
+    /**
+     * Stops the command from running when true is returned.
+     * @return True ends the command
+     */
     protected boolean isFinished() {
         //if in time mode, and the time has exceeded the defined parameter, end the command
         if (driveTime > 0 && currentTime > (startTime + driveTime))
