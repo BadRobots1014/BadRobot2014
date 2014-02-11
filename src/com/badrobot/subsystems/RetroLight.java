@@ -29,7 +29,7 @@ public class RetroLight extends BadSubsystem implements IRetroLight {
     
     protected void initialize()
     {
-        ringLightRelay = new Relay(RobotMap.ringLightSwitchRelay);//2nd relay
+        //ringLightRelay = new Relay(RobotMap.ringLightSwitchRelay);//2nd relay
     }
 
     public String getConsoleIdentity()
