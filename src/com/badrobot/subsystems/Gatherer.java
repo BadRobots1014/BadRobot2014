@@ -22,7 +22,7 @@ public class Gatherer extends BadSubsystem implements IGatherer
     
     // main system of gatherer
     Relay gathererSwitch;
-    Solenoid pullGatherer, pushGatherer;
+    Solenoid pullGatherer, pushGatherer, leftExhaust, rightExhaust;
 
     /**
      * Gets the current instance of Gatherer.
@@ -59,6 +59,8 @@ public class Gatherer extends BadSubsystem implements IGatherer
             
             pullGatherer = new Solenoid(RobotMap.pullGatherer);
             pushGatherer = new Solenoid(RobotMap.pushGatherer);
+            leftExhaust = new Solenoid(RobotMap.leftExhaust);
+            rightExhaust = new Solenoid(RobotMap.rightExhaust);
             
             pullGatherer.set(false);
             pushGatherer.set(true);
@@ -116,11 +118,15 @@ public class Gatherer extends BadSubsystem implements IGatherer
         if(pull)
         {
             pushGatherer.set(false);
+            rightExhaust.set(true);
+            leftExhaust.set(true);
             pullGatherer.set(true);
         }
         else
         {
             pullGatherer.set(false);
+            rightExhaust.set(false);
+            leftExhaust.set(false);
             pushGatherer.set(true);
         }
     }
