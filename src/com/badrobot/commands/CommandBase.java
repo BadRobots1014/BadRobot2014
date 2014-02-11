@@ -27,6 +27,10 @@ public abstract class CommandBase extends Command {
     public static IGatherer gatherer;
     
     public static void init() {
+        driveTrain = DriveTrain.getInstance();
+        shooter = Shooter.getInstance();
+        gatherer = Gatherer.getInstance();
+        
         // This MUST be here. If the OI creates Commands (which it very likely
         // will), constructing it during the construction of CommandBase (from
         // which commands extend), subsystems are not guaranteed to be
@@ -34,10 +38,6 @@ public abstract class CommandBase extends Command {
         // news. Don't move it.
         oi = new OI();
         oi.init();
-
-        driveTrain = DriveTrain.getInstance();
-        shooter = Shooter.getInstance();
-        gatherer = Gatherer.getInstance();
 
         // Show what command your subsystem is running on the SmartDashboard
         //SmartDashboard.putData(exampleSubsystem);

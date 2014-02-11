@@ -19,6 +19,7 @@ public class DriveRobot extends BadCommand
     
     public DriveRobot()
     {
+        log(driveTrain+"");
         requires((Subsystem) driveTrain);
     }
     
