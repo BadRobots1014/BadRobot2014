@@ -23,6 +23,15 @@ public class Lights implements ILights
     
     private static Lights instance;
     
+    public static Lights getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new Lights();
+        }
+        return instance;
+    }
+    
     private int currentColor = 0;
     
     private Lights()
