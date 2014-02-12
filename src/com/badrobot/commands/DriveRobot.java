@@ -5,21 +5,17 @@
 package com.badrobot.commands;
 
 import com.badrobot.OI;
-//import static com.badrobot.commands.CommandBase.driveTrain;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * 
  * @author Isaac
  */
 public class DriveRobot extends BadCommand
 {
-    private double BUMPER_SPEED = .5;
-    
     public DriveRobot()
     {
-        log(driveTrain+"");
         requires((Subsystem) driveTrain);
     }
     
@@ -36,15 +32,6 @@ public class DriveRobot extends BadCommand
     protected void execute() 
     {   
         driveTrain.tankDrive(OI.primaryController.getLeftStickY(), OI.primaryController.getRightStickY());
-        
-        if (OI.primaryController.isRBButtonPressed())
-        {
-            driveTrain.tankDrive(BUMPER_SPEED, -BUMPER_SPEED);
-        }
-        else if (OI.primaryController.isLBButtonPressed())
-        {
-            driveTrain.tankDrive(-BUMPER_SPEED, BUMPER_SPEED);
-        }
         
         if (OI.primaryController.getRightTrigger() > 0)
         {
@@ -68,6 +55,16 @@ public class DriveRobot extends BadCommand
         SmartDashboard.putNumber("gyro angle", driveTrain.getGyro().getAngle());
         SmartDashboard.putNumber("right encoder", driveTrain.getRightEncoder().get());
         SmartDashboard.putNumber("left encoder", driveTrain.getLeftEncoder().get());
+        
+        SmartDashboard.putNumber("right encoder DPP", (driveTrain.getRightEncoder().getDistance())
+                                                    / (driveTrain.getRightEncoder().get()));
+        SmartDashboard.putNumber("left encoder DPP", (driveTrain.getLeftEncoder().getDistance())
+                                                   / (driveTrain.getLeftEncoder().get()));
+        
+        if (!(SmartDashboard.getNumber("setEncoderDistancePerPulse") == driveTrain.getEncoderDistancePerPulse()))
+        {
+            driveTrain.setEncoderDistancePerPulse(SmartDashboard.getNumber("setEncoderDistancePerPulse"));
+        }
     }
 
     protected boolean isFinished() 

@@ -89,6 +89,11 @@ public class DriveStraightForward extends BadCommand{
         //if in distance mode, drive the robot forward while correcting its angle
         else if (driveDistance > 0)
         {
+            
+            
+            
+            
+            
             driveTrain.getTrain().drive(driveSpeed, -(driveTrain.getGyro().getAngle()-initialAngle)*Kp);
         }
         //if in tele-op mode, drive the robot forward while correcting its angle
