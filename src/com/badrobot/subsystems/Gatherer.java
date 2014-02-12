@@ -118,8 +118,8 @@ public class Gatherer extends BadSubsystem implements IGatherer
         if(pull)
         {
             pushGatherer.set(false);
-            rightExhaust.set(true);
-            leftExhaust.set(true);
+            rightExhaust.set(false);
+            leftExhaust.set(false);
             pullGatherer.set(true);
         }
         else
