@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *can also be used in tele-op mode to keep a constant course.
  * @author Jacob
  */
-public class DriveStraightForward extends BadCommand{
-
+public class DriveStraightForward extends BadCommand
+{
     public long driveTime;
     public double driveDistance;
     public long startTime;
