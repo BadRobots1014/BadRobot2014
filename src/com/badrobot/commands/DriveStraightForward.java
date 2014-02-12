@@ -22,7 +22,7 @@ public class DriveStraightForward extends BadCommand
     public long currentTime;
     private double initialAngle;
     //constant for turn correction
-    private static double Kp = .05;
+    private static final double Kp = .05;
     private static double driveSpeed;
     
     /**
