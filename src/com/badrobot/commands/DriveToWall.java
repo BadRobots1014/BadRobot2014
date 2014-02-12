@@ -15,10 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveToWall extends BadCommand
 {
     public static double driveSpeed;
-    private static final double DISTANCE_DEADZONE_MAGIC_NUMBER = .15;
-    private static boolean firstCheck;
-    private static boolean secondCheck;
-    private static boolean thirdCheck;
+    private static final double DISTANCE_DEADZONE_MAGIC_NUMBER = 2.0;
     private static int checkNumber;
     private double initialAngle;
     //Constant for turn correction
@@ -37,9 +34,6 @@ public class DriveToWall extends BadCommand
     {
         driveSpeed = 1.0;
         driveTrain.tankDrive(0, 0);
-        firstCheck = false;
-        secondCheck = false;
-        thirdCheck = false;
         checkNumber = 1;
         initialAngle = driveTrain.getGyro().getAngle();
     }
@@ -64,17 +58,14 @@ public class DriveToWall extends BadCommand
         {
             if(checkNumber == 1)
             {
-                firstCheck = true;
                 checkNumber++;
             }
             else if (checkNumber == 2)
             {
-                secondCheck = true;
                 checkNumber++;
             }
             else if (checkNumber == 3)
             {
-                thirdCheck = true;
                 checkNumber = 0;
             }
         }
