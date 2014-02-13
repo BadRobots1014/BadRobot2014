@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.Relay;
  */
 public class RetroLight extends BadSubsystem implements IRetroLight {
 
-    public Relay ringLightRelay;
+    Relay ringLightRelay;
     
     private static RetroLight instance;
     
@@ -49,5 +49,9 @@ public class RetroLight extends BadSubsystem implements IRetroLight {
             isHot = true;
         
         return isHot;
+    }
+
+    public Relay getRingLightRelay() {
+        return ringLightRelay;
     }
 }

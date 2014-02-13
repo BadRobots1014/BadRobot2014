@@ -17,7 +17,7 @@ public interface IVisionTracking
     
     public boolean isHot(BinaryImage c);
     
-    public boolean currImageIsHot();
+    public boolean currentImageIsHot();
     
     
 }

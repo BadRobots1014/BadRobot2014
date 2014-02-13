@@ -28,7 +28,7 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking {
     private final int LOW_BLUE = 0;
     private final int LOW_GREEN = 0;//for our color we are shooting at retrotape
     
-    public VisionTracking()
+    public VisionTracking()//should be called camera
     {
 
     }
@@ -95,7 +95,7 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking {
         return isHot;
     }
 
-    public boolean currImageIsHot()
+    public boolean currentImageIsHot()
     {
         return isHot(processedImage());
     }

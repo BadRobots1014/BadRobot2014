@@ -2,24 +2,34 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.badrobot.commands.autonomous;
+package com.badrobot.commands;
 
 import com.badrobot.commands.BadCommand;
 import com.badrobot.commands.TurnOnRetroLight;
 import com.badrobot.subsystems.RetroLight;
 import com.badrobot.subsystems.VisionTracking;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.camera.AxisCamera;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  * @author Steve
  */
-public class CheckHotAndShoot extends BadCommand {
-    private VisionTracking vt;//will be the subsystem
+public class CheckHot extends BadCommand {
 
+    private long time;
+    
+    public CheckHot()
+    {
+        requires((Subsystem) visionTracking);
+        requires((Subsystem) shooter);
+    }
+    
     protected void initialize() 
     {
-       vt = vt.getInstance();
+        time = Utility.getFPGATime();
     }
 
     public String getConsoleIdentity() 
@@ -29,17 +39,19 @@ public class CheckHotAndShoot extends BadCommand {
 
     protected void execute() 
     {
-        //turnOnLight
-        
-        if(vt.currImageIsHot())
+        if(visionTracking.currentImageIsHot())
         {
-            //shoot
+            isFinished();
+        }
+        if((Utility.getFPGATime()- time) > 6*1000000)//six million microseconds! 6 seconds
+        {
+            isFinished();
         }
     }
 
     protected boolean isFinished() 
     {
-        return false;
+        return true;
     }
 
     protected void end() {
