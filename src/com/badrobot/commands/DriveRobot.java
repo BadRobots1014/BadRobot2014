@@ -69,7 +69,7 @@ public class DriveRobot extends BadCommand
         //displays important values to the smart dashboard
         SmartDashboard.putNumber("ultrasonic distance", driveTrain.getDistanceToWall());
         SmartDashboard.putNumber("gyro angle", driveTrain.getGyro().getAngle());
-        SmartDashboard.putNumber("right encoder", driveTrain.getRightEncoder().get());
+        /*SmartDashboard.putNumber("right encoder", driveTrain.getRightEncoder().get());
         SmartDashboard.putNumber("left encoder", driveTrain.getLeftEncoder().get());
         
         SmartDashboard.putNumber("right encoder DPP", (driveTrain.getRightEncoder().getDistance())
@@ -80,7 +80,7 @@ public class DriveRobot extends BadCommand
         if (!(SmartDashboard.getNumber("setEncoderDistancePerPulse") == driveTrain.getEncoderDistancePerPulse()))
         {
             driveTrain.setEncoderDistancePerPulse(SmartDashboard.getNumber("setEncoderDistancePerPulse"));
-        }
+        }*/
     }
 
     /**

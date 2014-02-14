@@ -164,6 +164,7 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
     public double getDistanceToWall()
     {
         log("valid? : " + ultrasonic.isRangeValid() + "  ,  enabled: "+ultrasonic.isEnabled());
+        ultrasonic.ping();
         return ultrasonic.getRangeInches();
     }
     
@@ -180,8 +181,8 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
     public void setEncoderDistancePerPulse(double d)
     {
         encoderDistancePerPulse = d;
-        rightEncoder.setDistancePerPulse(d);
-        leftEncoder.setDistancePerPulse(d);
+        //rightEncoder.setDistancePerPulse(d);
+        //leftEncoder.setDistancePerPulse(d);
     }
     
 }

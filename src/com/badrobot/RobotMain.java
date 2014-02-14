@@ -13,7 +13,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.badrobot.commands.CommandBase;
+import com.badrobot.commands.DriveStraightForward;
 import com.badrobot.commands.ExampleCommand;
+import com.badrobot.commands.autonomouscommands.DriveForwardAndShoot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,6 +29,7 @@ import com.badrobot.commands.ExampleCommand;
 public class RobotMain extends IterativeRobot {
 
     Command autonomousCommand;
+    SendableChooser autoChooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -36,11 +41,18 @@ public class RobotMain extends IterativeRobot {
 
         // Initialize all subsystems
         CommandBase.init();
+        
+        autoChooser = new SendableChooser();
+
+        autoChooser.addObject("Drive Straight Forward and Shoot", new DriveForwardAndShoot(false));
+
+        SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
+        
     }
 
     public void autonomousInit() {
-        // schedule the autonomous command (example)
-        autonomousCommand.start();
+        autonomousCommand = (Command) autoChooser.getSelected();
+        Scheduler.getInstance().add(autonomousCommand);
     }
 
     /**

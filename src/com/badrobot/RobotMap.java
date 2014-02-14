@@ -60,8 +60,8 @@ public class RobotMap
     public static final int engageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER2;
     public static final int disengageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER1;
     
-    public static final int pullGatherer = Sidecar.PNEUMATIC_BUMPER3;
-    public static final int pushGatherer = Sidecar.PNEUMATIC_BUMPER4;
+    public static final int pullGatherer = Sidecar.PNEUMATIC_BUMPER4;
+    public static final int pushGatherer = Sidecar.PNEUMATIC_BUMPER3;
     public static final int leftExhaust = Sidecar.PNEUMATIC_BUMPER5;
     public static final int rightExhaust = Sidecar.PNEUMATIC_BUMPER6;
     
