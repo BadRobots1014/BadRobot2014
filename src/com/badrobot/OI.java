@@ -54,7 +54,7 @@ public class OI {
     {
         public boolean get() 
         {
-            return(primaryController.isAButtonPressed());
+            return(primaryController.isAButtonPressed());//A Button drives forward
         }
     };
     
