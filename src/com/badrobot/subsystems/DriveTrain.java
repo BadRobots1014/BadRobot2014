@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -27,6 +28,8 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
 {
     private static DriveTrain instance;
     private static boolean shiftedUp, compressorOn;
+    
+    private static double encoderDistancePerPulse;
     
     RobotDrive train;
     DigitalInput pressureSwitch;
@@ -66,6 +69,8 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
             leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
             rightEncoder.start();
             leftEncoder.start();
+            
+            encoderDistancePerPulse = 1;
             
             gyro = new Gyro(RobotMap.driveTrainGyro);
             gyro.reset();
@@ -159,12 +164,25 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
     public double getDistanceToWall()
     {
         log("valid? : " + ultrasonic.isRangeValid() + "  ,  enabled: "+ultrasonic.isEnabled());
+        ultrasonic.ping();
         return ultrasonic.getRangeInches();
     }
     
     public RobotDrive getTrain()
     {
          return train;
+    }
+    
+    public double getEncoderDistancePerPulse()
+    {
+        return encoderDistancePerPulse;
+    }
+    
+    public void setEncoderDistancePerPulse(double d)
+    {
+        encoderDistancePerPulse = d;
+        //rightEncoder.setDistancePerPulse(d);
+        //leftEncoder.setDistancePerPulse(d);
     }
     
 }

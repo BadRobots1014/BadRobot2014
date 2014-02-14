@@ -63,6 +63,7 @@ public class OI {
         driverStation = DriverStation.getInstance();
         primaryController = new XboxController(RobotMap.driverStation_ControllerPort1);
         secondaryController = new XboxController(RobotMap.driverStation_ControllerPort2);
+        
         if (!isSingleControllerMode())
         {
             driveStraight.whenPressed(new DriveStraightForward());

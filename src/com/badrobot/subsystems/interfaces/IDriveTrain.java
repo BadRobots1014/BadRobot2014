@@ -60,4 +60,8 @@ public interface IDriveTrain
     public double getDistanceToWall();
     
     public RobotDrive getTrain();
+    
+    public double getEncoderDistancePerPulse();
+    
+    public void setEncoderDistancePerPulse(double d);
 }

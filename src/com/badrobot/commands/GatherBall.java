@@ -68,15 +68,24 @@ public class GatherBall extends BadCommand
                 // and move it forward?
                 gatherer.gatherBall(false, true);
             }
+            
+            if (OI.secondaryController.isXButtonPressed())
+            {
+                gatherer.foldGatherer(true);
+            }
+            else if (OI.secondaryController.isYButtonPressed())
+            {
+                gatherer.foldGatherer(false);
+            }
         }
         //Used when one controller will be used
         else
         {
-            if (OI.primaryController.isXButtonPressed())
+            if (OI.primaryController.isRBButtonPressed())
             {
                 rButtonPressed = true;
             }
-            else if (!OI.primaryController.isXButtonPressed() && rButtonPressed)
+            else if (!OI.primaryController.isRBButtonPressed() && rButtonPressed)
             {
                 if (!gatherOn)
                 {
@@ -91,11 +100,11 @@ public class GatherBall extends BadCommand
                 rButtonPressed = false;
             }
 
-            if (OI.primaryController.isYButtonPressed())
+            if (OI.primaryController.isLBButtonPressed())
             {
                 lButtonPressed = true;
             }
-            else if (!OI.primaryController.isYButtonPressed() && lButtonPressed)
+            else if (!OI.primaryController.isLBButtonPressed() && lButtonPressed)
             {
                 lButtonPressed = false;
                 if (!gatherOn)
@@ -108,6 +117,14 @@ public class GatherBall extends BadCommand
                     gatherer.gatherBall(false, false);
                     gatherOn = false;
                 }
+            }
+            if (OI.primaryController.isXButtonPressed())
+            {
+                gatherer.foldGatherer(true);
+            }
+            else if (OI.primaryController.isYButtonPressed())
+            {
+                gatherer.foldGatherer(false);
             }
         }
     }

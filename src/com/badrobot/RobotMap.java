@@ -13,6 +13,7 @@ public class RobotMap
     
     public static final int NI9102_AnalogIn1 = 1;
     
+    
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
     // public static final int leftMotor = 1;
@@ -59,7 +60,15 @@ public class RobotMap
     public static final int engageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER2;
     public static final int disengageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER1;
     
+    public static final int pullGatherer = Sidecar.PNEUMATIC_BUMPER4;
+    public static final int pushGatherer = Sidecar.PNEUMATIC_BUMPER3;
+    public static final int leftExhaust = Sidecar.PNEUMATIC_BUMPER5;
+    public static final int rightExhaust = Sidecar.PNEUMATIC_BUMPER6;
     
+    //Lights
+    public static int redChannel;
+    public static int greenChannel;
+    public static int blueChannel;
     //~~~~~~~~INPUT~~~~~~~~//
     
     //Digital Input Pressure Switch

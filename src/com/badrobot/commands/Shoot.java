@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Shoot extends BadCommand
 {
-    private static double COCK_BACK_SPEED = 0.5;
+    private static double COCK_BACK_SPEED = 1.0;
 
     public Shoot()
     {
