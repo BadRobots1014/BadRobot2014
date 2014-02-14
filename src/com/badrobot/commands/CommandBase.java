@@ -45,12 +45,6 @@ public abstract class CommandBase extends Command {
         oi = new OI();
         oi.init();
 
-        driveTrain = DriveTrain.getInstance();
-        shooter = Shooter.getInstance();
-        gatherer = Gatherer.getInstance();
-        visionTracking = VisionTracking.getInstance();
-        retroLight = RetroLight.getInstance();
-
         // Show what command your subsystem is running on the SmartDashboard
         //SmartDashboard.putData(exampleSubsystem);
     }
