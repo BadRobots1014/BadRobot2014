@@ -12,11 +12,10 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 /**
  *
- * @author Isaac
+ * @author Steve
  */
-public class Gatherer extends BadSubsystem implements IGatherer
-{
-    public static Gatherer instance;
+public class FinalGatherer extends BadSubsystem implements IGatherer {
+    public static FinalGatherer instance;
     // is the gatherer on and forward
     public static boolean gathererOn, gathererForward;
     
@@ -29,16 +28,16 @@ public class Gatherer extends BadSubsystem implements IGatherer
      * If one doesn't exist, make one.
      * @return the current instance of Gatherer
      */
-    public static Gatherer getInstance()
+    public static FinalGatherer getInstance()
     {
         if (instance == null)
         {
-            instance = new Gatherer();
+            instance = new FinalGatherer();
         }
         return instance;
     }
     
-    private Gatherer()
+    private FinalGatherer()
     {
     }
     
@@ -50,7 +49,14 @@ public class Gatherer extends BadSubsystem implements IGatherer
     {
         if (!RobotMap.isPrototype)
         {
-            //final robot code goes here
+            gathererOn = false;
+            gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
+            
+            pullGatherer = new Solenoid(RobotMap.pullGatherer);
+            pushGatherer = new Solenoid(RobotMap.pushGatherer);
+            
+            pushGatherer.set(false);
+            pullGatherer.set(true);
         }
         else
         {
