@@ -31,6 +31,10 @@ public class DisengageWinch extends BadCommand
 
     protected void execute() {
         shooter.disengageWinch();
+        try {
+            Thread.sleep(500);
+        } catch (Exception ex) {
+        }
         finishedExecuting = true;
     }
 
