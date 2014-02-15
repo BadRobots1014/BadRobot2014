@@ -26,30 +26,9 @@ public interface IDriveTrain
      */
     public void tankDrive(double left, double right);
     
-    /**
-     * Shifts each of the two gear boxes on the robot's driveTrain; Up will
-     * shift the robot to the higher gear, !up will shift the robot to a lower
-     * gear.
-     * 
-     * @param up the direction of the shift
-     */
-    public void shift(boolean up);
+    public void shiftUp();
     
-    /**
-     * Enables or disables the compressor; On is on, !on is off.
-     * 
-     * @param on the state of the compressor.
-     */
-    public void compressorEnabled(boolean on);
-    
-    /**
-     * Returns the value that the pressure switch outputs; Will stay on until
-     * the pressure reaches 115 psi, and then stay off until it drops to 95;
-     * This lets us keep the pressure in a specific range.
-     * 
-     * @return the pressure switch output
-     */
-    public boolean getCompressorLimit();
+    public void shiftDown();
     
     public Gyro getGyro();
     

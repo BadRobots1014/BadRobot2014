@@ -47,23 +47,12 @@ public class DriveRobot extends BadCommand
         //shift up if right trigger is pressed
         if (OI.primaryController.getRightTrigger() > 0)
         {
-            driveTrain.shift(true);
+            driveTrain.shiftUp();
         }  
         //shift down if left trigger is pressed
         else if (OI.primaryController.getLeftTrigger() > 0)
         {
-            driveTrain.shift(false);
-        }
-        
-        //if the pressure in the tank drops below a certain amount, turn on the compressor
-        if (driveTrain.getCompressorLimit())
-        {
-            driveTrain.compressorEnabled(true);
-        }
-        //if the pressure in the tank exceeds a certain amount, turn off the compressor
-        else
-        {
-            driveTrain.compressorEnabled(false);
+            driveTrain.shiftDown();
         }
         
         //displays important values to the smart dashboard

@@ -25,13 +25,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveTrain extends BadSubsystem implements IDriveTrain
 {
     private static DriveTrain instance;
-    private static boolean shiftedUp, compressorOn;
     
-    private static double encoderDistancePerPulse;
+    boolean shiftedDown;
+    double encoderDistancePerPulse;
     
     RobotDrive train;
-    DigitalInput pressureSwitch;
-    Relay compressorSwitch;
     Solenoid shiftDownSolenoid, shiftUpSolenoid;
     SpeedController frontLeft, backLeft, frontRight, backRight;
     Gyro gyro;
@@ -60,9 +58,6 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
         }
         else
         {
-            shiftedUp = true;
-            compressorOn = false;
-            
             rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
             leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
             rightEncoder.start();
@@ -78,12 +73,9 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
             ultrasonic.setEnabled(true);
             ultrasonic.setAutomaticMode(true);
             
-            pressureSwitch = new DigitalInput(RobotMap.pressureSwitchDigitalIn);
-            compressorSwitch = new Relay(RobotMap.compressorSwitchRelay);
-            compressorSwitch.setDirection(Relay.Direction.kForward);
-            
             shiftDownSolenoid = new Solenoid(RobotMap.shiftDownSolenoid);
             shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoid);
+            shiftDown();
             
             frontLeft = new Talon(RobotMap.frontLeftController);
             backLeft = new Talon(RobotMap.backLeftController);
@@ -108,40 +100,25 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
     {
         train.tankDrive(left, right);
     }
-
-    public void shift(boolean up) 
+    
+    public void shiftUp()
     {
-        if (up && !shiftedUp)
+        if (shiftedDown)
         {
             shiftDownSolenoid.set(false);
             shiftUpSolenoid.set(true);
-            shiftedUp = true;
+            shiftedDown = false;
         }
-        else if (!up && shiftedUp)
+    }
+    
+    public void shiftDown()
+    {
+        if (!shiftedDown)
         {
             shiftUpSolenoid.set(false);
             shiftDownSolenoid.set(true);
-            shiftedUp = false;
+            shiftedDown = true;
         }
-    }
-
-    public void compressorEnabled(boolean on) 
-    {
-        if (on && !compressorOn)
-        {
-            compressorSwitch.set(Relay.Value.kOn);
-            compressorOn = true;
-        }
-        else if (!on && compressorOn)
-        {
-            compressorSwitch.set(Relay.Value.kOff);
-            compressorOn = false;
-        }
-    }
-
-    public boolean getCompressorLimit() 
-    {
-        return !pressureSwitch.get();
     }
     
     public Gyro getGyro()

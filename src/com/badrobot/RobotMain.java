@@ -43,9 +43,7 @@ public class RobotMain extends IterativeRobot {
         CommandBase.init();
         
         autoChooser = new SendableChooser();
-
         autoChooser.addObject("Drive Straight Forward and Shoot", new DriveForwardAndShoot(false));
-
         SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
         
     }
