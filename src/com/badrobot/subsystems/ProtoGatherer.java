@@ -17,8 +17,8 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class ProtoGatherer extends BadSubsystem implements IGatherer
 {
     public static ProtoGatherer instance;
-    // is the gatherer on and forward
-    public static boolean gathererOn, gathererForward;
+    
+    int gatheringState;
     
     // main system of gatherer
     Relay gathererSwitch;
@@ -48,28 +48,13 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
      */
     protected void initialize() 
     {
-        if (!RobotMap.isPrototype)
-        {
-            gathererOn = false;
-            gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
-            
-            pullGatherer = new Solenoid(RobotMap.pullGatherer);
-            pushGatherer = new Solenoid(RobotMap.pushGatherer);
-            
-            pushGatherer.set(false);
-            pullGatherer.set(true);
-        }
-        else
-        {
-            gathererOn = false;
-            gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
-            
-            pullGatherer = new Solenoid(RobotMap.pullGatherer);
-            pushGatherer = new Solenoid(RobotMap.pushGatherer);
-            
-            pushGatherer.set(false);
-            pullGatherer.set(true);
-        }
+        gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
+
+        pullGatherer = new Solenoid(RobotMap.pullGatherer);
+        pushGatherer = new Solenoid(RobotMap.pushGatherer);
+
+        pushGatherer.set(false);
+        pullGatherer.set(true);
     }
     
     /**
@@ -79,7 +64,7 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
      */
     public String getConsoleIdentity() 
     {
-        return "Gatherer";
+        return "ProtoGatherer";
     }
 
     protected void initDefaultCommand() 
@@ -87,34 +72,32 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
         this.setDefaultCommand(new GatherBall());
     }
     
-    /**
-     * Controls the gatherer's gathering system.
-     * @param on - should the gatherer be on?
-     * @param forward - should the gatherer be moving
-     * forward or backward?
-     */
-    public void gatherBall(boolean on, boolean forward)
+    public void gatherBall()
     {
-        if (forward && !gathererForward)
+        if (gatheringState != 1)
         {
             gathererSwitch.setDirection(Relay.Direction.kForward);
-            gathererForward = true;
+            gathererSwitch.set(Relay.Value.kOn);
+            gatheringState = 1;
         }
-        else if (!forward && gathererForward)
+    }
+    
+    public void ejectBall()
+    {
+        if (gatheringState != 2)
         {
             gathererSwitch.setDirection(Relay.Direction.kReverse);
-            gathererForward = false;
-        }
-        
-        if (on && !gathererOn)
-        {
             gathererSwitch.set(Relay.Value.kOn);
-            gathererOn = true;
+            gatheringState = 2;
         }
-        else if (!on && gathererOn)
+    }
+    
+    public void stopGatherer()
+    {
+        if (gatheringState != 0)
         {
             gathererSwitch.set(Relay.Value.kOff);
-            gathererOn = false;
+            gatheringState = 0;
         }
     }
     
@@ -123,15 +106,11 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
         if(pull)
         {
             pushGatherer.set(false);
-            //rightExhaust.set(false);
-            //leftExhaust.set(false);
             pullGatherer.set(true);
         }
         else
         {
             pullGatherer.set(false);
-            //rightExhaust.set(false);
-            //leftExhaust.set(false);
             pushGatherer.set(true);
         }
     }

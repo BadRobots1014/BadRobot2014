@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.badrobot.commands.CommandBase;
 import com.badrobot.commands.DriveStraightForward;
-import com.badrobot.commands.ExampleCommand;
 import com.badrobot.commands.autonomouscommands.DriveForwardAndShoot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -36,19 +35,21 @@ public class RobotMain extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-        // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
-
         // Initialize all subsystems
         CommandBase.init();
         
+        //Add autonomous commandgroups to the smart dashboard chooser
         autoChooser = new SendableChooser();
         autoChooser.addObject("Drive Straight Forward and Shoot", new DriveForwardAndShoot(false));
         SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
         
     }
 
+    /**
+     * Called when autonomous is first initiated
+     */
     public void autonomousInit() {
+        //select the selected autonomous commandgroup and add to scheduler
         autonomousCommand = (Command) autoChooser.getSelected();
         Scheduler.getInstance().add(autonomousCommand);
     }
@@ -60,16 +61,16 @@ public class RobotMain extends IterativeRobot {
         Scheduler.getInstance().run();
     }
 
+    /**
+     * Called when autonomous is first initiated
+     */
     public void teleopInit() {
-	// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
+	//cancels autonomous mode when teleop begins
         autonomousCommand.cancel();
     }
 
     /**
-     * This function is called periodically during operator control
+     * This function is called periodically during operator control (teleop mode)
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();

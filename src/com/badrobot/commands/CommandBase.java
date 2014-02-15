@@ -3,8 +3,12 @@ package com.badrobot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.badrobot.OI;
+import com.badrobot.RobotMap;
+import com.badrobot.subsystems.CompressorSubsystem;
+import com.badrobot.subsystems.FinalDriveTrain;
+import com.badrobot.subsystems.FinalGatherer;
+import com.badrobot.subsystems.FinalShooter;
 import com.badrobot.subsystems.ProtoDriveTrain;
-import com.badrobot.subsystems.ExampleSubsystem;
 import com.badrobot.subsystems.ProtoGatherer;
 import com.badrobot.subsystems.RetroLight;
 import com.badrobot.subsystems.ProtoShooter;
@@ -35,9 +39,24 @@ public abstract class CommandBase extends Command {
     public static ICompressor compressor;
     
     public static void init() {
-        driveTrain = ProtoDriveTrain.getInstance();
-        shooter = ProtoShooter.getInstance();
-        gatherer = ProtoGatherer.getInstance();
+        //Final Subsystems
+        if (!RobotMap.isPrototype)
+        {
+            driveTrain = FinalDriveTrain.getInstance();
+            shooter = FinalShooter.getInstance();
+            gatherer = FinalGatherer.getInstance();
+        }
+        //Prototype Subsystems
+        else
+        {
+            driveTrain = ProtoDriveTrain.getInstance();
+            shooter = ProtoShooter.getInstance();
+            gatherer = ProtoGatherer.getInstance();
+        }
+        
+        compressor = CompressorSubsystem.getInstance();
+        //retroLight = RetroLight.getInstance();
+        //visionTracking = VisionTracking.getInstance();
         
         // This MUST be here. If the OI creates Commands (which it very likely
         // will), constructing it during the construction of CommandBase (from

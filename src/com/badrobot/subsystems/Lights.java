@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.DigitalOutput;
  */
 public class Lights implements ILights
 {
-
     DigitalOutput redChannel;
     DigitalOutput greenChannel;
     DigitalOutput blueChannel;

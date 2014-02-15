@@ -5,8 +5,6 @@
 package com.badrobot.commands;
 
 import com.badrobot.OI;
-import com.badrobot.RobotMap;
-import com.badrobot.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -54,19 +52,18 @@ public class GatherBall extends BadCommand
             {
                 // turn gatherer on and move it forward
                 // to gather balls
-                gatherer.gatherBall(true, true);
+                gatherer.gatherBall();
             }
             else if (OI.secondaryController.isLBButtonPressed())
             {
                 // turn gatherer on but
                 // move it backwards
-                gatherer.gatherBall(true, false);
+                gatherer.ejectBall();
             }
             else
             {
                 // turn gatherer off
-                // and move it forward?
-                gatherer.gatherBall(false, true);
+                gatherer.stopGatherer();
             }
             
             if (OI.secondaryController.isXButtonPressed())
@@ -89,12 +86,12 @@ public class GatherBall extends BadCommand
             {
                 if (!gatherOn)
                 {
-                    gatherer.gatherBall(true, true);
+                    gatherer.gatherBall();
                     gatherOn = true;
                 }
                 else
                 {
-                    gatherer.gatherBall(false, true);
+                    gatherer.stopGatherer();
                     gatherOn = false;
                 }
                 rButtonPressed = false;
@@ -109,12 +106,12 @@ public class GatherBall extends BadCommand
                 lButtonPressed = false;
                 if (!gatherOn)
                 {
-                    gatherer.gatherBall(true, false);
+                    gatherer.ejectBall();
                     gatherOn = true;
                 }
                 else
                 {
-                    gatherer.gatherBall(false, false);
+                    gatherer.stopGatherer();
                     gatherOn = false;
                 }
             }

@@ -7,31 +7,28 @@ package com.badrobot.subsystems;
 import com.badrobot.RobotMap;
 import com.badrobot.commands.DriveRobot;
 import com.badrobot.subsystems.interfaces.IDriveTrain;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
-import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
- * @author Steve
+ * @author Isaac
  */
-public class FinalDriveTrain extends BadSubsystem implements IDriveTrain {
-    
+public class FinalDriveTrain extends BadSubsystem implements IDriveTrain
+{
     private static FinalDriveTrain instance;
-    private static boolean shiftedUp, compressorOn;
     
-    private static double encoderDistancePerPulse;
+    boolean shiftedDown;
+    double encoderDistancePerPulse;
     
     RobotDrive train;
-    DigitalInput pressureSwitch;
-    Relay compressorSwitch;
-    Solenoid shiftDownSolenoid, shiftUpSolenoid;
+    Solenoid shiftUpSolenoid;
     SpeedController frontLeft, backLeft, frontRight, backRight;
     Gyro gyro;
     Ultrasonic ultrasonic;
@@ -53,42 +50,37 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain {
 
     protected void initialize() 
     {
-                    shiftedUp = true;
-            compressorOn = false;
-            
-            rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
-            leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
-            rightEncoder.start();
-            leftEncoder.start();
-            
-            encoderDistancePerPulse = 1;
-            
-            gyro = new Gyro(RobotMap.driveTrainGyro);
-            gyro.reset();
-            
-            ultrasonic = new Ultrasonic(RobotMap.ultrasonicPing, 
-                    RobotMap.ultrasonicEcho, Ultrasonic.Unit.kInches);
-            ultrasonic.setEnabled(true);
-            ultrasonic.setAutomaticMode(true);
-            
-            pressureSwitch = new DigitalInput(RobotMap.pressureSwitchDigitalIn);
-            compressorSwitch = new Relay(RobotMap.compressorSwitchRelay);
-            compressorSwitch.setDirection(Relay.Direction.kForward);
-            
-            shiftDownSolenoid = new Solenoid(RobotMap.shiftDownSolenoid);
-            shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoid);
-            
-            frontLeft = new Talon(RobotMap.frontLeftController);
-            backLeft = new Talon(RobotMap.backLeftController);
-            frontRight = new Talon(RobotMap.frontRightController);
-            backRight = new Talon(RobotMap.backRightController);
-            
-            train = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
+        /*
+        rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
+        leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
+        rightEncoder.start();
+        leftEncoder.start();
+
+        encoderDistancePerPulse = 1;
+
+        gyro = new Gyro(RobotMap.driveTrainGyro);
+        gyro.reset();
+
+        ultrasonic = new Ultrasonic(RobotMap.ultrasonicPing, 
+                RobotMap.ultrasonicEcho, Ultrasonic.Unit.kInches);
+        ultrasonic.setEnabled(true);
+        ultrasonic.setAutomaticMode(true);
+        */
+        
+        shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoid);
+        shiftDown();
+
+        frontLeft = new Talon(RobotMap.frontLeftController);
+        backLeft = new Talon(RobotMap.backLeftController);
+        frontRight = new Talon(RobotMap.frontRightController);
+        backRight = new Talon(RobotMap.backRightController);
+
+        train = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
     }
 
     public String getConsoleIdentity() 
     {
-        return "DriveTrain";
+        return "FinalDriveTrain";
     }
 
     protected void initDefaultCommand() 
@@ -100,40 +92,23 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain {
     {
         train.tankDrive(left, right);
     }
-
-    public void shift(boolean up) 
+    
+    public void shiftUp()
     {
-        if (up && !shiftedUp)
+        if (shiftedDown)
         {
-            shiftDownSolenoid.set(false);
             shiftUpSolenoid.set(true);
-            shiftedUp = true;
+            shiftedDown = false;
         }
-        else if (!up && shiftedUp)
+    }
+    
+    public void shiftDown()
+    {
+        if (!shiftedDown)
         {
             shiftUpSolenoid.set(false);
-            shiftDownSolenoid.set(true);
-            shiftedUp = false;
+            shiftedDown = true;
         }
-    }
-
-    public void compressorEnabled(boolean on) 
-    {
-        if (on && !compressorOn)
-        {
-            compressorSwitch.set(Relay.Value.kOn);
-            compressorOn = true;
-        }
-        else if (!on && compressorOn)
-        {
-            compressorSwitch.set(Relay.Value.kOff);
-            compressorOn = false;
-        }
-    }
-
-    public boolean getCompressorLimit() 
-    {
-        return !pressureSwitch.get();
     }
     
     public Gyro getGyro()
@@ -153,7 +128,6 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain {
     
     public double getDistanceToWall()
     {
-        log("valid? : " + ultrasonic.isRangeValid() + "  ,  enabled: "+ultrasonic.isEnabled());
         ultrasonic.ping();
         return ultrasonic.getRangeInches();
     }
@@ -174,4 +148,5 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain {
         //rightEncoder.setDistancePerPulse(d);
         //leftEncoder.setDistancePerPulse(d);
     }
+    
 }

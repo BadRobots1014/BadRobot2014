@@ -47,7 +47,7 @@ public class ProtoShooter extends BadSubsystem implements IShooter
 
     public String getConsoleIdentity() 
     {
-        return "Shooter";
+        return "ProtoShooter";
     }
 
     protected void initDefaultCommand() 
