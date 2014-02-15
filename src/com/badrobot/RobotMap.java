@@ -40,6 +40,9 @@ public class RobotMap
     //Gyro Ports
     public static final int driveTrainGyro = Sidecar.ANALOG_BREAKOUT1;
     
+    // Digital Input Ports
+    public static final int lookingDownInput = 0; //dont't know what this is yet???
+    
     //Ultrasonic Ports
     public static final int ultrasonicPing = Sidecar.DIO3;
     public static final int ultrasonicEcho = Sidecar.DIO2;
