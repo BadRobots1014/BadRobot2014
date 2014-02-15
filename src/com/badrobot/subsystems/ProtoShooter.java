@@ -17,23 +17,23 @@ import edu.wpi.first.wpilibj.Talon;
  *
  * @author Isaac
  */
-public class Shooter extends BadSubsystem implements IShooter
+public class ProtoShooter extends BadSubsystem implements IShooter
 {
-    private static Shooter instance;
+    private static ProtoShooter instance;
     
     Solenoid engageSolenoid, disengageSolenoid;
     SpeedController winch;
     
-    public static Shooter getInstance()
+    public static ProtoShooter getInstance()
     {
         if (instance == null)
         {
-            instance = new Shooter();
+            instance = new ProtoShooter();
         }
         return instance;
     }
     
-    private Shooter()
+    private ProtoShooter()
     {
         
     }
