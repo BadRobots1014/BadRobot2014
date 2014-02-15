@@ -35,6 +35,7 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
     Gyro gyro;
     Ultrasonic ultrasonic;
     Encoder rightEncoder, leftEncoder;
+    DigitalInput lookingAtLine;
     
     public static ProtoDriveTrain getInstance()
     {
@@ -76,6 +77,8 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
         frontRight = new Talon(RobotMap.frontRightController);
         backRight = new Talon(RobotMap.backRightController);
 
+        lookingAtLine = new DigitalInput(RobotMap.lookingDownInput);
+        
         train = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
     }
 
@@ -133,6 +136,16 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
     {
         ultrasonic.ping();
         return ultrasonic.getRangeInches();
+    }
+    
+    public boolean foundLine()
+    {
+        boolean found = false;
+        if(lookingAtLine.get())
+        {
+            found = true;
+        }
+        return found;
     }
     
     public RobotDrive getTrain()
