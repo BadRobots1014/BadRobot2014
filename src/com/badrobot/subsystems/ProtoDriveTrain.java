@@ -24,9 +24,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  * @author Isaac
  */
-public class DriveTrain extends BadSubsystem implements IDriveTrain
+public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
 {
-    private static DriveTrain instance;
+    private static ProtoDriveTrain instance;
     private static boolean shiftedUp, compressorOn;
     
     private static double encoderDistancePerPulse;
@@ -40,16 +40,16 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
     Ultrasonic ultrasonic;
     Encoder rightEncoder, leftEncoder;
     
-    public static DriveTrain getInstance()
+    public static ProtoDriveTrain getInstance()
     {
         if (instance == null)
         {
-            instance = new DriveTrain();
+            instance = new ProtoDriveTrain();
         }
         return instance;
     }
     
-    private DriveTrain()
+    private ProtoDriveTrain()
     {
         
     }
@@ -58,7 +58,37 @@ public class DriveTrain extends BadSubsystem implements IDriveTrain
     {
         if (!RobotMap.isPrototype)
         {
-            //final robot code goes here
+            shiftedUp = true;
+            compressorOn = false;
+            
+            rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
+            leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
+            rightEncoder.start();
+            leftEncoder.start();
+            
+            /*encoderDistancePerPulse = 1;
+            
+            gyro = new Gyro(RobotMap.driveTrainGyro);
+            gyro.reset();
+            
+            ultrasonic = new Ultrasonic(RobotMap.ultrasonicPing, 
+                    RobotMap.ultrasonicEcho, Ultrasonic.Unit.kInches);
+            ultrasonic.setEnabled(true);
+            ultrasonic.setAutomaticMode(true);*/
+            
+            pressureSwitch = new DigitalInput(RobotMap.pressureSwitchDigitalIn);
+            compressorSwitch = new Relay(RobotMap.compressorSwitchRelay);
+            compressorSwitch.setDirection(Relay.Direction.kForward);
+            
+            shiftDownSolenoid = new Solenoid(RobotMap.shiftDownSolenoid);
+            shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoid);
+            
+            frontLeft = new Talon(RobotMap.frontLeftController);
+            backLeft = new Talon(RobotMap.backLeftController);
+            frontRight = new Talon(RobotMap.frontRightController);
+            backRight = new Talon(RobotMap.backRightController);
+            
+            train = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
         }
         else
         {
