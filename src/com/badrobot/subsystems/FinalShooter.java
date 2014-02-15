@@ -4,18 +4,21 @@
  */
 package com.badrobot.subsystems;
 
+import com.badrobot.OI;
 import com.badrobot.RobotMap;
 import com.badrobot.commands.Shoot;
 import com.badrobot.subsystems.interfaces.IShooter;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 
 /**
  *
- * @author Steve
+ * @author Isaac
  */
-public class FinalShooter extends BadSubsystem implements IShooter{
+public class FinalShooter extends BadSubsystem implements IShooter
+{
     private static FinalShooter instance;
     
     Solenoid engageSolenoid, disengageSolenoid;
@@ -44,7 +47,7 @@ public class FinalShooter extends BadSubsystem implements IShooter{
 
     public String getConsoleIdentity() 
     {
-        return "Shooter";
+        return "FinalShooter";
     }
 
     protected void initDefaultCommand() 
