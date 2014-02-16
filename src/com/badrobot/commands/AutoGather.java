@@ -28,11 +28,12 @@ public class AutoGather extends BadCommand
 
     protected void initialize() 
     {
-        //This code will be called from the initiation of the command until 2.0 seconds (defined below)
         timer = new Timer();
         startSequence = false;
+        
+        //This code will be called from the initiation of the command until 2.0 seconds (defined below)
         shooter.disengageWinch();
-        gatherer.foldGatherer();
+        gatherer.extendGatherer();
         gatherer.gatherBall();
     }
 
@@ -43,7 +44,7 @@ public class AutoGather extends BadCommand
 
     protected void execute() 
     {
-        //If the gatherer optical sensor is triggered, start the sequence of events
+        //If the gatherer optical sensor is triggered, start the timer and sequence of events
         if (gatherer.getOpticalSensorValue() && !startSequence)
         {
             startSequence = true;
