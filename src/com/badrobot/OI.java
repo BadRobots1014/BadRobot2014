@@ -1,6 +1,7 @@
 
 package com.badrobot;
 
+import com.badrobot.commands.AutoGather;
 import com.badrobot.commands.DriveStraightForward;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -54,7 +55,22 @@ public class OI {
     {
         public boolean get() 
         {
-            return(primaryController.isAButtonPressed());//A Button drives forward
+            return(primaryController.isRBButtonPressed());//A Button drives forward
+        }
+    };
+    
+    public Button autoGather = new Button()
+    {
+        public boolean get()
+        {
+            if (!isSingleControllerMode())
+            {
+                return secondaryController.isStartButtonPressed();
+            }
+            else
+            {
+                return primaryController.isStartButtonPressed();
+            }
         }
     };
     
@@ -68,6 +84,8 @@ public class OI {
         {
             driveStraight.whenPressed(new DriveStraightForward());
         }
+        
+        autoGather.whenPressed(new AutoGather());
     }
     
     public static boolean getDigitalInput(int channel){

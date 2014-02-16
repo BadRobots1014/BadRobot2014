@@ -19,6 +19,7 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
     public static FinalGatherer instance;
     
     int gatheringState;
+    boolean folded;
     
     // main system of gatherer
     Relay gathererSwitch;
@@ -55,6 +56,7 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
 
         pushGatherer.set(false);
         pullGatherer.set(true);
+        folded = true;
     }
     
     /**
@@ -107,11 +109,23 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
         {
             pushGatherer.set(false);
             pullGatherer.set(true);
+            folded = true;
         }
         else
         {
             pullGatherer.set(false);
             pushGatherer.set(true);
+            folded = false;
         }
+    }
+
+    public boolean getOpticalSensorValue() 
+    {
+        return false;
+    }
+    
+    public boolean isFolded()
+    {
+        return folded;
     }
 }

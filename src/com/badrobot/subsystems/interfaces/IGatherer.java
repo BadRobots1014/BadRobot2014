@@ -16,5 +16,9 @@ public interface IGatherer {
     
     public void stopGatherer();
     
-    public void foldGatherer(boolean pull);    
+    public void foldGatherer(boolean pull);  
+    
+    public boolean getOpticalSensorValue();
+    
+    public boolean isFolded();
 }

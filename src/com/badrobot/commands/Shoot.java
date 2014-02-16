@@ -6,7 +6,7 @@ package com.badrobot.commands;
 
 import com.badrobot.OI;
 import com.badrobot.RobotMap;
-import edu.wpi.first.wpilibj.Utility;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -16,7 +16,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Shoot extends BadCommand
 {
     private static double COCK_BACK_SPEED = 1.0;
-    private static long time;
+    
+    private Timer timer;
 
     public Shoot()
     {
@@ -47,12 +48,12 @@ public class Shoot extends BadCommand
                 shooter.cockBack(0);
             }
 
-            if (OI.secondaryController.isBButtonPressed())
+            if (OI.secondaryController.isBButtonPressed() && !gatherer.isFolded())
             {
-                time = Utility.getFPGATime();
+                timer.start();
                 shooter.disengageWinch();
             }
-            else if ((Utility.getFPGATime() - time) >= 1*1000000)
+            else if (timer.get() > 1)
             {
                 shooter.engageWinch();
             }

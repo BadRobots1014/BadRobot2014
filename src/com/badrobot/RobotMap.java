@@ -69,8 +69,10 @@ public class RobotMap
     public static int redChannel;
     public static int greenChannel;
     public static int blueChannel;
+    
     //~~~~~~~~INPUT~~~~~~~~//
     
-    //Digital Input Pressure Switch
+    //Digital Input
     public static final int pressureSwitchDigitalIn = Sidecar.DIO1;
+    public static final int gathererOpticalSensor = Sidecar.DIO8;
 }

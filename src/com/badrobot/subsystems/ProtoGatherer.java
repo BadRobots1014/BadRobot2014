@@ -7,6 +7,7 @@ package com.badrobot.subsystems;
 import com.badrobot.RobotMap;
 import com.badrobot.commands.GatherBall;
 import com.badrobot.subsystems.interfaces.IGatherer;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -19,10 +20,12 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
     public static ProtoGatherer instance;
     
     int gatheringState;
+    boolean folded;
     
     // main system of gatherer
     Relay gathererSwitch;
     Solenoid pullGatherer, pushGatherer;
+    DigitalInput gathererOpticalSensor;
 
     /**
      * Gets the current instance of Gatherer.
@@ -49,12 +52,14 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
     protected void initialize() 
     {
         gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
+        gathererOpticalSensor = new DigitalInput(RobotMap.gathererOpticalSensor);
 
         pullGatherer = new Solenoid(RobotMap.pullGatherer);
         pushGatherer = new Solenoid(RobotMap.pushGatherer);
 
         pushGatherer.set(false);
         pullGatherer.set(true);
+        folded = true;
     }
     
     /**
@@ -107,11 +112,23 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
         {
             pushGatherer.set(false);
             pullGatherer.set(true);
+            folded = true;
         }
         else
         {
             pullGatherer.set(false);
             pushGatherer.set(true);
+            folded = false;
         }
+    }
+
+    public boolean getOpticalSensorValue() 
+    {
+        return gathererOpticalSensor.get();
+    }
+    
+    public boolean isFolded()
+    {
+        return folded;
     }
 }
