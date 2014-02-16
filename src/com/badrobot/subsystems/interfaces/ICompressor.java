@@ -10,7 +10,14 @@ package com.badrobot.subsystems.interfaces;
  */
 public interface ICompressor 
 {
+    /**
+     * Starts the compressor, automatically regulating
+     * the pressure in the system.
+     */
     public void startCompressor();
     
+    /**
+     * Stops the compressor and any pressure regulation.
+     */
     public void stopCompressor();
 }

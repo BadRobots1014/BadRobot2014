@@ -4,22 +4,29 @@
  */
 package com.badrobot.subsystems;
 
+import com.badrobot.BadSubsystem;
 import com.badrobot.RobotMap;
 import com.badrobot.commands.Compress;
 import com.badrobot.subsystems.interfaces.ICompressor;
 import edu.wpi.first.wpilibj.Compressor;
 
 /**
- *
+ * The compressor subsystem for the prototype robot;
+ * All compressor functionality code should go in this class.
  * @author Isaac
  */
 public class CompressorSubsystem extends BadSubsystem implements ICompressor
 {
     private static CompressorSubsystem instance;
     
-    private Compressor compressor;
+    //Physical components of the compressor:
+    Compressor compressor;
     
-    
+    /**
+     * Gets the current instance of the subsystem;
+     * If one doesn't exist, make one.
+     * @return The current instance of this subsystem
+     */
     public static CompressorSubsystem getInstance()
     {
         if (instance == null)
@@ -29,30 +36,52 @@ public class CompressorSubsystem extends BadSubsystem implements ICompressor
         return instance;
     }
     
+    /**
+     * Private constructor for an instance of the subsystem;
+     * Required for the getInstace() method.
+     */
     private CompressorSubsystem()
     {
     }
 
+    /**
+     * Initializes the instance variables.
+     */
     protected void initialize() 
     {
         compressor = new Compressor(RobotMap.compressorSwitchRelay, RobotMap.pressureSwitchDigitalIn);
     }
 
+    /**
+     * Returns the console identity, which is
+     * generally the class name.
+     * @return the class name
+     */
     public String getConsoleIdentity() 
     {
         return "CompressorSubsystem";
     }
 
+    /**
+     * Defines the default command for this subsystem.
+     */
     protected void initDefaultCommand() 
     {
         this.setDefaultCommand(new Compress());
     }
 
+    /**
+     * Starts the compressor, automatically regulating
+     * the pressure in the system.
+     */
     public void startCompressor() 
     {
         compressor.start();
     }
 
+    /**
+     * Stops the compressor and any pressure regulation.
+     */
     public void stopCompressor() 
     {
         compressor.stop();

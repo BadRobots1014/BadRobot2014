@@ -6,22 +6,29 @@
 
 package com.badrobot.subsystems;
 
+import com.badrobot.BadSubsystem;
 import com.badrobot.RobotMap;
 import com.badrobot.subsystems.interfaces.ILights;
 import edu.wpi.first.wpilibj.DigitalOutput;
 
 /**
- *
+ * The LED lights subsystem for the prototype robot;
+ * All LED lights functionality code should go in this class.
  * @author Saaj
  */
-public class Lights implements ILights
+public class Lights extends BadSubsystem implements ILights
 {
+    private static Lights instance;
+    
     DigitalOutput redChannel;
     DigitalOutput greenChannel;
     DigitalOutput blueChannel;
     
-    private static Lights instance;
-    
+    /**
+     * Gets the current instance of the subsystem;
+     * If one doesn't exist, make one.
+     * @return The current instance of this subsystem
+     */
     public static Lights getInstance()
     {
         if (instance == null)
@@ -33,7 +40,18 @@ public class Lights implements ILights
     
     private int currentColor = 0;
     
+    /**
+     * Private constructor for an instance of the subsystem;
+     * Required for the getInstace() method.
+     */
     private Lights()
+    {
+    }
+    
+    /**
+     * Initializes the instance variables.
+     */
+    protected void initialize() 
     {
         redChannel = new DigitalOutput(RobotMap.redChannel);
         greenChannel = new DigitalOutput(RobotMap.greenChannel);
@@ -43,10 +61,21 @@ public class Lights implements ILights
         greenChannel.enablePWM(0);
         blueChannel.enablePWM(0);
     }
-    
+
+    /**
+     * Returns the console identity, which is
+     * generally the class name.
+     * @return the class name
+     */
     public String getConsoleIdentity()
     {
         return "Decorative LED Lights";
+    }
+    
+    /**
+     * Defines the default command for this subsystem.
+     */
+    protected void initDefaultCommand() {
     }
     
     public static double byteToPWM(int Color)
@@ -105,10 +134,4 @@ public class Lights implements ILights
     {
         return currentColor;
     }
-
-    public void log(String out)
-    {
-        
-    }
-    
 }

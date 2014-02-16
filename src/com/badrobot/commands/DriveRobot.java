@@ -4,6 +4,7 @@
  */
 package com.badrobot.commands;
 
+import com.badrobot.BadCommand;
 import com.badrobot.OI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -58,6 +59,7 @@ public class DriveRobot extends BadCommand
         //displays important values to the smart dashboard
         SmartDashboard.putNumber("ultrasonic distance", driveTrain.getDistanceToWall());
         SmartDashboard.putNumber("gyro angle", driveTrain.getGyro().getAngle());
+        
         //commented out because we don't currently have both encoders working.
         /*SmartDashboard.putNumber("right encoder", driveTrain.getRightEncoder().get());
         SmartDashboard.putNumber("left encoder", driveTrain.getLeftEncoder().get());

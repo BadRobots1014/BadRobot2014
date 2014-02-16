@@ -4,6 +4,7 @@
  */
 package com.badrobot.commands;
 
+import com.badrobot.BadCommand;
 import com.badrobot.OI;
 import com.badrobot.RobotMap;
 import edu.wpi.first.wpilibj.Timer;

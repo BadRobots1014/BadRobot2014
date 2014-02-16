@@ -4,6 +4,7 @@
  */
 package com.badrobot.subsystems;
 
+import com.badrobot.BadSubsystem;
 import com.badrobot.RobotMap;
 import com.badrobot.commands.GatherBall;
 import com.badrobot.subsystems.interfaces.IGatherer;
@@ -12,25 +13,27 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
- *
+ * The gatherer subsystem for the prototype robot;
+ * All gatherer functionality code should go in this class.
  * @author Isaac
  */
 public class ProtoGatherer extends BadSubsystem implements IGatherer
 {
     public static ProtoGatherer instance;
     
-    int gatheringState;
-    boolean folded;
-    
-    // main system of gatherer
+    //Physical components of the gatherer:
     Relay gathererSwitch;
     Solenoid pullGatherer, pushGatherer;
     DigitalInput gathererOpticalSensor;
+    
+    //Other variables:
+    int gatheringState;
+    boolean folded;
 
     /**
-     * Gets the current instance of Gatherer.
+     * Gets the current instance of the subsystem;
      * If one doesn't exist, make one.
-     * @return the current instance of Gatherer
+     * @return The current instance of this subsystem
      */
     public static ProtoGatherer getInstance()
     {
@@ -41,13 +44,16 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
         return instance;
     }
     
+    /**
+     * Private constructor for an instance of the subsystem;
+     * Required for the getInstace() method.
+     */
     private ProtoGatherer()
     {
     }
     
     /**
      * Initializes the instance variables.
-     * Done here because this can be called twice.
      */
     protected void initialize() 
     {
@@ -57,6 +63,7 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
         pullGatherer = new Solenoid(RobotMap.pullGatherer);
         pushGatherer = new Solenoid(RobotMap.pushGatherer);
 
+        //Defaults the gatherer to the folded position:
         pushGatherer.set(false);
         pullGatherer.set(true);
         folded = true;
@@ -72,11 +79,17 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
         return "ProtoGatherer";
     }
 
+    /**
+     * Defines the default command for this subsystem.
+     */
     protected void initDefaultCommand() 
     {
         this.setDefaultCommand(new GatherBall());
     }
     
+    /**
+     * Rotates the gatherer wheels to pull the ball into the robot.
+     */
     public void gatherBall()
     {
         if (gatheringState != 1)
@@ -87,6 +100,9 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
         }
     }
     
+    /**
+     * Rotates the gatherer wheels to eject the ball out of the robot.
+     */
     public void ejectBall()
     {
         if (gatheringState != 2)
@@ -97,7 +113,10 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
         }
     }
     
-    public void stopGatherer()
+    /**
+     * Stops the gatherer wheels altogether.
+     */
+    public void stopGatherWheels()
     {
         if (gatheringState != 0)
         {
@@ -106,27 +125,39 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
         }
     }
     
-    public void foldGatherer(boolean pull) 
+    /**
+     * Articulates the gatherer into the robot.
+     */
+    public void foldGatherer() 
     {
-        if(pull)
-        {
-            pushGatherer.set(false);
-            pullGatherer.set(true);
-            folded = true;
-        }
-        else
-        {
-            pullGatherer.set(false);
-            pushGatherer.set(true);
-            folded = false;
-        }
+        pushGatherer.set(false);
+        pullGatherer.set(true);
+        folded = true;
+    }
+    
+    /**
+     * Articulates the gatherer to the extended position.
+     */
+    public void extendGatherer()
+    {
+        pullGatherer.set(false);
+        pushGatherer.set(true);
+        folded = false;
     }
 
+    /**
+     * Gets the current boolean value of the optical sensor.
+     * @return Optical sensor boolean value
+     */
     public boolean getOpticalSensorValue() 
     {
         return gathererOpticalSensor.get();
     }
     
+    /**
+     * Gives the current state of the gatherer articulation.
+     * @return True if the gatherer is folded into the robot
+     */
     public boolean isFolded()
     {
         return folded;

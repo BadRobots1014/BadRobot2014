@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.badrobot.commands;
+package com.badrobot;
 
 import com.badrobot.OI;
+import com.badrobot.commands.CommandBase;
 import com.badrobot.subsystems.interfaces.Logger;
 
 /**

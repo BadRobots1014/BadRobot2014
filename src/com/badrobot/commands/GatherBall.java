@@ -4,18 +4,22 @@
  */
 package com.badrobot.commands;
 
+import com.badrobot.BadCommand;
 import com.badrobot.OI;
+import com.badrobot.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * 
  * @author Isaac
  */
 public class GatherBall extends BadCommand
 {
-    
-    public static boolean gatherOn, rButtonPressed, lButtonPressed; 
-    
+    /**
+     * Constructor for the command;
+     * Requires the subsystem to override any 
+     * other commands currently using this subsystem.
+     */
     public GatherBall()
     {
         requires ((Subsystem) gatherer);
@@ -26,9 +30,7 @@ public class GatherBall extends BadCommand
      */
     protected void initialize() 
     {
-        gatherOn = false;
-        rButtonPressed = false;
-        lButtonPressed = false;
+        
     }
     /**
      * Gets the console identity. Usually this 
@@ -41,100 +43,94 @@ public class GatherBall extends BadCommand
     }
 
     /**
-     * Stuff that will be getting called over and over again.
+     * Continuously called while the command is active.
      */
     protected void execute() 
     {
         //Used when two controllers will be used
         if (!OI.isSingleControllerMode())
         {
-            if (OI.secondaryController.isRBButtonPressed())
-            {
-                // turn gatherer on and move it forward
-                // to gather balls
-                gatherer.gatherBall();
-            }
-            else if (OI.secondaryController.isLBButtonPressed())
-            {
-                // turn gatherer on but
-                // move it backwards
-                gatherer.ejectBall();
-            }
-            else
-            {
-                // turn gatherer off
-                gatherer.stopGatherer();
-            }
+            //gather ball with RB, eject with LB
+            controlGathererWheels(OI.secondaryController);
             
-            if (OI.secondaryController.isXButtonPressed())
-            {
-                gatherer.foldGatherer(true);
-            }
-            else if (OI.secondaryController.isYButtonPressed())
-            {
-                gatherer.foldGatherer(false);
-            }
+            //folds gatherer into robot with X, extends with Y
+            controlGathererArticulation(OI.secondaryController);
         }
         //Used when one controller will be used
         else
         {
-            if (OI.primaryController.isRBButtonPressed())
-            {
-                rButtonPressed = true;
-            }
-            else if (!OI.primaryController.isRBButtonPressed() && rButtonPressed)
-            {
-                if (!gatherOn)
-                {
-                    gatherer.gatherBall();
-                    gatherOn = true;
-                }
-                else
-                {
-                    gatherer.stopGatherer();
-                    gatherOn = false;
-                }
-                rButtonPressed = false;
-            }
-
-            if (OI.primaryController.isLBButtonPressed())
-            {
-                lButtonPressed = true;
-            }
-            else if (!OI.primaryController.isLBButtonPressed() && lButtonPressed)
-            {
-                lButtonPressed = false;
-                if (!gatherOn)
-                {
-                    gatherer.ejectBall();
-                    gatherOn = true;
-                }
-                else
-                {
-                    gatherer.stopGatherer();
-                    gatherOn = false;
-                }
-            }
-            if (OI.primaryController.isXButtonPressed())
-            {
-                gatherer.foldGatherer(true);
-            }
-            else if (OI.primaryController.isYButtonPressed())
-            {
-                gatherer.foldGatherer(false);
-            }
+            //gather ball with RB, eject with LB
+            controlGathererWheels(OI.primaryController);
+            
+            //folds gatherer into robot with X, extends with Y
+            controlGathererArticulation(OI.primaryController);
         }
     }
 
+    /**
+     * Determines when the command will be finished
+     * @return False for a continuous command
+     */
     protected boolean isFinished() 
     {
         return false;
     }
 
+    /**
+     * Called when the isFinished method returns true,
+     * The last thing this command will call.
+     */
     protected void end() {
     }
 
-    protected void interrupted() {
+    
+    /**
+     * Called when another command interrupts this command
+     * by requiring the gatherer subsystem.
+     */
+    protected void interrupted() 
+    {
+        log("I've been interrupted and am deffering to the new Command");
+    }
+    
+    /**
+     * Controls the gatherer wheels:
+     * RB Button: Rotates wheels to pull ball into robot;
+     * LB Button: Rotates wheels to eject the ball out of the robot.
+     * @param controller The controller to be used
+     */
+    private void controlGathererWheels(XboxController controller)
+    {
+        if (controller.isRBButtonPressed())
+        {
+            gatherer.gatherBall();
+        }
+        else if (controller.isLBButtonPressed())
+        {
+            gatherer.ejectBall();
+        }
+        else
+        {
+            gatherer.stopGatherWheels();
+        }
+    }
+    
+    /**
+     * Controls the gatherer articulation:
+     * X Button: Articulates the gatherer into the robot
+     * Y Button: Articulates the gatherer to the extended position.
+     * @param controller The controller to be used
+     */
+    private void controlGathererArticulation(XboxController controller)
+    {
+        if (controller.isXButtonPressed())
+        {
+            gatherer.foldGatherer();
+        }
+        else if (controller.isYButtonPressed())
+        {
+            gatherer.extendGatherer();
+        }
     }
     
 }

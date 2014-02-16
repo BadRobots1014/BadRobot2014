@@ -6,6 +6,7 @@
 
 package com.badrobot.commands;
 
+import com.badrobot.BadCommand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**

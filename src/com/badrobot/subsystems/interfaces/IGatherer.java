@@ -14,9 +14,11 @@ public interface IGatherer {
     
     public void ejectBall();
     
-    public void stopGatherer();
+    public void stopGatherWheels();
     
-    public void foldGatherer(boolean pull);  
+    public void foldGatherer();
+    
+    public void extendGatherer();
     
     public boolean getOpticalSensorValue();
     

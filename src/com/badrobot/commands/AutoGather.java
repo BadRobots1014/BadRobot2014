@@ -4,6 +4,7 @@
  */
 package com.badrobot.commands;
 
+import com.badrobot.BadCommand;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -31,7 +32,7 @@ public class AutoGather extends BadCommand
         timer = new Timer();
         startSequence = false;
         shooter.disengageWinch();
-        gatherer.foldGatherer(false);
+        gatherer.foldGatherer();
         gatherer.gatherBall();
     }
 
@@ -58,7 +59,7 @@ public class AutoGather extends BadCommand
             if (timeBetween(2.0, 2.5))
             {
                 log("Changing Actions: 1");
-                gatherer.foldGatherer(true);
+                gatherer.foldGatherer();
             }
             else if (timeBetween(2.5, 3.5))
             {

@@ -4,6 +4,7 @@
  */
 package com.badrobot.commands;
 
+import com.badrobot.BadCommand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -12,11 +13,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class ArticulateGatherer extends BadCommand
 {
-    boolean finished;
+    boolean finished, extendPosition;
     
     public ArticulateGatherer(boolean out)
     {
-        requires((Subsystem)shooter);
+        requires((Subsystem) gatherer);
+        extendPosition = out;
     }
 
     protected void initialize() {
@@ -27,7 +29,14 @@ public class ArticulateGatherer extends BadCommand
     }
 
     protected void execute() {
-        gatherer.foldGatherer(false);
+        if (extendPosition)
+        {
+            gatherer.extendGatherer();
+        }
+        else
+        {
+            gatherer.foldGatherer();
+        }
         finished = true;
     }
 

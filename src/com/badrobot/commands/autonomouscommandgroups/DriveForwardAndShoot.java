@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.badrobot.commands.autonomouscommands;
+package com.badrobot.commands.autonomouscommandgroups;
 
 import com.badrobot.commands.ArticulateGatherer;
 import com.badrobot.commands.DisengageWinch;

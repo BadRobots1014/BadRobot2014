@@ -4,7 +4,7 @@
  */
 package com.badrobot.commands;
 
-import com.badrobot.commands.BadCommand;
+import com.badrobot.BadCommand;
 import com.badrobot.commands.TurnOnRetroLight;
 import com.badrobot.subsystems.RetroLight;
 import com.badrobot.subsystems.VisionTracking;

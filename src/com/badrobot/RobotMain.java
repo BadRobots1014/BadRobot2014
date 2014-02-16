@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.badrobot.commands.CommandBase;
 import com.badrobot.commands.DriveStraightForward;
-import com.badrobot.commands.autonomouscommands.DriveForwardAndShoot;
+import com.badrobot.commands.autonomouscommandgroups.DriveForwardAndShoot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
