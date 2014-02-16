@@ -6,7 +6,7 @@ package com.badrobot.subsystems;
 
 import com.badrobot.BadSubsystem;
 import com.badrobot.RobotMap;
-import com.badrobot.subsystems.interfaces.IRetroLight;
+import com.badrobot.subsystems.interfaces.IRingLight;
 import edu.wpi.first.wpilibj.Relay;
 
 /**
@@ -14,22 +14,26 @@ import edu.wpi.first.wpilibj.Relay;
  * All camera ring light functionality code should go in this class.
  * @author Steve
  */
-public class RetroLight extends BadSubsystem implements IRetroLight 
+public class RingLight extends BadSubsystem implements IRingLight 
 {
-    private static RetroLight instance;
+    private static RingLight instance;
     
+    //Physical components of the ring light:
     Relay ringLightRelay;
+    
+    //Other variables:
+    boolean isOn = false;
     
     /**
      * Gets the current instance of the subsystem;
      * If one doesn't exist, make one.
      * @return The current instance of this subsystem
      */
-    public static RetroLight getInstance()
+    public static RingLight getInstance()
     {
         if (instance == null)
         {
-            instance = new RetroLight();
+            instance = new RingLight();
         }
         return instance;
     }
@@ -38,7 +42,7 @@ public class RetroLight extends BadSubsystem implements IRetroLight
      * Private constructor for an instance of the subsystem;
      * Required for the getInstace() method.
      */
-    private RetroLight()
+    private RingLight()
     {
     }
     
@@ -66,17 +70,19 @@ public class RetroLight extends BadSubsystem implements IRetroLight
     protected void initDefaultCommand() {
     }
     
+    /**
+     * Gets the current status of the ring light.
+     * @return True if the ring light is on
+     */
     public boolean ringLightIsOn()
-    {   
-        boolean isHot = false;
-        if(ringLightRelay.get() == Relay.Value.kOff)
-            isHot = false;
-        else if(ringLightRelay.get() == Relay.Value.kOn)
-            isHot = true;
-        
-        return isHot;
+    {
+        return isOn;
     }
 
+    /**
+     * Gets the ring light object.
+     * @return The relay that represents the ring light object
+     */
     public Relay getRingLightRelay() {
         return ringLightRelay;
     }

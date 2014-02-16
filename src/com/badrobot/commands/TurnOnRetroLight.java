@@ -5,7 +5,7 @@
 package com.badrobot.commands;
 
 import com.badrobot.BadCommand;
-import com.badrobot.subsystems.RetroLight;
+import com.badrobot.subsystems.RingLight;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -17,12 +17,12 @@ public class TurnOnRetroLight extends BadCommand {
 
     public TurnOnRetroLight()
     {
-        requires((Subsystem) retroLight);
+        requires((Subsystem) ringLight);
     }
 
     protected void initialize() 
     {
-        retroLight.getRingLightRelay().set(Relay.Value.kOn);
+        ringLight.getRingLightRelay().set(Relay.Value.kOn);
     }
 
     public String getConsoleIdentity() 
@@ -32,9 +32,9 @@ public class TurnOnRetroLight extends BadCommand {
 
     protected void execute() 
     {
-        if(!retroLight.ringLightIsOn())
+        if(!ringLight.ringLightIsOn())
         {
-            retroLight.getRingLightRelay().set(Relay.Value.kOn);
+            ringLight.getRingLightRelay().set(Relay.Value.kOn);
         }
     }
 

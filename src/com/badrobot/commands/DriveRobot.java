@@ -45,12 +45,10 @@ public class DriveRobot extends BadCommand
         //drives using direct input from the xbox controller
         driveTrain.tankDrive(OI.primaryController.getLeftStickY(), OI.primaryController.getRightStickY());
         
-        //shift up if right trigger is pressed
         if (OI.primaryController.getRightTrigger() > 0)
         {
             driveTrain.shiftUp();
-        }  
-        //shift down if left trigger is pressed
+        }
         else if (OI.primaryController.getLeftTrigger() > 0)
         {
             driveTrain.shiftDown();

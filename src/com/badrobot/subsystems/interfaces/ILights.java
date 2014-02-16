@@ -13,7 +13,7 @@ package com.badrobot.subsystems.interfaces;
 public interface ILights extends Logger
 {   
     /**
-     *  Generic enumerable
+     * Convenience names for the integer cases
      */
     public static final int kBlue = 0,
                             kRed = 1,
@@ -44,11 +44,10 @@ public interface ILights extends Logger
      * Sets color of lights to predefined enumerable color
      * @param color predefined enumerable color
      */
-    
     public void setColor(int color);
     
     /**
-     * 
+     * Gets the current color.
      * @return current enumerated color as specified in interface
      */
     public int getColor();

@@ -6,7 +6,7 @@ package com.badrobot.commands;
 
 import com.badrobot.BadCommand;
 import com.badrobot.commands.TurnOnRetroLight;
-import com.badrobot.subsystems.RetroLight;
+import com.badrobot.subsystems.RingLight;
 import com.badrobot.subsystems.VisionTracking;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Utility;

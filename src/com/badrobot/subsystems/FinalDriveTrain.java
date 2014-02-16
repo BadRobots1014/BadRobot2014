@@ -114,9 +114,13 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain
     }
 
     /**
-     * Drives the robot tank-style with two inputs.
-     * @param left Speed from -1 to 1 to drive the left side of the robot
-     * @param right Speed from -1 to 1 to drive the right side of the robot
+     * Drives the robot in tank drive--two sticks represent the left and right
+     * sides of the robot; pushing forward on the left stick moves the left side
+     * forward, pushing backwards on the right stick moves the right side of the
+     * robot backwards.
+     * 
+     * @param left the left side joystick value (-1 to 1)
+     * @param right the right joystick value (-1 to 1)
      */
     public void tankDrive(double left, double right) 
     {

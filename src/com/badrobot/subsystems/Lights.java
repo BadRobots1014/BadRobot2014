@@ -85,11 +85,17 @@ public class Lights extends BadSubsystem implements ILights
         return pwmValue;
     }
     
+    /**
+     *  Turns on Lights
+     */  
     public void turnOn()
     {
         setColor(ILights.kETech);
     }
 
+    /**
+     *  Turns off Lights
+     */   
     public void turnOff()
     {
         redChannel.updateDutyCycle(0);
@@ -97,6 +103,12 @@ public class Lights extends BadSubsystem implements ILights
         blueChannel.updateDutyCycle(0);
     }
 
+    /**
+     * ALL values are to be in between 0 and 255
+     * @param r red
+     * @param g green
+     * @param b blue
+     */
     public void setColor(int r, int g, int b)
     {
         redChannel.updateDutyCycle(byteToPWM(Math.abs(r)));
@@ -104,6 +116,10 @@ public class Lights extends BadSubsystem implements ILights
         blueChannel.updateDutyCycle(byteToPWM(Math.abs(b)));
     }
 
+    /**
+     * Sets color of lights to predefined enumerable color
+     * @param color predefined enumerable color
+     */
     public void setColor(int color)
     {
         switch(color)
@@ -130,6 +146,10 @@ public class Lights extends BadSubsystem implements ILights
         currentColor = color;
     }
 
+    /**
+     * Gets the current color.
+     * @return current enumerated color as specified in interface
+     */
     public int getColor()
     {
         return currentColor;
