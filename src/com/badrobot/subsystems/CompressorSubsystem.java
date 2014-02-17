@@ -4,8 +4,6 @@
  */
 package com.badrobot.subsystems;
 
-import com.badrobot.BadSubsystem;
-import com.badrobot.RobotMap;
 import com.badrobot.commands.Compress;
 import com.badrobot.subsystems.interfaces.ICompressor;
 import edu.wpi.first.wpilibj.Compressor;
@@ -49,7 +47,7 @@ public class CompressorSubsystem extends BadSubsystem implements ICompressor
      */
     protected void initialize() 
     {
-        compressor = new Compressor(RobotMap.compressorSwitchRelay, RobotMap.pressureSwitchDigitalIn);
+        compressor = new Compressor(getRobotMap().getCompressorRelayPort(), getRobotMap().getPressureSwitchPort());
     }
 
     /**

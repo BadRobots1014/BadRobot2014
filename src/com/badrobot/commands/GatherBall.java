@@ -4,7 +4,6 @@
  */
 package com.badrobot.commands;
 
-import com.badrobot.BadCommand;
 import com.badrobot.OI;
 import com.badrobot.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;

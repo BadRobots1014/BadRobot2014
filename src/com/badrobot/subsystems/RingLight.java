@@ -4,8 +4,6 @@
  */
 package com.badrobot.subsystems;
 
-import com.badrobot.BadSubsystem;
-import com.badrobot.RobotMap;
 import com.badrobot.subsystems.interfaces.IRingLight;
 import edu.wpi.first.wpilibj.Relay;
 
@@ -51,7 +49,7 @@ public class RingLight extends BadSubsystem implements IRingLight
      */
     protected void initialize()
     {
-        //ringLightRelay = new Relay(RobotMap.ringLightSwitchRelay);//2nd relay
+        //ringLightRelay = new Relay(getRobotMap().ringLightSwitchRelay);//2nd relay
     }
 
     /**

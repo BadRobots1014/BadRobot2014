@@ -2,9 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.badrobot;
+package com.badrobot.subsystems;
 
+import com.badrobot.FinalRobotMap;
 import com.badrobot.OI;
+import com.badrobot.OI;
+import com.badrobot.ProtoRobotMap;
+import com.badrobot.subsystems.interfaces.IRobotMap;
 import com.badrobot.subsystems.interfaces.Logger;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -52,4 +56,21 @@ public abstract class BadSubsystem extends Subsystem implements Logger {
      * Can be whatever you want, most likely the class name though.
      */
     public abstract String getConsoleIdentity();
+    
+    private IRobotMap map;
+    public IRobotMap getRobotMap()
+    {
+        if (map == null)
+        {
+            if (OI.isPrototype)
+            {
+                map = new ProtoRobotMap();
+            }
+            else
+            {
+                map = new FinalRobotMap();
+            }
+        }
+        return map;
+    }
 }

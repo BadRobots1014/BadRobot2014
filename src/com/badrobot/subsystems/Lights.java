@@ -6,8 +6,6 @@
 
 package com.badrobot.subsystems;
 
-import com.badrobot.BadSubsystem;
-import com.badrobot.RobotMap;
 import com.badrobot.subsystems.interfaces.ILights;
 import edu.wpi.first.wpilibj.DigitalOutput;
 
@@ -53,9 +51,9 @@ public class Lights extends BadSubsystem implements ILights
      */
     protected void initialize() 
     {
-        redChannel = new DigitalOutput(RobotMap.redChannel);
-        greenChannel = new DigitalOutput(RobotMap.greenChannel);
-        blueChannel = new DigitalOutput(RobotMap.blueChannel);
+        redChannel = new DigitalOutput(getRobotMap().getRedChannelPort());
+        greenChannel = new DigitalOutput(getRobotMap().getGreenChannelPort());
+        blueChannel = new DigitalOutput(getRobotMap().getBlueChannelPort());
         
         redChannel.enablePWM(0);
         greenChannel.enablePWM(0);

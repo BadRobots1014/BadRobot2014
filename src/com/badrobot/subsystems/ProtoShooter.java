@@ -4,9 +4,7 @@
  */
 package com.badrobot.subsystems;
 
-import com.badrobot.BadSubsystem;
 import com.badrobot.OI;
-import com.badrobot.RobotMap;
 import com.badrobot.commands.Shoot;
 import com.badrobot.subsystems.interfaces.IShooter;
 import edu.wpi.first.wpilibj.Encoder;
@@ -54,9 +52,9 @@ public class ProtoShooter extends BadSubsystem implements IShooter
      */
     protected void initialize() 
     {
-        winch = new Talon(RobotMap.winchController);
-        engageSolenoid = new Solenoid(RobotMap.engageWinchSolenoid);
-        disengageSolenoid = new Solenoid(RobotMap.disengageWinchSolenoid);
+        winch = new Talon(getRobotMap().getWinchSpeedControllerPort());
+        engageSolenoid = new Solenoid(getRobotMap().getEngageWinchSolenoidPort());
+        disengageSolenoid = new Solenoid(getRobotMap().getDisengageWinchSolenoidPort());
     }
 
     /**

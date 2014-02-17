@@ -4,8 +4,6 @@
  */
 package com.badrobot.subsystems;
 
-import com.badrobot.BadSubsystem;
-import com.badrobot.RobotMap;
 import com.badrobot.commands.GatherBall;
 import com.badrobot.subsystems.interfaces.IGatherer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -57,11 +55,11 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
      */
     protected void initialize() 
     {
-        gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
-        gathererOpticalSensor = new DigitalInput(RobotMap.gathererOpticalSensor);
+        gathererSwitch = new Relay(getRobotMap().getGathererMotorRelayPort());
+        gathererOpticalSensor = new DigitalInput(getRobotMap().getGathererOpticalSensorPort());
 
-        pullGatherer = new Solenoid(RobotMap.pullGatherer);
-        pushGatherer = new Solenoid(RobotMap.pushGatherer);
+        pullGatherer = new Solenoid(getRobotMap().getFoldGathererSolenoidPort());
+        pushGatherer = new Solenoid(getRobotMap().getExtendGathererSolenoidPort());
 
         //Defaults the gatherer to the folded position:
         pushGatherer.set(false);

@@ -4,8 +4,6 @@
  */
 package com.badrobot.subsystems;
 
-import com.badrobot.BadSubsystem;
-import com.badrobot.RobotMap;
 import com.badrobot.commands.DriveRobot;
 import com.badrobot.subsystems.interfaces.IDriveTrain;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -70,27 +68,27 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain
         /*
         encoderDistancePerPulse = 1;
         
-        rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
-        leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
+        rightEncoder = new Encoder(getRobotMap().rightEncoderA, getRobotMap().rightEncoderB);
+        leftEncoder = new Encoder(getRobotMap().leftEncoderA, getRobotMap().leftEncoderB);
         rightEncoder.start();
         leftEncoder.start();
 
-        gyro = new Gyro(RobotMap.driveTrainGyro);
+        gyro = new Gyro(getRobotMap().driveTrainGyro);
         gyro.reset();
 
-        ultrasonic = new Ultrasonic(RobotMap.ultrasonicPing, 
-                RobotMap.ultrasonicEcho, Ultrasonic.Unit.kInches);
+        ultrasonic = new Ultrasonic(getRobotMap().ultrasonicPing, 
+                getRobotMap().ultrasonicEcho, Ultrasonic.Unit.kInches);
         ultrasonic.setEnabled(true);
         ultrasonic.setAutomaticMode(true);
         */
 
-        shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoid);
+        shiftUpSolenoid = new Solenoid(getRobotMap().getShiftUpSolenoidPort());
         shiftedDown = true;
 
-        frontLeft = new Talon(RobotMap.frontLeftController);
-        backLeft = new Talon(RobotMap.backLeftController);
-        frontRight = new Talon(RobotMap.frontRightController);
-        backRight = new Talon(RobotMap.backRightController);
+        frontLeft = new Talon(getRobotMap().getFrontLeftSpeedControllerPort());
+        backLeft = new Talon(getRobotMap().getBackLeftSpeedControllerPort());
+        frontRight = new Talon(getRobotMap().getFrontRightSpeedControllerPort());
+        backRight = new Talon(getRobotMap().getBackRightSpeedControllerPort());
 
         train = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
     }

@@ -46,6 +46,8 @@ public class OI {
     
     public static DriverStation driverStation;
     
+    public static final boolean isPrototype = true;
+    
     public static boolean CONSOLE_OUTPUT_ENABLED = true;
     
     public static XboxController primaryController, secondaryController;
@@ -77,8 +79,8 @@ public class OI {
     public void init()
     {
         driverStation = DriverStation.getInstance();
-        primaryController = new XboxController(RobotMap.driverStation_ControllerPort1);
-        secondaryController = new XboxController(RobotMap.driverStation_ControllerPort2);
+        primaryController = new XboxController(1);
+        secondaryController = new XboxController(2);
         
         if (!isSingleControllerMode())
         {

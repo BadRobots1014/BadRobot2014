@@ -3,7 +3,6 @@ package com.badrobot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.badrobot.OI;
-import com.badrobot.RobotMap;
 import com.badrobot.subsystems.CompressorSubsystem;
 import com.badrobot.subsystems.FinalDriveTrain;
 import com.badrobot.subsystems.FinalGatherer;
@@ -40,7 +39,7 @@ public abstract class CommandBase extends Command {
     
     public static void init() {
         //Final Subsystems
-        if (!RobotMap.isPrototype)
+        if (!OI.isPrototype)
         {
             driveTrain = FinalDriveTrain.getInstance();
             shooter = FinalShooter.getInstance();
