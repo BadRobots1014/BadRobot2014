@@ -6,7 +6,6 @@
 
 package com.badrobot.subsystems;
 
-import com.badrobot.BadSubsystem;
 import com.badrobot.RobotMap;
 import com.badrobot.subsystems.interfaces.ILights;
 import edu.wpi.first.wpilibj.DigitalOutput;

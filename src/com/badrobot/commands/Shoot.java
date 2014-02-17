@@ -4,7 +4,6 @@
  */
 package com.badrobot.commands;
 
-import com.badrobot.BadCommand;
 import com.badrobot.OI;
 import com.badrobot.RobotMap;
 import com.badrobot.XboxController;

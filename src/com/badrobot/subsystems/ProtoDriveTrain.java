@@ -4,7 +4,6 @@
  */
 package com.badrobot.subsystems;
 
-import com.badrobot.BadSubsystem;
 import com.badrobot.RobotMap;
 import com.badrobot.commands.DriveRobot;
 import com.badrobot.subsystems.interfaces.IDriveTrain;

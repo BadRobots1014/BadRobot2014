@@ -4,7 +4,6 @@
  */
 package com.badrobot.subsystems;
 
-import com.badrobot.BadSubsystem;
 import com.badrobot.OI;
 import com.badrobot.RobotMap;
 import com.badrobot.commands.Shoot;

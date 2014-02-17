@@ -4,7 +4,6 @@
  */
 package com.badrobot.subsystems;
 
-import com.badrobot.BadSubsystem;
 import com.badrobot.RobotMap;
 import com.badrobot.commands.GatherBall;
 import com.badrobot.subsystems.interfaces.IGatherer;

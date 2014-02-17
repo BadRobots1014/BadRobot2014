@@ -4,7 +4,6 @@
  */
 package com.badrobot.commands;
 
-import com.badrobot.BadCommand;
 import com.badrobot.OI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

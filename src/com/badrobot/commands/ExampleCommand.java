@@ -1,8 +1,6 @@
 
 package com.badrobot.commands;
 
-import com.badrobot.BadCommand;
-
 /**
  *
  * @author bradmiller

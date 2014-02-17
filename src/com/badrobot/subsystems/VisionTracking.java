@@ -4,7 +4,6 @@
  */
 package com.badrobot.subsystems;
 
-import com.badrobot.BadSubsystem;
 import com.badrobot.subsystems.interfaces.IVisionTracking;
 import edu.wpi.first.wpilibj.camera.AxisCamera;
 import edu.wpi.first.wpilibj.camera.AxisCameraException;

@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.badrobot;
+package com.badrobot.subsystems;
 
+import com.badrobot.OI;
+import com.badrobot.OI;
 import com.badrobot.OI;
 import com.badrobot.subsystems.interfaces.Logger;
 import edu.wpi.first.wpilibj.command.Subsystem;

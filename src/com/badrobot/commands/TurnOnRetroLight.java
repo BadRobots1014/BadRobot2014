@@ -4,7 +4,6 @@
  */
 package com.badrobot.commands;
 
-import com.badrobot.BadCommand;
 import com.badrobot.subsystems.RingLight;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
