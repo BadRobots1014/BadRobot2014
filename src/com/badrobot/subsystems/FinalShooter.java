@@ -8,6 +8,7 @@ import com.badrobot.OI;
 import com.badrobot.RobotMap;
 import com.badrobot.commands.Shoot;
 import com.badrobot.subsystems.interfaces.IShooter;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -24,6 +25,7 @@ public class FinalShooter extends BadSubsystem implements IShooter
     
     //Physical components of the shooter:
     Solenoid engageSolenoid, disengageSolenoid;
+    DoubleSolenoid winchSolenoid;
     SpeedController winch;
     
     /**
@@ -54,8 +56,11 @@ public class FinalShooter extends BadSubsystem implements IShooter
     protected void initialize() 
     {
         winch = new Talon(RobotMap.winchController);
-        engageSolenoid = new Solenoid(RobotMap.engageWinchSolenoid);
-        disengageSolenoid = new Solenoid(RobotMap.disengageWinchSolenoid);
+//        engageSolenoid = new Solenoid(RobotMap.engageWinchSolenoid);
+//        disengageSolenoid = new Solenoid(RobotMap.disengageWinchSolenoid);
+        winchSolenoid = new DoubleSolenoid(RobotMap.engageWinchSolenoid, RobotMap.disengageWinchSolenoid);
+        
+        engageWinch();
     }
 
     /**
@@ -90,8 +95,9 @@ public class FinalShooter extends BadSubsystem implements IShooter
      */
     public void disengageWinch() 
     {
-        engageSolenoid.set(false);
-        disengageSolenoid.set(true);
+//        engageSolenoid.set(false);
+//        disengageSolenoid.set(true);
+        winchSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
     
     /**
@@ -99,8 +105,9 @@ public class FinalShooter extends BadSubsystem implements IShooter
      */
     public void engageWinch()
     {
-        disengageSolenoid.set(false);
-        engageSolenoid.set(true);
+//        disengageSolenoid.set(false);
+//        engageSolenoid.set(true);
+        winchSolenoid.set(DoubleSolenoid.Value.kForward);
     }
     
 }

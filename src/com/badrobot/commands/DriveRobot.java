@@ -40,7 +40,7 @@ public class DriveRobot extends BadCommand
      * Runs the contained code repeatedly until the command is ended.
      */
     protected void execute() 
-    {   
+    {
         //drives using direct input from the xbox controller
         driveTrain.tankDrive(OI.primaryController.getLeftStickY(), OI.primaryController.getRightStickY());
         

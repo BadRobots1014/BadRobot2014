@@ -8,6 +8,7 @@ import com.badrobot.RobotMap;
 import com.badrobot.commands.GatherBall;
 import com.badrobot.subsystems.interfaces.IGatherer;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -23,6 +24,7 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
     //Physical components of the gatherer:
     Relay gathererSwitch;
     Solenoid pullGatherer, pushGatherer;
+    DoubleSolenoid articulatorSolenoid;
     DigitalInput gathererOpticalSensor;
     
     //Other variables:
@@ -59,12 +61,17 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
         gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
         gathererOpticalSensor = new DigitalInput(RobotMap.gathererOpticalSensor);
 
-        pullGatherer = new Solenoid(RobotMap.pullGatherer);
-        pushGatherer = new Solenoid(RobotMap.pushGatherer);
+        //pullGatherer = new Solenoid(RobotMap.pullGathererSolenoid);
+        //pushGatherer = new Solenoid(RobotMap.pushGathererSolenoid);
+        
+        articulatorSolenoid = new DoubleSolenoid(RobotMap.pushGathererSolenoid, RobotMap.pullGathererSolenoid);
 
         //Defaults the gatherer to the folded position:
-        pushGatherer.set(false);
-        pullGatherer.set(true);
+        //pushGatherer.set(false);
+        //pullGatherer.set(true);
+        
+        foldGatherer();
+        
         folded = true;
     }
     
@@ -129,8 +136,9 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
      */
     public void foldGatherer() 
     {
-        pushGatherer.set(false);
-        pullGatherer.set(true);
+//        pushGatherer.set(false);
+//        pullGatherer.set(true);
+        articulatorSolenoid.set(DoubleSolenoid.Value.kReverse);
         folded = true;
     }
     
@@ -139,8 +147,9 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
      */
     public void extendGatherer()
     {
-        pullGatherer.set(false);
-        pushGatherer.set(true);
+//        pullGatherer.set(false);
+//        pushGatherer.set(true);
+        articulatorSolenoid.set(DoubleSolenoid.Value.kForward);
         folded = false;
     }
 

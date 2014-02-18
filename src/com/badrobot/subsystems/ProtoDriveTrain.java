@@ -218,5 +218,4 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
         //rightEncoder.setDistancePerPulse(d);
         //leftEncoder.setDistancePerPulse(d);
     }
-    
 }

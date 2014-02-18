@@ -4,6 +4,7 @@
  */
 package com.badrobot.commands;
 
+import com.badrobot.OI;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -31,8 +32,8 @@ public class AutoGather extends BadCommand
         startSequence = false;
         
         //This code will be called from the initiation of the command until 2.0 seconds (defined below)
-        shooter.disengageWinch();
         gatherer.extendGatherer();
+        shooter.disengageWinch();
         gatherer.gatherBall();
     }
 
@@ -44,7 +45,7 @@ public class AutoGather extends BadCommand
     protected void execute() 
     {
         //If the gatherer optical sensor is triggered, start the timer and sequence of events
-        if (gatherer.getOpticalSensorValue() && !startSequence)
+        if (OI.driverStation.getDigitalIn(3) && !startSequence)
         {
             startSequence = true;
             timer.start();
@@ -56,17 +57,18 @@ public class AutoGather extends BadCommand
             timePassed = timer.get();
             log("Starting Sequence: 0");
             
-            if (timeBetween(2.0, 2.5))
+            if (timeBetween(2.0, 3.0))
             {
                 log("Changing Actions: 1");
                 gatherer.foldGatherer();
             }
-            else if (timeBetween(2.5, 3.5))
+            else if (timeBetween(3.0, 4.0))
             {
                 log("Changing Actions: 2");
+                gatherer.stopGatherWheels();
                 shooter.cockBack(1.0);
             }
-            else if (timeBetween(3.5, 4.0))
+            else if (timeBetween(4.0, 4.5))
             {
                 log("Changing Actions: 3");
                 shooter.cockBack(0);

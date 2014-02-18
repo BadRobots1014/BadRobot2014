@@ -51,7 +51,7 @@ public abstract class CommandBase extends Command {
         {
             driveTrain = ProtoDriveTrain.getInstance();
             shooter = ProtoShooter.getInstance();
-            gatherer = ProtoGatherer.getInstance();
+            //gatherer = ProtoGatherer.getInstance();
         }
         
         compressor = CompressorSubsystem.getInstance();

@@ -7,6 +7,7 @@ package com.badrobot.commands;
 import com.badrobot.OI;
 import com.badrobot.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * 
@@ -45,7 +46,7 @@ public class GatherBall extends BadCommand
      * Continuously called while the command is active.
      */
     protected void execute() 
-    {
+    {   
         //Used when two controllers will be used
         if (!OI.isSingleControllerMode())
         {

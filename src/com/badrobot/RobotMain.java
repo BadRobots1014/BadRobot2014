@@ -40,7 +40,7 @@ public class RobotMain extends IterativeRobot {
         
         //Add autonomous commandgroups to the smart dashboard chooser
         autoChooser = new SendableChooser();
-        autoChooser.addObject("Drive Straight Forward and Shoot", new DriveForwardAndShoot(false));
+        //autoChooser.addObject("Drive Straight Forward and Shoot", new DriveForwardAndShoot(false));
         SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
         
     }
@@ -66,7 +66,7 @@ public class RobotMain extends IterativeRobot {
      */
     public void teleopInit() {
 	//cancels autonomous mode when teleop begins
-        autonomousCommand.cancel();
+        //autonomousCommand.cancel();
     }
 
     /**

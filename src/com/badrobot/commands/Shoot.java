@@ -8,6 +8,7 @@ import com.badrobot.OI;
 import com.badrobot.RobotMap;
 import com.badrobot.XboxController;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,7 +18,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Shoot extends BadCommand
 {
     private static double COCK_BACK_SPEED = 1.0;
-    private Timer timer;
+    //private Timer timer;
+    
+    long startTime;
 
     public Shoot()
     {
@@ -76,12 +79,12 @@ public class Shoot extends BadCommand
             shooter.cockBack(0);
         }
         
-        if (controller.isBButtonPressed() && !gatherer.isFolded())
+        if (controller.isBButtonPressed())
         {
-            timer.start();
+            startTime = Utility.getFPGATime();
             shooter.disengageWinch();
         }
-        else if (timer.get() > 1)
+        else if ((Utility.getFPGATime() - startTime) > 0.5*1000000)
         {
             shooter.engageWinch();
         }

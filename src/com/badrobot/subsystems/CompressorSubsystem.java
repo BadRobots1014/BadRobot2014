@@ -48,7 +48,7 @@ public class CompressorSubsystem extends BadSubsystem implements ICompressor
      */
     protected void initialize() 
     {
-        compressor = new Compressor(RobotMap.compressorSwitchRelay, RobotMap.pressureSwitchDigitalIn);
+        compressor = new Compressor(RobotMap.pressureSwitchDigitalIn, RobotMap.compressorSwitchRelay);
     }
 
     /**
@@ -84,6 +84,11 @@ public class CompressorSubsystem extends BadSubsystem implements ICompressor
     public void stopCompressor() 
     {
         compressor.stop();
+    }
+    
+    public boolean isEnabled()
+    {
+        return compressor.enabled();
     }
     
 }

@@ -20,4 +20,6 @@ public interface ICompressor
      * Stops the compressor and any pressure regulation.
      */
     public void stopCompressor();
+    
+    public boolean isEnabled();
 }

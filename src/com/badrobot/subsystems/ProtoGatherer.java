@@ -59,8 +59,8 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
         gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
         gathererOpticalSensor = new DigitalInput(RobotMap.gathererOpticalSensor);
 
-        pullGatherer = new Solenoid(RobotMap.pullGatherer);
-        pushGatherer = new Solenoid(RobotMap.pushGatherer);
+        pullGatherer = new Solenoid(RobotMap.pullGathererSolenoid);
+        pushGatherer = new Solenoid(RobotMap.pushGathererSolenoid);
 
         //Defaults the gatherer to the folded position:
         pushGatherer.set(false);

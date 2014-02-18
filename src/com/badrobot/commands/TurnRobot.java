@@ -99,7 +99,7 @@ public class TurnRobot extends BadCommand
 
     protected void interrupted() 
     {
-        log(getConsoleIdentity() + ": I have been interrupted!");
+        log("I have been interrupted!");
     }
     
 }

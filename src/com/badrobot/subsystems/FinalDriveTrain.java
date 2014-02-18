@@ -66,7 +66,6 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain
      */
     protected void initialize() 
     {
-        /*
         encoderDistancePerPulse = 1;
         
         rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
@@ -81,7 +80,6 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain
                 RobotMap.ultrasonicEcho, Ultrasonic.Unit.kInches);
         ultrasonic.setEnabled(true);
         ultrasonic.setAutomaticMode(true);
-        */
 
         shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoid);
         shiftedDown = true;
@@ -217,5 +215,4 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain
         //rightEncoder.setDistancePerPulse(d);
         //leftEncoder.setDistancePerPulse(d);
     }
-    
 }

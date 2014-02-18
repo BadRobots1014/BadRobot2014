@@ -30,7 +30,6 @@ public class DriveStraightForward extends BadCommand
      */
     public DriveStraightForward()
     {
-        log(driveTrain+"");
         requires((Subsystem) driveTrain);
         driveTime = -1;
         driveDistance = -1;
