@@ -7,6 +7,7 @@ package com.badrobot.subsystems;
 import com.badrobot.RobotMap;
 import com.badrobot.commands.DriveRobot;
 import com.badrobot.subsystems.interfaces.IDriveTrain;
+import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
@@ -16,6 +17,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.camera.AxisCamera;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -27,12 +29,16 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
 {
     private static ProtoDriveTrain instance;
     
+    AxisCamera camera;
+    
+    
     //Physical components of the drive train:
     RobotDrive train;
     Solenoid shiftDownSolenoid, shiftUpSolenoid;
     SpeedController frontLeft, backLeft, frontRight, backRight;
     Gyro gyro;
-    Ultrasonic ultrasonic;
+    //Ultrasonic ultrasonic;
+    AnalogChannel ultrasonic;
     Encoder rightEncoder, leftEncoder;
     
     //Other variables:
@@ -66,6 +72,11 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
      */
     protected void initialize() 
     {
+        camera = AxisCamera.getInstance();
+        camera.writeResolution(AxisCamera.ResolutionT.k640x480);
+        
+        
+        
         encoderDistancePerPulse = 1;
         
         rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
@@ -76,10 +87,7 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
         gyro = new Gyro(RobotMap.driveTrainGyro);
         gyro.reset();
 
-        ultrasonic = new Ultrasonic(RobotMap.ultrasonicPing, 
-                RobotMap.ultrasonicEcho, Ultrasonic.Unit.kInches);
-        ultrasonic.setEnabled(true);
-        ultrasonic.setAutomaticMode(true);
+        //ultrasonic = new AnalogChannel(RobotMap.ultrasonicVoltage);
 
         shiftDownSolenoid = new Solenoid(RobotMap.shiftDownSolenoid);
         shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoid);
@@ -184,8 +192,22 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
      */
     public double getDistanceToWall()
     {
+        //This ultrasonic outputs a voltage in Volts, that reads
+        // 5/512 volts per inch
+        //return (ultrasonic.getVoltage() / .00977);
+        
+        return -1;
+        
+        /*
         ultrasonic.ping();
         return ultrasonic.getRangeInches();
+        */
+    }
+    
+    public double getUltrasonicVoltage()
+    {
+        return -1;
+        //return ultrasonic.getVoltage();
     }
     
     /**

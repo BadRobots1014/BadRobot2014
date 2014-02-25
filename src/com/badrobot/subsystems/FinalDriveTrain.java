@@ -215,4 +215,8 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain
         //rightEncoder.setDistancePerPulse(d);
         //leftEncoder.setDistancePerPulse(d);
     }
+
+    public double getUltrasonicVoltage() {
+        return -1;
+    }
 }
