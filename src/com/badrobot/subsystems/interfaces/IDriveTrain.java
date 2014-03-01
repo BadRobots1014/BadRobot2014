@@ -4,6 +4,11 @@
  */
 package com.badrobot.subsystems.interfaces;
 
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.camera.AxisCamera;
+
 /**
  * Interface for the drive train subsystem;
  * 
@@ -23,27 +28,58 @@ public interface IDriveTrain
     public void tankDrive(double left, double right);
     
     /**
-     * Shifts each of the two gear boxes on the robot's driveTrain; Up will
-     * shift the robot to the higher gear, !up will shift the robot to a lower
-     * gear.
-     * 
-     * @param up the direction of the shift
+     * Shifts both sides of the drive train into high gear.
      */
-    public void shift(boolean up);
+    public void shiftUp();
     
     /**
-     * Enables or disables the compressor; On is on, !on is off.
-     * 
-     * @param on the state of the compressor.
+     * Shifts both sides of the drive train into low gear.
      */
-    public void compressorEnabled(boolean on);
+    public void shiftDown();
     
     /**
-     * Returns the value that the pressure switch outputs; Will stay on until
-     * the pressure reaches 115 psi, and then stay off until it drops to 95;
-     * This lets us keep the pressure in a specific range.
-     * 
-     * @return the pressure switch output
+     * Gets the gyro.
+     * @return The gyro object
      */
-    public boolean getCompressorLimit();
+    public Gyro getGyro();
+    
+    /**
+     * Gets the right encoder.
+     * @return The right encoder object
+     */
+    public Encoder getRightEncoder();
+    
+    /**
+     * Gets the left encoder.
+     * @return The left encoder object
+     */
+    public Encoder getLeftEncoder();
+    
+    /**
+     * Gets the distance to the wall using the ultrasonic sensor.
+     * @return The distance to wall in inches
+     */
+    public double getDistanceToWall();
+    
+    public double getUltrasonicVoltage();
+    
+    /**
+     * Gets the train object of the drive train.
+     * @return The train object
+     */
+    public RobotDrive getTrain();
+    
+    /**
+     * Gets the drive train encoder distance per pulse;
+     * This is used to calibrate the encoder distance per pulse.
+     * @return The encoder distance per pulse value
+     */
+    public double getEncoderDistancePerPulse();
+    
+    /**
+     * Sets the drive train encoder distance per pulse;
+     * This is used to calibrate the encoder distance per pulse.
+     * @param d The value to set the distance per pulse to
+     */
+    public void setEncoderDistancePerPulse(double d);
 }

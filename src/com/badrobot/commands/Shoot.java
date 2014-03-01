@@ -5,7 +5,12 @@
 package com.badrobot.commands;
 
 import com.badrobot.OI;
+import com.badrobot.RobotMap;
+import com.badrobot.XboxController;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -13,7 +18,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Shoot extends BadCommand
 {
-    private static double COCK_BACK_SPEED = 0.5;
+    private static double COCK_BACK_SPEED = 1.0;
+    //private Timer timer;
+    
+    long startTime;
 
     public Shoot()
     {
@@ -32,23 +40,20 @@ public class Shoot extends BadCommand
 
     protected void execute() 
     {
-        if (OI.primaryController.isAButtonPressed())
+        //Used when two controllers will be used
+        if (!OI.isSingleControllerMode())
         {
-            shooter.cockBack(COCK_BACK_SPEED);
+            //Cock shooter with A, release with B
+            controlWinch(OI.secondaryController);
         }
+        //Used when one controller will be used
         else
         {
-            shooter.cockBack(0);
+            //Cock shooter with A, release with B
+            controlWinch(OI.primaryController);
         }
         
-        if (OI.primaryController.isBButtonPressed())
-        {
-            shooter.disengageWinch();
-        }
-        else
-        {
-            shooter.engageWinch();
-        }
+        SmartDashboard.putBoolean("Shooter Cocked Back", shooter.isCockedBack());
     }
 
     protected boolean isFinished() 
@@ -66,4 +71,25 @@ public class Shoot extends BadCommand
         
     }
     
+    private void controlWinch(XboxController controller)
+    {
+        if (controller.isAButtonPressed())
+        {
+            shooter.cockBack(COCK_BACK_SPEED);
+        }
+        else
+        {
+            shooter.cockBack(0);
+        }
+        
+        if (controller.isBButtonPressed())
+        {
+            startTime = Utility.getFPGATime();
+            shooter.disengageWinch();
+        }
+        else if ((Utility.getFPGATime() - startTime) > 0.5*1000000)
+        {
+            shooter.engageWinch();
+        }
+    }
 }

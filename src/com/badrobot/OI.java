@@ -1,6 +1,8 @@
 
 package com.badrobot;
 
+import com.badrobot.commands.AutoGather;
+import com.badrobot.commands.DriveStraightForward;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
@@ -48,15 +50,51 @@ public class OI {
     
     public static XboxController primaryController, secondaryController;
     
+    //Buttons:
+    public Button driveStraight = new Button() 
+    {
+        public boolean get() 
+        {
+            return(primaryController.isRBButtonPressed());//A Button drives forward
+        }
+    };
+    
+    public Button autoGather = new Button()
+    {
+        public boolean get()
+        {
+            if (!isSingleControllerMode())
+            {
+                return secondaryController.isStartButtonPressed();
+            }
+            else
+            {
+                return primaryController.isStartButtonPressed();
+            }
+        }
+    };
+    
     public void init()
     {
         driverStation = DriverStation.getInstance();
         primaryController = new XboxController(RobotMap.driverStation_ControllerPort1);
         secondaryController = new XboxController(RobotMap.driverStation_ControllerPort2);
+        
+        if (!isSingleControllerMode())
+        {
+            driveStraight.whenPressed(new DriveStraightForward());
+        }
+        
+        //autoGather.whenPressed(new AutoGather());
     }
     
     public static boolean getDigitalInput(int channel){
         return driverStation.getDigitalIn(channel);
+    }
+    
+    public static boolean isSingleControllerMode()
+    {
+        return driverStation.getDigitalIn(1);
     }
 }
 
