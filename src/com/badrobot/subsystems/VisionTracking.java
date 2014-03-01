@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.image.BinaryImage;
 import edu.wpi.first.wpilibj.image.ColorImage;
 import edu.wpi.first.wpilibj.image.NIVisionException;
 import edu.wpi.first.wpilibj.image.ParticleAnalysisReport;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The vision tracking subsystem for the prototype robot;
@@ -23,14 +24,15 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
     
     //Physical components of vision tracking:
     private AxisCamera camera;
+    private ColorImage image;
 
     //Other variables:
-    private final int HIGH_RED = 0;
-    private final int HIGH_BLUE = 0;
-    private final int HIGH_GREEN = 0;
-    private final int LOW_RED = 0;
-    private final int LOW_BLUE = 0;
-    private final int LOW_GREEN = 0;//for our color we are shooting at retrotape
+    private int HIGH_RED = 0;
+    private int HIGH_BLUE = 0;
+    private int HIGH_GREEN = 0;
+    private int LOW_RED = 0;
+    private int LOW_BLUE = 0;
+    private int LOW_GREEN = 0;//for our color we are shooting at retrotape
 
     /**
      * Gets the current instance of the subsystem;
@@ -59,9 +61,6 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
      */
     protected void initialize() 
     {
-        camera = AxisCamera.getInstance();
-        camera.writeResolution(AxisCamera.ResolutionT.k160x120);
-        camera.writeMaxFPS(30);
     }
 
     /**
@@ -85,16 +84,37 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
 
     public BinaryImage processedImage()  
     {
+        if(HIGH_RED != (int) SmartDashboard.getNumber("High Red"))
+                HIGH_RED = (int) SmartDashboard.getNumber("High Red");
+        
+        if(HIGH_BLUE != (int) SmartDashboard.getNumber("High Blue"))
+                HIGH_BLUE = (int) SmartDashboard.getNumber("High Blue");
+        
+        if(HIGH_GREEN != (int) SmartDashboard.getNumber("High Green"))
+                HIGH_GREEN = (int) SmartDashboard.getNumber("High Green");
+        
+        if(LOW_RED != (int) SmartDashboard.getNumber("Low Red"))
+                LOW_RED = (int) SmartDashboard.getNumber("Low Red");
+        
+        if(LOW_BLUE != (int) SmartDashboard.getNumber("Low Blue"))
+                LOW_BLUE = (int) SmartDashboard.getNumber("Low Blue");
+        
+        if(LOW_GREEN != (int) SmartDashboard.getNumber("Low Green"))
+                LOW_GREEN = (int) SmartDashboard.getNumber("Low Green");
+        
+        camera = AxisCamera.getInstance();
+        camera.writeResolution(AxisCamera.ResolutionT.k160x120);
+        camera.writeMaxFPS(7);
+        
         BinaryImage filteredImage = null;
+        try {  
+            image = camera.getImage();
+        } catch (AxisCameraException ex) {
+            ex.printStackTrace();
+        } catch (NIVisionException ex) {
+            ex.printStackTrace();
+        }
         try {
-            ColorImage image = null;
-            try {  
-                image = camera.getImage();
-            } catch (AxisCameraException ex) {
-                ex.printStackTrace();
-            } catch (NIVisionException ex) {
-                ex.printStackTrace();
-            }
             filteredImage = image.thresholdRGB(LOW_RED, HIGH_RED, LOW_GREEN, HIGH_GREEN, LOW_BLUE, HIGH_BLUE);//needs to be the color we send out
         } catch (NIVisionException ex) {
             ex.printStackTrace();

@@ -9,6 +9,7 @@ package com.badrobot.commands.autonomouscommandgroups;
 import com.badrobot.commands.ArticulateGatherer;
 import com.badrobot.commands.DisengageWinch;
 import com.badrobot.commands.DriveStraightForward;
+import com.badrobot.commands.DriveToWall;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -18,24 +19,21 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DriveForwardAndShoot extends CommandGroup
 {
     public static boolean useDistance;
-    private static final double DISTANCE = 24;
-    private static final double TIME = 3;
+    private static double time = 3;
     
-    public DriveForwardAndShoot(boolean distanceMode)
+    public DriveForwardAndShoot()
     {
-        useDistance = distanceMode;
-        if(useDistance)
-        {
-            this.addSequential(new ArticulateGatherer(true));
-            this.addSequential(new DriveStraightForward(DISTANCE, 0));
-            this.addSequential(new DisengageWinch());
-        }
-        else
-        {
-            this.addSequential(new ArticulateGatherer(true));
-            this.addSequential(new DriveStraightForward(TIME));
-            this.addSequential(new DisengageWinch());
-        }
+        this.addSequential(new ArticulateGatherer(true));
+        this.addSequential(new DriveToWall());
+        this.addSequential(new DisengageWinch());
+    }
+    
+    public DriveForwardAndShoot(double t)
+    {
+        time = t;
+        this.addSequential(new ArticulateGatherer(true));
+        this.addSequential(new DriveStraightForward(time));
+        this.addSequential(new DisengageWinch());
     }
     
     public void initialize()

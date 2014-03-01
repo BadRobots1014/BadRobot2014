@@ -8,6 +8,7 @@
 package com.badrobot;
 
 
+import com.badrobot.commands.CheckHotMoveAndShoot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -40,7 +41,9 @@ public class RobotMain extends IterativeRobot {
         
         //Add autonomous commandgroups to the smart dashboard chooser
         autoChooser = new SendableChooser();
-        //autoChooser.addObject("Drive Straight Forward and Shoot", new DriveForwardAndShoot(false));
+        autoChooser.addObject("Drive straight forward with distance and shoot", new DriveForwardAndShoot());
+        autoChooser.addObject("Drive straight forward with time and shoot", new DriveForwardAndShoot(SmartDashboard.getNumber("AutonomousDriveStraightTime", 3)));
+        autoChooser.addObject("Check hot drive foward and shoot", new CheckHotMoveAndShoot());
         SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
         
     }
