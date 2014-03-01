@@ -8,6 +8,7 @@ import com.badrobot.OI;
 import com.badrobot.RobotMap;
 import com.badrobot.commands.Shoot;
 import com.badrobot.subsystems.interfaces.IShooter;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -25,6 +26,8 @@ public class ProtoShooter extends BadSubsystem implements IShooter
     //Physical components of the shooter:
     Solenoid engageSolenoid, disengageSolenoid;
     SpeedController winch;
+    
+    DigitalInput shooterDIO;
     
     /**
      * Gets the current instance of the subsystem;
@@ -56,6 +59,8 @@ public class ProtoShooter extends BadSubsystem implements IShooter
         winch = new Talon(RobotMap.winchController);
         engageSolenoid = new Solenoid(RobotMap.engageWinchSolenoid);
         disengageSolenoid = new Solenoid(RobotMap.disengageWinchSolenoid);
+        
+        //shooterDIO = new DigitalInput(RobotMap.shooterDIO);
     }
 
     /**
@@ -101,6 +106,12 @@ public class ProtoShooter extends BadSubsystem implements IShooter
     {
         disengageSolenoid.set(false);
         engageSolenoid.set(true);
+    }
+    
+    public boolean isCockedBack()
+    {
+        return false;
+        //return shooterDIO.get();
     }
     
 }

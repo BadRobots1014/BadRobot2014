@@ -71,23 +71,18 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
      * Initializes the instance variables.
      */
     protected void initialize() 
-    {
-        camera = AxisCamera.getInstance();
-        camera.writeResolution(AxisCamera.ResolutionT.k640x480);
-        
-        
-        
+    {   
         encoderDistancePerPulse = 1;
         
-        rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
-        leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
-        rightEncoder.start();
-        leftEncoder.start();
+        //rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
+        //leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
+        //rightEncoder.start();
+        //leftEncoder.start();
 
         gyro = new Gyro(RobotMap.driveTrainGyro);
         gyro.reset();
 
-        //ultrasonic = new AnalogChannel(RobotMap.ultrasonicVoltage);
+        ultrasonic = new AnalogChannel(RobotMap.ultrasonicVoltage);
 
         shiftDownSolenoid = new Solenoid(RobotMap.shiftDownSolenoid);
         shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoid);
@@ -194,9 +189,9 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
     {
         //This ultrasonic outputs a voltage in Volts, that reads
         // 5/512 volts per inch
-        //return (ultrasonic.getVoltage() / .00977);
+        return (ultrasonic.getVoltage() / .00977);
         
-        return -1;
+        //return -1;
         
         /*
         ultrasonic.ping();
@@ -206,8 +201,7 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
     
     public double getUltrasonicVoltage()
     {
-        return -1;
-        //return ultrasonic.getVoltage();
+        return ultrasonic.getVoltage();
     }
     
     /**

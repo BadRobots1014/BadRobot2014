@@ -10,6 +10,7 @@ import com.badrobot.XboxController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -51,6 +52,8 @@ public class Shoot extends BadCommand
             //Cock shooter with A, release with B
             controlWinch(OI.primaryController);
         }
+        
+        SmartDashboard.putBoolean("Shooter Cocked Back", shooter.isCockedBack());
     }
 
     protected boolean isFinished() 

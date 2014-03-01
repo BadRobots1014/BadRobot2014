@@ -7,6 +7,7 @@
 package com.badrobot.commands;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Drives in a straight line until encountering an obstacle.
@@ -15,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveToWall extends BadCommand
 {
     public static double driveSpeed;
-    private static final double DISTANCE_DEADZONE_MAGIC_NUMBER = 2.0;
+    private static double DISTANCE_DEADZONE_MAGIC_NUMBER;
     private static int checkNumber;
     private double initialAngle;
     //Constant for turn correction
@@ -36,6 +37,7 @@ public class DriveToWall extends BadCommand
         driveTrain.tankDrive(0, 0);
         checkNumber = 1;
         initialAngle = driveTrain.getGyro().getAngle();
+        DISTANCE_DEADZONE_MAGIC_NUMBER = 2.0;
     }
 
     /**
@@ -53,6 +55,8 @@ public class DriveToWall extends BadCommand
      */
     protected void execute() 
     {
+        DISTANCE_DEADZONE_MAGIC_NUMBER = SmartDashboard.getNumber("Distance from wall");
+        
         driveTrain.getTrain().drive(driveSpeed, -(driveTrain.getGyro().getAngle()-initialAngle)*Kp);
         if (driveTrain.getDistanceToWall() < DISTANCE_DEADZONE_MAGIC_NUMBER && driveTrain.getDistanceToWall() > -DISTANCE_DEADZONE_MAGIC_NUMBER)
         {
