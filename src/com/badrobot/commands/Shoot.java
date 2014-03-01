@@ -44,7 +44,7 @@ public class Shoot extends BadCommand
         if (!OI.isSingleControllerMode())
         {
             //Cock shooter with A, release with B
-            controlWinch(OI.secondaryController);
+            controlWinch(OI.primaryController, OI.secondaryController);
         }
         //Used when one controller will be used
         else
@@ -71,9 +71,32 @@ public class Shoot extends BadCommand
         
     }
     
-    private void controlWinch(XboxController controller)
+    private void controlWinch(XboxController controller1, XboxController controller2)
     {
-        if (controller.isAButtonPressed())
+        SmartDashboard.putBoolean("Primary Fire", controller1.isBButtonPressed());
+        SmartDashboard.putBoolean("Secondary Fire", controller2.isBButtonPressed());
+        if (controller2.isAButtonPressed())
+        {
+            shooter.cockBack(COCK_BACK_SPEED);
+        }
+        else
+        {
+            shooter.cockBack(0);
+        }
+        //Allows firing if both B buttons are pressed or if the select button is pressed on the second controller
+        if ((controller1.isBButtonPressed() && controller2.isBButtonPressed()) || controller2.isSelectButtonPressed())
+        {
+            startTime = Utility.getFPGATime();
+            shooter.disengageWinch();
+        }
+        else if ((Utility.getFPGATime() - startTime) > 0.5*1000000)
+        {
+            shooter.engageWinch();
+        }
+    }
+    private void controlWinch(XboxController controller2)
+    {
+        if (controller2.isAButtonPressed())
         {
             shooter.cockBack(COCK_BACK_SPEED);
         }
@@ -82,7 +105,7 @@ public class Shoot extends BadCommand
             shooter.cockBack(0);
         }
         
-        if (controller.isBButtonPressed())
+        if (controller2.isBButtonPressed())
         {
             startTime = Utility.getFPGATime();
             shooter.disengageWinch();
