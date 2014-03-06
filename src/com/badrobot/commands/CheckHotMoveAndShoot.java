@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -51,7 +52,7 @@ public class CheckHotMoveAndShoot extends BadCommand {
         
         if (timer.get() > 0.5)
         {
-            driveToWall = new DriveToWall();
+            driveToWall = new DriveToWall(SmartDashboard.getNumber("Distance to wall"));
             driveToWall.start();
             startedDriving = true;
         }

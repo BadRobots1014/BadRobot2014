@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Ultrasonic;
-import edu.wpi.first.wpilibj.camera.AxisCamera;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -29,21 +28,18 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
 {
     private static ProtoDriveTrain instance;
     
-    AxisCamera camera;
-    
-    
     //Physical components of the drive train:
     RobotDrive train;
     Solenoid shiftDownSolenoid, shiftUpSolenoid;
     SpeedController frontLeft, backLeft, frontRight, backRight;
     Gyro gyro;
-    //Ultrasonic ultrasonic;
-    AnalogChannel ultrasonic;
+    Ultrasonic ultrasonic;
+    AnalogChannel ultrasonicV;
     Encoder rightEncoder, leftEncoder;
     
     //Other variables:
     boolean shiftedDown;
-    double encoderDistancePerPulse;
+    double encoderDistancePerPulse, dist;
     
     /**
      * Gets the current instance of the subsystem;
@@ -74,6 +70,8 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
     {   
         encoderDistancePerPulse = 1;
         
+        dist = 0;
+        
         //rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
         //leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
         //rightEncoder.start();
@@ -82,7 +80,9 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
         gyro = new Gyro(RobotMap.driveTrainGyro);
         gyro.reset();
 
-        ultrasonic = new AnalogChannel(RobotMap.ultrasonicVoltage);
+        ultrasonic = new Ultrasonic(RobotMap.ultrasonicPing, RobotMap.ultrasonicEcho);
+        ultrasonic.setEnabled(true);
+        ultrasonicV = new AnalogChannel(RobotMap.ultrasonicVoltage);
 
         shiftDownSolenoid = new Solenoid(RobotMap.shiftDownSolenoid);
         shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoid);
@@ -182,26 +182,27 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
     }
     
     /**
-     * Gets the distance to the wall using the ultrasonic sensor.
+     * Gets the distance to the wall using the ultrasonicV sensor.
      * @return The distance to wall in inches
      */
     public double getDistanceToWall()
     {
-        //This ultrasonic outputs a voltage in Volts, that reads
+        //This ultrasonicV outputs a voltage in Volts, that reads
         // 5/512 volts per inch
-        return (ultrasonic.getVoltage() / .00977);
+        //return (ultrasonicV.getVoltage() / .00977);
         
         //return -1;
+        dist = ultrasonic.getRangeInches();
         
-        /*
         ultrasonic.ping();
-        return ultrasonic.getRangeInches();
-        */
+        
+        return dist;
+        
     }
     
     public double getUltrasonicVoltage()
     {
-        return ultrasonic.getVoltage();
+        return ultrasonicV.getVoltage();
     }
     
     /**

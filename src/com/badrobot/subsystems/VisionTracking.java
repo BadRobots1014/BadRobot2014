@@ -5,6 +5,7 @@
 package com.badrobot.subsystems;
 
 import com.badrobot.subsystems.interfaces.IVisionTracking;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.camera.AxisCamera;
 import edu.wpi.first.wpilibj.camera.AxisCameraException;
 import edu.wpi.first.wpilibj.image.BinaryImage;
@@ -33,6 +34,9 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
     private int LOW_RED = 0;
     private int LOW_BLUE = 0;
     private int LOW_GREEN = 0;//for our color we are shooting at retrotape
+    
+    boolean isInitialized;
+    Timer timer;
 
     /**
      * Gets the current instance of the subsystem;
@@ -61,6 +65,15 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
      */
     protected void initialize() 
     {
+        SmartDashboard.putNumber("High Red", 0);
+        SmartDashboard.putNumber("High Blue", 0);
+        SmartDashboard.putNumber("High Green", 0);
+        SmartDashboard.putNumber("Low Red", 0);
+        SmartDashboard.putNumber("Low Blue", 0);
+        SmartDashboard.putNumber("Low Green", 0);
+        
+        timer = new Timer();
+        timer.start();
     }
 
     /**
@@ -102,25 +115,39 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
         if(LOW_GREEN != (int) SmartDashboard.getNumber("Low Green"))
                 LOW_GREEN = (int) SmartDashboard.getNumber("Low Green");
         
-        camera = AxisCamera.getInstance();
-        camera.writeResolution(AxisCamera.ResolutionT.k160x120);
-        camera.writeMaxFPS(7);
-        
-        BinaryImage filteredImage = null;
-        try {  
-            image = camera.getImage();
-        } catch (AxisCameraException ex) {
-            ex.printStackTrace();
-        } catch (NIVisionException ex) {
-            ex.printStackTrace();
+        if (!isInitialized)
+        {
+            log("starting sleep");
+            if (timer.get() > 7)
+            {
+                isInitialized = true;
+            }
+            log("finished sleep, setting boolean");
         }
-        try {
-            filteredImage = image.thresholdRGB(LOW_RED, HIGH_RED, LOW_GREEN, HIGH_GREEN, LOW_BLUE, HIGH_BLUE);//needs to be the color we send out
-        } catch (NIVisionException ex) {
-            ex.printStackTrace();
+        if (isInitialized)
+        {
+            camera = AxisCamera.getInstance();
+            log("~~~~~~~~~~~~~!!!!!!!!!!!!!!@@@@@@@~!!!!::  "+ camera);
+            camera.writeResolution(AxisCamera.ResolutionT.k160x120);
+            camera.writeMaxFPS(7);
+
+            BinaryImage filteredImage = null;
+            try {  
+                image = camera.getImage();
+            } catch (AxisCameraException ex) {
+                ex.printStackTrace();
+            } catch (NIVisionException ex) {
+                ex.printStackTrace();
+            }
+            try {
+                filteredImage = image.thresholdRGB(LOW_RED, HIGH_RED, LOW_GREEN, HIGH_GREEN, LOW_BLUE, HIGH_BLUE);//needs to be the color we send out
+            } catch (NIVisionException ex) {
+                ex.printStackTrace();
+            }
+
+            return filteredImage;
         }
-        
-        return filteredImage;
+        return null;
     }
 
     public boolean isHot(BinaryImage c)

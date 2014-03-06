@@ -56,7 +56,7 @@ public abstract class CommandBase extends Command {
         
         compressor = CompressorSubsystem.getInstance();
         //ringLight = RingLight.getInstance();
-        //visionTracking = VisionTracking.getInstance();
+        visionTracking = VisionTracking.getInstance();
         
         // This MUST be here. If the OI creates Commands (which it very likely
         // will), constructing it during the construction of CommandBase (from

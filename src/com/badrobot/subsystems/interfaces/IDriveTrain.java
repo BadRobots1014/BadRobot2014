@@ -7,8 +7,6 @@ package com.badrobot.subsystems.interfaces;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.camera.AxisCamera;
-
 /**
  * Interface for the drive train subsystem;
  * 

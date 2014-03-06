@@ -60,7 +60,7 @@ public class ProtoShooter extends BadSubsystem implements IShooter
         engageSolenoid = new Solenoid(RobotMap.engageWinchSolenoid);
         disengageSolenoid = new Solenoid(RobotMap.disengageWinchSolenoid);
         
-        //shooterDIO = new DigitalInput(RobotMap.shooterDIO);
+        shooterDIO = new DigitalInput(RobotMap.shooterDIO);
     }
 
     /**
@@ -87,7 +87,14 @@ public class ProtoShooter extends BadSubsystem implements IShooter
      */
     public void cockBack(double speed) 
     {
-        winch.set(-speed);   
+        if (!isCockedBack())
+        {
+            winch.set(-speed);
+        }
+        else
+        {
+            winch.set(0);
+        }
     }
 
     /**
@@ -110,8 +117,6 @@ public class ProtoShooter extends BadSubsystem implements IShooter
     
     public boolean isCockedBack()
     {
-        return false;
-        //return shooterDIO.get();
+        return shooterDIO.get();
     }
-    
 }

@@ -114,8 +114,8 @@ public class DriveStraightForward extends BadCommand
         {
             return true;
         }
-        //if in teleop mode and the a button has become unpressed, end the command
-        else if(driveDistance < 0 && driveTime < 0 && !OI.primaryController.isAButtonPressed())
+        //if in teleop mode and the rb button has become unpressed, end the command
+        else if(driveDistance < 0 && driveTime < 0 && !OI.primaryController.isRBButtonPressed())
         {
             return true;
         }

@@ -5,7 +5,6 @@
 package com.badrobot.commands;
 
 import com.badrobot.OI;
-import edu.wpi.first.wpilibj.camera.AxisCamera;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -42,6 +41,9 @@ public class DriveRobot extends BadCommand
      */
     protected void execute() 
     {
+        //SmartDashboard.putBoolean("Current image is hot", visionTracking.currentImageIsHot());
+        //SmartDashboard.putBoolean("image is null", visionTracking.processedImage() == null);
+        
         //drives using direct input from the xbox controller
         driveTrain.tankDrive(OI.primaryController.getLeftStickY(), OI.primaryController.getRightStickY());
         

@@ -11,6 +11,7 @@ import com.badrobot.commands.DisengageWinch;
 import com.badrobot.commands.DriveStraightForward;
 import com.badrobot.commands.DriveToWall;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -24,7 +25,8 @@ public class DriveForwardAndShoot extends CommandGroup
     public DriveForwardAndShoot()
     {
         this.addSequential(new ArticulateGatherer(true));
-        this.addSequential(new DriveToWall());
+        this.addSequential(new DriveStraightForward(time));
+        this.addSequential(new DriveToWall(SmartDashboard.getNumber("Distance to wall")));
         this.addSequential(new DisengageWinch());
     }
     

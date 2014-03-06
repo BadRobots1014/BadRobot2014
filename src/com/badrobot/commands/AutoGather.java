@@ -42,13 +42,14 @@ public class AutoGather extends BadCommand
         gatherer.foldGatherer();
         
         timer = new Timer();
+        timer.start();
         
         stopGatherWheels = false;
         cockBackStop = false;
         
-        stopWheelingTime = 2.0;
-        cockBackStartTime = 3.0;
-        cockBackStopTime = 4.0;
+        SmartDashboard.putNumber("End Gatherer Wheeling Time", 0.5);
+        SmartDashboard.putNumber("Start Cock Back Time", 2.0);
+        SmartDashboard.putNumber("Stop Cock Back Time", 2.5);
     }
 
     public String getConsoleIdentity() 
@@ -58,9 +59,9 @@ public class AutoGather extends BadCommand
 
     protected void execute() 
     {
-        SmartDashboard.putNumber("End Gatherer Wheeling Time", stopWheelingTime);
-        SmartDashboard.putNumber("Start Cock Back Time", cockBackStartTime);
-        SmartDashboard.putNumber("Stop Cock Back Time", cockBackStopTime);
+        stopWheelingTime = SmartDashboard.getNumber("End Gatherer Wheeling Time");
+        cockBackStartTime = SmartDashboard.getNumber("Start Cock Back Time");
+        cockBackStopTime = SmartDashboard.getNumber("Stop Cock Back Time");
         
         
         timePassed = timer.get();
