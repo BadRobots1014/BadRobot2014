@@ -127,7 +127,6 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
         if (isInitialized)
         {
             camera = AxisCamera.getInstance();
-            log("~~~~~~~~~~~~~!!!!!!!!!!!!!!@@@@@@@~!!!!::  "+ camera);
             camera.writeResolution(AxisCamera.ResolutionT.k160x120);
             camera.writeMaxFPS(7);
 

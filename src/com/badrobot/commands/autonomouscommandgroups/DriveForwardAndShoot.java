@@ -25,7 +25,7 @@ public class DriveForwardAndShoot extends CommandGroup
     public DriveForwardAndShoot()
     {
         this.addSequential(new ArticulateGatherer(true));
-        this.addSequential(new DriveStraightForward(time));
+        this.addSequential(new DriveStraightForward(SmartDashboard.getNumber("AutonomousDriveStraightTime")));
         this.addSequential(new DriveToWall(SmartDashboard.getNumber("Distance to wall")));
         this.addSequential(new DisengageWinch());
     }

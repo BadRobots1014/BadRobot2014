@@ -18,8 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CheckHotMoveAndShoot extends BadCommand {
     
     Command driveToWall;
-    private long time;
-    boolean supaHotFire, startedDriving;
+    boolean supaHotFire, startedDriving, timing;
     
     Timer timer;
     
@@ -31,6 +30,7 @@ public class CheckHotMoveAndShoot extends BadCommand {
     }
 
     protected void initialize() {
+        timing = false;
         timer = new Timer();
         timer.start();
     }
@@ -40,6 +40,11 @@ public class CheckHotMoveAndShoot extends BadCommand {
     }
 
     protected void execute() {
+        if (!timing)
+        {
+            timer.start();
+            timing = true;
+        }
         
         if(visionTracking.currentImageIsHot() && !startedDriving)
         {

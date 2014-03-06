@@ -26,11 +26,11 @@ public class RobotMap
     
     
     //Misc Important Robot Variables
-    public static final boolean isPrototype = true;
+    public static final boolean isPrototype = false;
     
     
     
-    
+    /*
     
     
     //PROTOTYPE:
@@ -91,12 +91,12 @@ public class RobotMap
     
     
     
-    
+    */
     
     
     
     //FINAL:
-    /*
+    
     //~~~~~~~~OUTPUT~~~~~~~~//
     
     //Speed Controller Ports
@@ -143,6 +143,6 @@ public class RobotMap
     //Digital Input
     public static final int pressureSwitchDigitalIn = Sidecar.DIO3;
     public static final int gathererOpticalSensor = Sidecar.DIO9;
-    * 
-    */
+    public static final int ultrasonicVoltage = Sidecar.ANALOG_BREAKOUT2;
+    public static final int shooterDIO = Sidecar.DIO6;
 }
