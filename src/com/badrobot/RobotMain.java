@@ -44,8 +44,8 @@ public class RobotMain extends IterativeRobot {
         // Initialize all subsystems
         CommandBase.init();
         
-        SmartDashboard.putNumber("AutonomousDriveStraightTime", 3);
-        SmartDashboard.putNumber("Distance to wall", 45);
+        SmartDashboard.putNumber("AutonomousDriveStraightTime", 3.8);
+        SmartDashboard.putNumber("Distance to wall", 56);
         
         //Add autonomous commandgroups to the smart dashboard chooser
         autoChooser = new SendableChooser();

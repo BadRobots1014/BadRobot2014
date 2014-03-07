@@ -147,7 +147,6 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
             ex.printStackTrace();
         }
         try {
-            //ask someone to look over this code..
             if (image.getWidth() == 0 || image.getHeight() == 0) {
                 errorCount++;
                 log("Has dropped "+errorCount+" frames!");

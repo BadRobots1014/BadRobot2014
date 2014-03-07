@@ -8,6 +8,7 @@ import com.badrobot.RobotMap;
 import com.badrobot.commands.Compress;
 import com.badrobot.subsystems.interfaces.ICompressor;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The compressor subsystem for the prototype robot;
@@ -88,6 +89,7 @@ public class CompressorSubsystem extends BadSubsystem implements ICompressor
     
     public boolean isEnabled()
     {
+        SmartDashboard.putBoolean("Compressor", compressor.enabled());
         return compressor.enabled();
     }
     

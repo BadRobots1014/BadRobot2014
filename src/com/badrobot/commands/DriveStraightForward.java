@@ -8,6 +8,7 @@ package com.badrobot.commands;
 import com.badrobot.OI;
 import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *Drives the robot forward in a straight line for a time or to a distance from a barrier
@@ -24,6 +25,8 @@ public class DriveStraightForward extends BadCommand
     //constant for turn correction
     private static final double Kp = .05;
     private static double driveSpeed;
+    
+    boolean startedTime;
     
     /**
      * Parameterless constructor for DriveStraightForward command.
@@ -89,6 +92,14 @@ public class DriveStraightForward extends BadCommand
         //if in time mode, update the time variable and drive the robot forward while correcting its angle
         if (driveTime > 0)
         {
+            if (driveTrain.getLeftEncoder().get() > 0) {
+                SmartDashboard.putNumber("Encoder Click Count: ", driveTrain.getLeftEncoder().get());
+            }
+            if (!startedTime) {
+                startTime = Utility.getFPGATime();
+                driveTrain.shiftDown();
+                startedTime = true;
+            }
             currentTime = Utility.getFPGATime();
             driveTrain.getTrain().drive(driveSpeed, -(driveTrain.getGyro().getAngle()-initialAngle)*Kp);
         }

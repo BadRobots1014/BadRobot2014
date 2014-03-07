@@ -48,7 +48,7 @@ public abstract class CommandBase extends Command {
             driveTrain = FinalDriveTrain.getInstance();
             shooter = FinalShooter.getInstance();
             gatherer = FinalGatherer.getInstance();
-            lights = Lights.getInstance();
+            //lights = Lights.getInstance();
         }
         //Prototype Subsystems
         else
