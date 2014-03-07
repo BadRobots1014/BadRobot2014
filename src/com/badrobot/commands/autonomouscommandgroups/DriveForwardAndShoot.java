@@ -20,21 +20,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveForwardAndShoot extends CommandGroup
 {
     public static boolean useDistance;
-    private static double time = 3;
     
     public DriveForwardAndShoot()
     {
         this.addSequential(new ArticulateGatherer(true));
-        this.addSequential(new DriveStraightForward(SmartDashboard.getNumber("AutonomousDriveStraightTime")));
+        this.addSequential(new DriveStraightForward(SmartDashboard.getNumber("AutonomousDriveStraightTime"), false));
         this.addSequential(new DriveToWall(SmartDashboard.getNumber("Distance to wall")));
         this.addSequential(new DisengageWinch());
     }
     
     public DriveForwardAndShoot(double t)
     {
-        time = t;
         this.addSequential(new ArticulateGatherer(true));
-        this.addSequential(new DriveStraightForward(time));
+        this.addSequential(new DriveStraightForward(t, false));
         this.addSequential(new DisengageWinch());
     }
     

@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.badrobot.commands.CommandBase;
 import com.badrobot.commands.DriveStraightForward;
 import com.badrobot.commands.autonomouscommandgroups.DriveForwardAndShoot;
+import com.badrobot.commands.autonomouscommandgroups.DriveTooFarFixAndShoot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -47,7 +48,10 @@ public class RobotMain extends IterativeRobot {
         autoChooser.addObject("Drive straight forward with distance and shoot", new DriveForwardAndShoot());
         autoChooser.addObject("Drive straight forward with time and shoot", new DriveForwardAndShoot(SmartDashboard.getNumber("AutonomousDriveStraightTime")));
         //autoChooser.addObject("Check hot drive foward and shoot", new CheckHotMoveAndShoot());
-        autoChooser.addObject("Drive Foward", new DriveStraightForward(SmartDashboard.getNumber("AutonomousDriveStraightTime")));
+        autoChooser.addObject("Drive Foward", new DriveStraightForward(SmartDashboard.getNumber("AutonomousDriveStraightTime"), false));
+        autoChooser.addObject("Drive too far low speed", new DriveTooFarFixAndShoot(false));
+        autoChooser.addObject("Drive too far high speed", new DriveTooFarFixAndShoot(true));
+        
         SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
         
     }

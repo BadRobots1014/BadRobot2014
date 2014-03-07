@@ -39,11 +39,17 @@ public class DriveStraightForward extends BadCommand
      * Constructor for time mode of DriveStraightForward command.
      * @param t Time to drive forward
      */
-    public DriveStraightForward(double t)
+    public DriveStraightForward(double t, boolean shiftUp)
     {
         requires((Subsystem) driveTrain);
         driveTime = (long) t*1000000;
         driveDistance = -1;
+        if (shiftUp) {
+            driveTrain.shiftUp();
+        }
+        else {
+            driveTrain.shiftDown();
+        }
     }
     
     /**
@@ -56,6 +62,7 @@ public class DriveStraightForward extends BadCommand
         requires((Subsystem) driveTrain);
         driveDistance = d;
         driveTime = -1;
+        driveTrain.shiftDown();
     }
     
     /**
@@ -65,7 +72,6 @@ public class DriveStraightForward extends BadCommand
         startTime = Utility.getFPGATime();
         initialAngle = driveTrain.getGyro().getAngle();
         driveSpeed = 1.0;
-        driveTrain.shiftDown();
     }
     
     /**
