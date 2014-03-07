@@ -25,7 +25,7 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
     
     //Physical components of vision tracking:
     private AxisCamera camera;
-    private ColorImage image;
+    private ColorImage image, lastWorkingImage;
     BinaryImage filteredImage;
 
     //Other variables:
@@ -38,6 +38,8 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
     
     boolean isInitialized;
     Timer timer;
+    
+    int errorCount = 0;
 
     /**
      * Gets the current instance of the subsystem;
@@ -139,7 +141,21 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
             ex.printStackTrace();
         }
         try {
+            //this should be 320x240 (or 240x320 if I am dumb)
             log("~~~~~~~~~~~~~~~~~~~~~~~~~"+image.getWidth()+"  x  "+image.getHeight());
+        } catch (NIVisionException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            //ask someone to look over this code..
+            if (image.getWidth() == 0 || image.getHeight() == 0) {
+                errorCount++;
+                log("Has dropped "+errorCount+" frames!");
+                image = lastWorkingImage;
+            }
+            else {
+                lastWorkingImage = image;
+            }
         } catch (NIVisionException ex) {
             ex.printStackTrace();
         }

@@ -5,8 +5,10 @@
 package com.badrobot.commands;
 
 import com.badrobot.OI;
+import com.badrobot.RobotMain;
 import com.badrobot.RobotMap;
 import com.badrobot.XboxController;
+import com.badrobot.subsystems.interfaces.ILights;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -40,6 +42,12 @@ public class Shoot extends BadCommand
 
     protected void execute() 
     {
+        if (lights != null) {
+            if (shooter.isCockedBack()) {
+                lights.setColor(ILights.kGreen);
+            }
+        }
+        
         //Used when two controllers will be used
         if (!OI.isSingleControllerMode())
         {

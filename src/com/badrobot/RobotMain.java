@@ -15,8 +15,11 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.badrobot.commands.CommandBase;
 import com.badrobot.commands.DriveStraightForward;
+import com.badrobot.commands.RunLights;
 import com.badrobot.commands.autonomouscommandgroups.DriveForwardAndShoot;
 import com.badrobot.commands.autonomouscommandgroups.DriveTooFarFixAndShoot;
+import com.badrobot.subsystems.interfaces.ILights;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -31,6 +34,7 @@ public class RobotMain extends IterativeRobot {
 
     Command autonomousCommand;
     SendableChooser autoChooser;
+    public static int ALLIANCE_COLOR = 0;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -54,6 +58,10 @@ public class RobotMain extends IterativeRobot {
         
         SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
         
+        int value = DriverStation.getInstance().getAlliance().value;
+        ALLIANCE_COLOR = (value == DriverStation.Alliance.kBlue_val) ? ILights.kBlue : ILights.kRed;
+        if (CommandBase.lights != null)
+         Scheduler.getInstance().add(new RunLights(ALLIANCE_COLOR));
     }
 
     /**
@@ -63,6 +71,11 @@ public class RobotMain extends IterativeRobot {
         //select the selected autonomous commandgroup and add to scheduler
         autonomousCommand = (Command) autoChooser.getSelected();
         Scheduler.getInstance().add(autonomousCommand);
+        
+        int value = DriverStation.getInstance().getAlliance().value;
+        ALLIANCE_COLOR = (value == DriverStation.Alliance.kBlue_val) ? ILights.kBlue : ILights.kRed;
+        if (CommandBase.lights != null)
+         Scheduler.getInstance().add(new RunLights(ALLIANCE_COLOR));
     }
 
     /**

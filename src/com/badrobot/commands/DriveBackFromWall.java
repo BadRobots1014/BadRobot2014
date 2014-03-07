@@ -25,6 +25,7 @@ public class DriveBackFromWall extends BadCommand {
         checkNumber = 1;
         Kp = .05;
         initialAngle = driveTrain.getGyro().getAngle();
+        driveTrain.shiftDown();
     }
 
     public String getConsoleIdentity() {

@@ -8,6 +8,7 @@ import com.badrobot.subsystems.CompressorSubsystem;
 import com.badrobot.subsystems.FinalDriveTrain;
 import com.badrobot.subsystems.FinalGatherer;
 import com.badrobot.subsystems.FinalShooter;
+import com.badrobot.subsystems.Lights;
 import com.badrobot.subsystems.ProtoDriveTrain;
 import com.badrobot.subsystems.ProtoGatherer;
 import com.badrobot.subsystems.RingLight;
@@ -16,6 +17,7 @@ import com.badrobot.subsystems.VisionTracking;
 import com.badrobot.subsystems.interfaces.ICompressor;
 import com.badrobot.subsystems.interfaces.IDriveTrain;
 import com.badrobot.subsystems.interfaces.IGatherer;
+import com.badrobot.subsystems.interfaces.ILights;
 import com.badrobot.subsystems.interfaces.IRingLight;
 import com.badrobot.subsystems.interfaces.IShooter;
 import com.badrobot.subsystems.interfaces.IVisionTracking;
@@ -37,6 +39,7 @@ public abstract class CommandBase extends Command {
     public static IVisionTracking visionTracking;
     public static IRingLight ringLight;
     public static ICompressor compressor;
+    public static ILights lights;
     
     public static void init() {
         //Final Subsystems
@@ -45,6 +48,7 @@ public abstract class CommandBase extends Command {
             driveTrain = FinalDriveTrain.getInstance();
             shooter = FinalShooter.getInstance();
             gatherer = FinalGatherer.getInstance();
+            lights = Lights.getInstance();
         }
         //Prototype Subsystems
         else

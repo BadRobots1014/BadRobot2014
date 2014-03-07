@@ -10,6 +10,8 @@ import com.badrobot.commands.ArticulateGatherer;
 import com.badrobot.commands.DisengageWinch;
 import com.badrobot.commands.DriveStraightForward;
 import com.badrobot.commands.DriveToWall;
+import com.badrobot.commands.RunLights;
+import com.badrobot.subsystems.interfaces.ILights;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -27,6 +29,7 @@ public class DriveForwardAndShoot extends CommandGroup
         this.addSequential(new DriveStraightForward(SmartDashboard.getNumber("AutonomousDriveStraightTime"), false));
         this.addSequential(new DriveToWall(SmartDashboard.getNumber("Distance to wall")));
         this.addSequential(new DisengageWinch());
+        //this.addParallel(new RunLights(ILights.kGold));
     }
     
     public DriveForwardAndShoot(double t)
@@ -34,6 +37,7 @@ public class DriveForwardAndShoot extends CommandGroup
         this.addSequential(new ArticulateGatherer(true));
         this.addSequential(new DriveStraightForward(t, false));
         this.addSequential(new DisengageWinch());
+        //this.addParallel(new RunLights(ILights.kGold));
     }
     
     public void initialize()
