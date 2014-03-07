@@ -37,7 +37,7 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain
     
     //Other variables:
     boolean shiftedDown;
-    double encoderDistancePerPulse;
+    double encoderDistancePerPulse, dist;
     
     /**
      * Gets the current instance of the subsystem;
@@ -76,10 +76,9 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain
         gyro = new Gyro(RobotMap.driveTrainGyro);
         gyro.reset();
 
-        ultrasonic = new Ultrasonic(RobotMap.ultrasonicPing, 
-                RobotMap.ultrasonicEcho, Ultrasonic.Unit.kInches);
+        ultrasonic = new Ultrasonic(RobotMap.ultrasonicEcho, 
+                RobotMap.ultrasonicPing, Ultrasonic.Unit.kInches);
         ultrasonic.setEnabled(true);
-        ultrasonic.setAutomaticMode(true);
 
         shiftUpSolenoid = new Solenoid(RobotMap.shiftUpSolenoid);
         shiftedDown = true;
@@ -181,8 +180,11 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain
      */
     public double getDistanceToWall()
     {
+        dist = ultrasonic.getRangeInches();
+        
         ultrasonic.ping();
-        return ultrasonic.getRangeInches();
+        
+        return dist;
     }
     
     /**

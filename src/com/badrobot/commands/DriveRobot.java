@@ -41,8 +41,8 @@ public class DriveRobot extends BadCommand
      */
     protected void execute() 
     {
-        //SmartDashboard.putBoolean("Current image is hot", visionTracking.currentImageIsHot());
         //SmartDashboard.putBoolean("image is null", visionTracking.processedImage() == null);
+        //SmartDashboard.putBoolean("Current image is hot", visionTracking.currentImageIsHot());
         
         //drives using direct input from the xbox controller
         driveTrain.tankDrive(OI.primaryController.getLeftStickY(), OI.primaryController.getRightStickY());

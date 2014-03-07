@@ -26,6 +26,7 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
     //Physical components of vision tracking:
     private AxisCamera camera;
     private ColorImage image;
+    BinaryImage filteredImage;
 
     //Other variables:
     private int HIGH_RED = 0;
@@ -72,6 +73,10 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
         SmartDashboard.putNumber("Low Blue", 0);
         SmartDashboard.putNumber("Low Green", 0);
         
+        camera = AxisCamera.getInstance();
+        camera.writeResolution(AxisCamera.ResolutionT.k320x240);
+        camera.writeMaxFPS(7);
+        
         timer = new Timer();
         timer.start();
     }
@@ -115,38 +120,36 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
         if(LOW_GREEN != (int) SmartDashboard.getNumber("Low Green"))
                 LOW_GREEN = (int) SmartDashboard.getNumber("Low Green");
         
-        if (!isInitialized)
-        {
-            log("starting sleep");
-            if (timer.get() > 7)
-            {
-                isInitialized = true;
-            }
-            log("finished sleep, setting boolean");
-        }
-        if (isInitialized)
-        {
-            camera = AxisCamera.getInstance();
-            camera.writeResolution(AxisCamera.ResolutionT.k160x120);
-            camera.writeMaxFPS(7);
-
-            BinaryImage filteredImage = null;
-            try {  
-                image = camera.getImage();
-            } catch (AxisCameraException ex) {
-                ex.printStackTrace();
-            } catch (NIVisionException ex) {
-                ex.printStackTrace();
-            }
+        filteredImage = null;
+        if (isInitialized) {
             try {
-                filteredImage = image.thresholdRGB(LOW_RED, HIGH_RED, LOW_GREEN, HIGH_GREEN, LOW_BLUE, HIGH_BLUE);//needs to be the color we send out
+                image.free();
             } catch (NIVisionException ex) {
                 ex.printStackTrace();
             }
-
-            return filteredImage;
         }
-        return null;
+        
+        isInitialized = true;
+        
+        try {  
+            image = camera.getImage();
+        } catch (AxisCameraException ex) {
+            ex.printStackTrace();
+        } catch (NIVisionException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            log("~~~~~~~~~~~~~~~~~~~~~~~~~"+image.getWidth()+"  x  "+image.getHeight());
+        } catch (NIVisionException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            filteredImage = (BinaryImage) image.thresholdRGB(LOW_RED, HIGH_RED, LOW_GREEN, HIGH_GREEN, LOW_BLUE, HIGH_BLUE);//needs to be the color we send out
+        } catch (NIVisionException ex) {
+            ex.printStackTrace();
+        }
+
+        return filteredImage;
     }
 
     public boolean isHot(BinaryImage c)
@@ -157,6 +160,12 @@ public class VisionTracking extends BadSubsystem implements IVisionTracking
             {
                 isHot = true;
             }
+        } catch (NIVisionException ex) {
+            ex.printStackTrace();
+        }
+        
+        try {
+            filteredImage.free();
         } catch (NIVisionException ex) {
             ex.printStackTrace();
         }

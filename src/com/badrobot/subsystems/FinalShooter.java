@@ -8,6 +8,7 @@ import com.badrobot.OI;
 import com.badrobot.RobotMap;
 import com.badrobot.commands.Shoot;
 import com.badrobot.subsystems.interfaces.IShooter;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -27,6 +28,8 @@ public class FinalShooter extends BadSubsystem implements IShooter
     Solenoid engageSolenoid, disengageSolenoid;
     DoubleSolenoid winchSolenoid;
     SpeedController winch;
+    
+    DigitalInput shooterDIO;
     
     /**
      * Gets the current instance of the subsystem;
@@ -59,6 +62,8 @@ public class FinalShooter extends BadSubsystem implements IShooter
 //        engageSolenoid = new Solenoid(RobotMap.engageWinchSolenoid);
 //        disengageSolenoid = new Solenoid(RobotMap.disengageWinchSolenoid);
         winchSolenoid = new DoubleSolenoid(RobotMap.engageWinchSolenoid, RobotMap.disengageWinchSolenoid);
+
+        shooterDIO = new DigitalInput(RobotMap.shooterDIO);
         
         engageWinch();
     }
@@ -87,7 +92,14 @@ public class FinalShooter extends BadSubsystem implements IShooter
      */
     public void cockBack(double speed) 
     {
-        winch.set(-speed);   
+        if (!isCockedBack())
+        {
+            winch.set(-speed);
+        }
+        else
+        {
+            winch.set(0);
+        }  
     }
 
     /**
@@ -111,7 +123,7 @@ public class FinalShooter extends BadSubsystem implements IShooter
     }
 
     public boolean isCockedBack() {
-        return false;
+        return shooterDIO.get();
     }
     
 }

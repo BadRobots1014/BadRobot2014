@@ -65,6 +65,7 @@ public class DriveStraightForward extends BadCommand
         startTime = Utility.getFPGATime();
         initialAngle = driveTrain.getGyro().getAngle();
         driveSpeed = 1.0;
+        driveTrain.shiftDown();
     }
     
     /**

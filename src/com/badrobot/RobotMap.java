@@ -105,6 +105,7 @@ public class RobotMap
     public static final int frontRightController = Sidecar.PWMOUT1;
     public static final int backRightController = Sidecar.PWMOUT2;
     public static final int winchController = Sidecar.PWMOUT5;
+    public static final int gathererWheelsController = Sidecar.PWMOUT6;
     
     //Gyro Ports
     public static final int driveTrainGyro = Sidecar.ANALOG_BREAKOUT1;
@@ -144,5 +145,5 @@ public class RobotMap
     public static final int pressureSwitchDigitalIn = Sidecar.DIO3;
     public static final int gathererOpticalSensor = Sidecar.DIO9;
     public static final int ultrasonicVoltage = Sidecar.ANALOG_BREAKOUT2;
-    public static final int shooterDIO = Sidecar.DIO6;
+    public static final int shooterDIO = Sidecar.DIO8;
 }

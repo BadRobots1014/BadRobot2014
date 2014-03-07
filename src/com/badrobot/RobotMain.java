@@ -46,7 +46,8 @@ public class RobotMain extends IterativeRobot {
         autoChooser = new SendableChooser();
         autoChooser.addObject("Drive straight forward with distance and shoot", new DriveForwardAndShoot());
         autoChooser.addObject("Drive straight forward with time and shoot", new DriveForwardAndShoot(SmartDashboard.getNumber("AutonomousDriveStraightTime")));
-        autoChooser.addObject("Check hot drive foward and shoot", new CheckHotMoveAndShoot());
+        //autoChooser.addObject("Check hot drive foward and shoot", new CheckHotMoveAndShoot());
+        autoChooser.addObject("Drive Foward", new DriveStraightForward(SmartDashboard.getNumber("AutonomousDriveStraightTime")));
         SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
         
     }

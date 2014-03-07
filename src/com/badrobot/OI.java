@@ -58,7 +58,7 @@ public class OI {
             return(primaryController.isRBButtonPressed());//RB Button drives forward
         }
     };
-    
+    /*
     public Button autoGather = new Button()
     {
         public boolean get()
@@ -73,7 +73,7 @@ public class OI {
             }
         }
     };
-    
+    */
     public void init()
     {
         driverStation = DriverStation.getInstance();
@@ -85,7 +85,7 @@ public class OI {
             driveStraight.whenPressed(new DriveStraightForward());
         }
         
-        autoGather.whenPressed(new AutoGather());
+        //autoGather.whenPressed(new AutoGather());
     }
     
     public static boolean getDigitalInput(int channel){

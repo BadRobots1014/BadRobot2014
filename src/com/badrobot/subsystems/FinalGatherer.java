@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
 
 /**
  * The gatherer subsystem for the final robot;
@@ -26,6 +28,7 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
     Solenoid pullGatherer, pushGatherer;
     DoubleSolenoid articulatorSolenoid;
     DigitalInput gathererOpticalSensor;
+    SpeedController gathererWheels;
     
     //Other variables:
     int gatheringState;
@@ -58,7 +61,8 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
      */
     protected void initialize() 
     {
-        gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
+        //gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
+        gathererWheels = new Talon(RobotMap.gathererWheelsController);
         gathererOpticalSensor = new DigitalInput(RobotMap.gathererOpticalSensor);
 
         //pullGatherer = new Solenoid(RobotMap.pullGathererSolenoid);
@@ -100,8 +104,9 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
     {
         if (gatheringState != 1)
         {
-            gathererSwitch.setDirection(Relay.Direction.kForward);
-            gathererSwitch.set(Relay.Value.kOn);
+            gathererWheels.set(1);
+            //gathererSwitch.setDirection(Relay.Direction.kForward);
+            //gathererSwitch.set(Relay.Value.kOn);
             gatheringState = 1;
         }
     }
@@ -113,8 +118,9 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
     {
         if (gatheringState != 2)
         {
-            gathererSwitch.setDirection(Relay.Direction.kReverse);
-            gathererSwitch.set(Relay.Value.kOn);
+            gathererWheels.set(-1);
+            //gathererSwitch.setDirection(Relay.Direction.kReverse);
+            //gathererSwitch.set(Relay.Value.kOn);
             gatheringState = 2;
         }
     }
@@ -126,7 +132,8 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
     {
         if (gatheringState != 0)
         {
-            gathererSwitch.set(Relay.Value.kOff);
+            gathererWheels.set(0);
+            //gathererSwitch.set(Relay.Value.kOff);
             gatheringState = 0;
         }
     }
