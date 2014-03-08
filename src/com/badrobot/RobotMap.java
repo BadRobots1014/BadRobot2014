@@ -115,8 +115,8 @@ public class RobotMap
     public static final int ultrasonicEcho = Sidecar.DIO2;
     
     //Encoder Ports
-    public static final int rightEncoderA = Sidecar.DIO4;
-    public static final int rightEncoderB = Sidecar.DIO5;
+    //public static final int rightEncoderA = Sidecar.DIO4;
+    //public static final int rightEncoderB = Sidecar.DIO5;
     public static final int leftEncoderA = Sidecar.DIO6;
     public static final int leftEncoderB = Sidecar.DIO7;
     

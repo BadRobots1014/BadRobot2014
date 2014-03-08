@@ -68,9 +68,9 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain
     {
         encoderDistancePerPulse = 1;
         
-        rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
+        //rightEncoder = new Encoder(RobotMap.rightEncoderA, RobotMap.rightEncoderB);
         leftEncoder = new Encoder(RobotMap.leftEncoderA, RobotMap.leftEncoderB);
-        rightEncoder.start();
+        //rightEncoder.start();
         leftEncoder.start();
 
         gyro = new Gyro(RobotMap.driveTrainGyro);
@@ -162,7 +162,7 @@ public class FinalDriveTrain extends BadSubsystem implements IDriveTrain
      */
     public Encoder getRightEncoder()
     {
-        return rightEncoder;
+        return leftEncoder;
     }
     
     /**
