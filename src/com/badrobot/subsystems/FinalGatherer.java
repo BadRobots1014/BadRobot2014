@@ -63,7 +63,6 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
     {
         //gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
         gathererWheels = new Talon(RobotMap.gathererWheelsController);
-        gathererOpticalSensor = new DigitalInput(RobotMap.gathererOpticalSensor);
 
         //pullGatherer = new Solenoid(RobotMap.pullGathererSolenoid);
         //pushGatherer = new Solenoid(RobotMap.pushGathererSolenoid);
@@ -166,7 +165,7 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
      */
     public boolean getOpticalSensorValue() 
     {
-        return gathererOpticalSensor.get();
+        return false;
     }
     
     /**

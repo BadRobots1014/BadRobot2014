@@ -135,15 +135,14 @@ public class RobotMap
     public static final int pushGathererSolenoid = Sidecar.PNEUMATIC_BUMPER2;
     
     //Lights
-    public static int redChannel;
-    public static int greenChannel;
-    public static int blueChannel;
+    public static int redChannel = Sidecar.DIO9;
+    public static int greenChannel = Sidecar.DIO10;
+    public static int blueChannel = Sidecar.DIO11;
     
     //~~~~~~~~INPUT~~~~~~~~//
     
     //Digital Input
     public static final int pressureSwitchDigitalIn = Sidecar.DIO3;
-    public static final int gathererOpticalSensor = Sidecar.DIO9;
     public static final int ultrasonicVoltage = Sidecar.ANALOG_BREAKOUT2;
     public static final int shooterDIO = Sidecar.DIO8;
 }

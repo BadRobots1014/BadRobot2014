@@ -42,11 +42,13 @@ public class Shoot extends BadCommand
 
     protected void execute() 
     {
+        /*
         if (lights != null) {
             if (shooter.isCockedBack()) {
                 lights.setColor(ILights.kGreen);
             }
         }
+        * */
         
         //Used when two controllers will be used
         if (!OI.isSingleControllerMode())

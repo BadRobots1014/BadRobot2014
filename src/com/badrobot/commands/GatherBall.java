@@ -32,7 +32,9 @@ public class GatherBall extends BadCommand
      */
     protected void initialize() 
     {
-        
+        SmartDashboard.putNumber("Red Channel", 0);
+        SmartDashboard.putNumber("Green Channel", 0);
+        SmartDashboard.putNumber("Blue Channel", 0);
     }
     /**
      * Gets the console identity. Usually this 
@@ -49,6 +51,7 @@ public class GatherBall extends BadCommand
      */
     protected void execute() 
     {   
+        /*
         if (lights != null) {
             if (!shooter.isCockedBack()) {
                 if (!gatherer.isFolded()) {
@@ -59,6 +62,10 @@ public class GatherBall extends BadCommand
                 }       
             }
         }
+        */
+        
+        //lights.setColor((int)SmartDashboard.getNumber("Red Channel"),(int) SmartDashboard.getNumber("Green Channel"),(int)SmartDashboard.getNumber("Blue Channel"));
+        //lights.setColor(255, 0, 0);
         
         //Used when two controllers will be used
         if (!OI.isSingleControllerMode())

@@ -90,10 +90,10 @@ public class DriveStraightForward extends BadCommand
      */
     protected void execute() {
         //if in time mode, update the time variable and drive the robot forward while correcting its angle
-        if (driveTime > 0)
+        if (SmartDashboard.getNumber("AutonomousDriveStraightTime") > 0)
         {
             if (driveTrain.getLeftEncoder().get() > 0) {
-                SmartDashboard.putNumber("Encoder Click Count: ", driveTrain.getLeftEncoder().get());
+                //SmartDashboard.putNumber("Encoder Click Count: ", driveTrain.getLeftEncoder().get());
             }
             if (!startedTime) {
                 startTime = Utility.getFPGATime();
@@ -101,7 +101,8 @@ public class DriveStraightForward extends BadCommand
                 startedTime = true;
             }
             currentTime = Utility.getFPGATime();
-            driveTrain.getTrain().drive(driveSpeed, -(driveTrain.getGyro().getAngle()-initialAngle)*Kp);
+            //driveTrain.getTrain().drive(driveSpeed, -(driveTrain.getGyro().getAngle()-initialAngle)*Kp);
+            driveTrain.tankDrive(1, 1);
         }
         //if in distance mode, drive the robot forward while correcting its angle
         else if (driveDistance > 0)
@@ -123,7 +124,8 @@ public class DriveStraightForward extends BadCommand
      */
     protected boolean isFinished() {
         //if in time mode, and the time has exceeded the defined parameter, end the command
-        if (driveTime > 0 && currentTime > (startTime + driveTime))
+        if (SmartDashboard.getNumber("AutonomousDriveStraightTime") > 0 && 
+                currentTime > (startTime + SmartDashboard.getNumber("AutonomousDriveStraightTime")*1000000))
         {
             return true;
         }
@@ -141,7 +143,7 @@ public class DriveStraightForward extends BadCommand
     }
 
     protected void end() { 
-        
+        driveTrain.tankDrive(0, 0);
     }
 
     protected void interrupted() {

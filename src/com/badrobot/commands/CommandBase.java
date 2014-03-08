@@ -48,7 +48,6 @@ public abstract class CommandBase extends Command {
             driveTrain = FinalDriveTrain.getInstance();
             shooter = FinalShooter.getInstance();
             gatherer = FinalGatherer.getInstance();
-            //lights = Lights.getInstance();
         }
         //Prototype Subsystems
         else
@@ -61,6 +60,7 @@ public abstract class CommandBase extends Command {
         compressor = CompressorSubsystem.getInstance();
         //ringLight = RingLight.getInstance();
         //visionTracking = VisionTracking.getInstance();
+        //lights = Lights.getInstance();
         
         // This MUST be here. If the OI creates Commands (which it very likely
         // will), constructing it during the construction of CommandBase (from

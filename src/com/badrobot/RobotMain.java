@@ -58,10 +58,10 @@ public class RobotMain extends IterativeRobot {
         
         SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
         
-        int value = DriverStation.getInstance().getAlliance().value;
-        ALLIANCE_COLOR = (value == DriverStation.Alliance.kBlue_val) ? ILights.kBlue : ILights.kRed;
-        if (CommandBase.lights != null)
-         Scheduler.getInstance().add(new RunLights(ALLIANCE_COLOR));
+//        int value = DriverStation.getInstance().getAlliance().value;
+//        ALLIANCE_COLOR = (value == DriverStation.Alliance.kBlue_val) ? ILights.kBlue : ILights.kRed;
+//        if (CommandBase.lights != null)
+//         Scheduler.getInstance().add(new RunLights(ALLIANCE_COLOR));
     }
 
     /**
@@ -72,10 +72,10 @@ public class RobotMain extends IterativeRobot {
         autonomousCommand = (Command) autoChooser.getSelected();
         Scheduler.getInstance().add(autonomousCommand);
         
-        int value = DriverStation.getInstance().getAlliance().value;
-        ALLIANCE_COLOR = (value == DriverStation.Alliance.kBlue_val) ? ILights.kBlue : ILights.kRed;
-        if (CommandBase.lights != null)
-         Scheduler.getInstance().add(new RunLights(ALLIANCE_COLOR));
+//        int value = DriverStation.getInstance().getAlliance().value;
+//        ALLIANCE_COLOR = (value == DriverStation.Alliance.kBlue_val) ? ILights.kBlue : ILights.kRed;
+//        if (CommandBase.lights != null)
+//         Scheduler.getInstance().add(new RunLights(ALLIANCE_COLOR));
     }
 
     /**

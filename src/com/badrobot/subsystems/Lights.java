@@ -45,13 +45,6 @@ public class Lights extends BadSubsystem implements ILights
      */
     private Lights()
     {
-    }
-    
-    /**
-     * Initializes the instance variables.
-     */
-    protected void initialize() 
-    {
         redChannel = new DigitalOutput(RobotMap.redChannel);
         greenChannel = new DigitalOutput(RobotMap.greenChannel);
         blueChannel = new DigitalOutput(RobotMap.blueChannel);
@@ -59,6 +52,13 @@ public class Lights extends BadSubsystem implements ILights
         redChannel.enablePWM(0);
         greenChannel.enablePWM(0);
         blueChannel.enablePWM(0);
+    }
+    
+    /**
+     * Initializes the instance variables.
+     */
+    protected void initialize() 
+    {
     }
 
     /**
@@ -113,6 +113,8 @@ public class Lights extends BadSubsystem implements ILights
         redChannel.updateDutyCycle(byteToPWM(Math.abs(r)));
         greenChannel.updateDutyCycle(byteToPWM(Math.abs(g)));
         blueChannel.updateDutyCycle(byteToPWM(Math.abs(b)));
+        
+        log("Set color to: "+r+"   "+g+"   "+b);
     }
 
     /**
