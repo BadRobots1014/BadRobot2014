@@ -26,11 +26,11 @@ public class RobotMap
     
     
     //Misc Important Robot Variables
-    public static final boolean isPrototype = false;
+    public static final boolean isPrototype = true;
     
     
     
-    /*
+    
     
     
     //PROTOTYPE:
@@ -48,7 +48,7 @@ public class RobotMap
     public static final int driveTrainGyro = Sidecar.ANALOG_BREAKOUT1;
     
     //Ultrasonic Ports
-    public static final int ultrasonicPing = Sidecar.DIO3;
+    public static final int ultrasonicPing = Sidecar.DIO1;
     public static final int ultrasonicEcho = Sidecar.DIO2;
     
     //Encoder Ports
@@ -67,8 +67,8 @@ public class RobotMap
     public static final int engageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER2;
     public static final int disengageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER1;
     
-    public static final int pullGathererSolenoid = Sidecar.PNEUMATIC_BUMPER4;
-    public static final int pushGathererSolenoid = Sidecar.PNEUMATIC_BUMPER3;
+    public static final int pullGathererSolenoid = Sidecar.PNEUMATIC_BUMPER5;
+    public static final int pushGathererSolenoid = Sidecar.PNEUMATIC_BUMPER6;
     public static final int leftExhaust = Sidecar.PNEUMATIC_BUMPER5;
     public static final int rightExhaust = Sidecar.PNEUMATIC_BUMPER6;
     
@@ -80,7 +80,7 @@ public class RobotMap
     //~~~~~~~~INPUT~~~~~~~~//
     
     //Digital Input
-    public static final int pressureSwitchDigitalIn = Sidecar.DIO1;
+    public static final int pressureSwitchDigitalIn = Sidecar.DIO3;
     public static final int gathererOpticalSensor = Sidecar.DIO9;
     
     public static final int ultrasonicVoltage = Sidecar.ANALOG_BREAKOUT2;
@@ -91,7 +91,7 @@ public class RobotMap
     
     
     
-    */
+    /*
     
     
     
@@ -145,4 +145,5 @@ public class RobotMap
     public static final int pressureSwitchDigitalIn = Sidecar.DIO3;
     public static final int ultrasonicVoltage = Sidecar.ANALOG_BREAKOUT2;
     public static final int shooterDIO = Sidecar.DIO8;
+    */
 }

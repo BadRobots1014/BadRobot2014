@@ -20,7 +20,6 @@ public class Compress extends BadCommand
     }
 
     protected void initialize() {
-        compressorEnabled = compressor.isEnabled();
     }
 
     public String getConsoleIdentity() 
@@ -30,9 +29,11 @@ public class Compress extends BadCommand
 
     protected void execute() 
     {
+        compressorEnabled = compressor.isEnabled();
         if (!compressorEnabled)
         {
             compressor.startCompressor();
+            log("enabling compressor");
         }
     }
 

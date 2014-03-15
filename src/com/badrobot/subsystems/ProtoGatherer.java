@@ -63,8 +63,9 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
         pushGatherer = new Solenoid(RobotMap.pushGathererSolenoid);
 
         //Defaults the gatherer to the folded position:
-        pushGatherer.set(false);
-        pullGatherer.set(true);
+//        pushGatherer.set(false);
+//        pullGatherer.set(true);
+        foldGatherer();
         folded = true;
     }
     

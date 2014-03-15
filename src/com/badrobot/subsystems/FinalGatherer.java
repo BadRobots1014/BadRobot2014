@@ -62,7 +62,7 @@ public class FinalGatherer extends BadSubsystem implements IGatherer
     protected void initialize() 
     {
         //gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
-        gathererWheels = new Talon(RobotMap.gathererWheelsController);
+        //gathererWheels = new Talon(RobotMap.gathererWheelsController);
 
         //pullGatherer = new Solenoid(RobotMap.pullGathererSolenoid);
         //pushGatherer = new Solenoid(RobotMap.pushGathererSolenoid);
