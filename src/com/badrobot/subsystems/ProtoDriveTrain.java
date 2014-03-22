@@ -77,8 +77,8 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
         //rightEncoder.start();
         //leftEncoder.start();
 
-        gyro = new Gyro(RobotMap.driveTrainGyro);
-        gyro.reset();
+//        gyro = new Gyro(RobotMap.driveTrainGyro);
+//        gyro.reset();
 
         ultrasonic = new Ultrasonic(RobotMap.ultrasonicPing, RobotMap.ultrasonicEcho);
         ultrasonic.setEnabled(true);
@@ -189,14 +189,14 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
     {
         //This ultrasonicV outputs a voltage in Volts, that reads
         // 5/512 volts per inch
-        //return (ultrasonicV.getVoltage() / .00977);
+        return (ultrasonicV.getVoltage() / .00977);
         
         //return -1;
-        dist = ultrasonic.getRangeInches();
-        
-        ultrasonic.ping();
-        
-        return dist;
+//        dist = ultrasonic.getRangeInches();
+//        
+//        ultrasonic.ping();
+//        
+//        return dist;
         
     }
     

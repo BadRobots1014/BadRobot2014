@@ -73,7 +73,7 @@ public class DriveStraightForward extends BadCommand
      */
     protected void initialize() {
         startTime = Utility.getFPGATime();
-        initialAngle = driveTrain.getGyro().getAngle();
+        //initialAngle = driveTrain.getGyro().getAngle();
         driveSpeed = 1.0;
     }
     
@@ -92,9 +92,9 @@ public class DriveStraightForward extends BadCommand
         //if in time mode, update the time variable and drive the robot forward while correcting its angle
         if (SmartDashboard.getNumber("AutonomousDriveStraightTime") > 0)
         {
-            if (driveTrain.getLeftEncoder().get() > 0) {
+            //if (driveTrain.getLeftEncoder().get() > 0) {
                 //SmartDashboard.putNumber("Encoder Click Count: ", driveTrain.getLeftEncoder().get());
-            }
+            //}
             if (!startedTime) {
                 startTime = Utility.getFPGATime();
                 driveTrain.shiftDown();

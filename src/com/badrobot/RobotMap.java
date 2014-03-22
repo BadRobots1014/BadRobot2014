@@ -83,7 +83,7 @@ public class RobotMap
     public static final int pressureSwitchDigitalIn = Sidecar.DIO3;
     public static final int gathererOpticalSensor = Sidecar.DIO9;
     
-    public static final int ultrasonicVoltage = Sidecar.ANALOG_BREAKOUT2;
+    public static final int ultrasonicVoltage = Sidecar.ANALOG_BREAKOUT1;
     public static final int shooterDIO = Sidecar.DIO6;
     
     

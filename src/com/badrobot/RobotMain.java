@@ -45,13 +45,13 @@ public class RobotMain extends IterativeRobot {
         // Initialize all subsystems
         CommandBase.init();
         
-        SmartDashboard.putNumber("AutonomousDriveStraightTime", 3.8);
-        SmartDashboard.putNumber("Distance to wall", 56);
+        SmartDashboard.putNumber("AutonomousDriveStraightTime", 2.0);
+        SmartDashboard.putNumber("Distance to wall", 64);
         
         //Add autonomous commandgroups to the smart dashboard chooser
         autoChooser = new SendableChooser();
-        //autoChooser.addObject("Drive straight forward with distance and shoot", new DriveForwardAndShoot());
-        //autoChooser.addObject("Drive straight forward with time and shoot", new DriveForwardAndShoot(SmartDashboard.getNumber("AutonomousDriveStraightTime")));
+        autoChooser.addObject("Drive straight forward with distance and shoot", new DriveForwardAndShoot());
+        autoChooser.addObject("Drive straight forward with time and shoot", new DriveForwardAndShoot(SmartDashboard.getNumber("AutonomousDriveStraightTime")));
         //autoChooser.addObject("Check hot drive foward and shoot", new CheckHotMoveAndShoot());
         //autoChooser.addObject("Drive Foward", new DriveStraightForward(SmartDashboard.getNumber("AutonomousDriveStraightTime"), false));
         //autoChooser.addObject("Drive too far low speed", new DriveTooFarFixAndShoot(false));

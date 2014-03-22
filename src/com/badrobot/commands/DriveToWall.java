@@ -21,6 +21,8 @@ public class DriveToWall extends BadCommand
     private double initialAngle;
     //Constant for turn correction
     private static final double Kp = .05;
+    
+    boolean started;
 
     public DriveToWall(double distance)
     {
@@ -35,9 +37,8 @@ public class DriveToWall extends BadCommand
     protected void initialize() 
     {
         driveSpeed = 1.0;
-        driveTrain.tankDrive(0, 0);
         checkNumber = 1;
-        initialAngle = driveTrain.getGyro().getAngle();
+        //initialAngle = driveTrain.getGyro().getAngle();
     }
 
     /**
@@ -55,8 +56,13 @@ public class DriveToWall extends BadCommand
      */
     protected void execute() 
     {
-        driveTrain.getTrain().drive(driveSpeed, -(driveTrain.getGyro().getAngle()-initialAngle)*Kp);
-        if (driveTrain.getDistanceToWall() < DISTANCE_DEADZONE_MAGIC_NUMBER && driveTrain.getDistanceToWall() > -DISTANCE_DEADZONE_MAGIC_NUMBER)
+        if (!started) {
+            DISTANCE_DEADZONE_MAGIC_NUMBER = SmartDashboard.getNumber("Distance to wall");
+            started = true;
+        }
+        //driveTrain.getTrain().drive(driveSpeed, -(driveTrain.getGyro().getAngle()-initialAngle)*Kp);
+        driveTrain.tankDrive(driveSpeed, driveSpeed);
+        if (driveTrain.getDistanceToWall() < DISTANCE_DEADZONE_MAGIC_NUMBER)
         {
             if(checkNumber == 1)
             {
