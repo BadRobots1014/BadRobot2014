@@ -8,7 +8,9 @@ package com.badrobot.subsystems;
 
 import com.badrobot.RobotMap;
 import com.badrobot.subsystems.interfaces.ILights;
+import edu.wpi.first.wpilibj.DigitalModule;
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.I2C;
 
 /**
  * The LED lights subsystem for the prototype robot;
@@ -18,10 +20,10 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 public class Lights extends BadSubsystem implements ILights
 {
     private static Lights instance;
-    
-    DigitalOutput redChannel;
-    DigitalOutput greenChannel;
-    DigitalOutput blueChannel;
+    private final int address = 168;
+    private int currentColor;
+    DigitalModule digiMod;
+    I2C led;
     
     /**
      * Gets the current instance of the subsystem;
@@ -37,21 +39,12 @@ public class Lights extends BadSubsystem implements ILights
         return instance;
     }
     
-    private int currentColor = 0;
-    
     /**
      * Private constructor for an instance of the subsystem;
      * Required for the getInstace() method.
      */
     private Lights()
     {
-        redChannel = new DigitalOutput(RobotMap.redChannel);
-        greenChannel = new DigitalOutput(RobotMap.greenChannel);
-        blueChannel = new DigitalOutput(RobotMap.blueChannel);
-        
-        redChannel.enablePWM(0);
-        greenChannel.enablePWM(0);
-        blueChannel.enablePWM(0);
     }
     
     /**
@@ -59,6 +52,10 @@ public class Lights extends BadSubsystem implements ILights
      */
     protected void initialize() 
     {
+        currentColor = 0;
+        digiMod = DigitalModule.getInstance(1);
+        led = digiMod.getI2C(address);
+        led.free();
     }
 
     /**
@@ -74,14 +71,8 @@ public class Lights extends BadSubsystem implements ILights
     /**
      * Defines the default command for this subsystem.
      */
-    protected void initDefaultCommand() {
-    }
-    
-    public static double byteToPWM(int Color)
+    protected void initDefaultCommand() 
     {
-        double bytePercent = (double) ((double) Color / 255);
-        double pwmValue = (bytePercent*1);
-        return pwmValue;
     }
     
     /**
@@ -89,7 +80,9 @@ public class Lights extends BadSubsystem implements ILights
      */  
     public void turnOn()
     {
-        setColor(ILights.kETech);
+        setColor(ILights.strip_body, ILights.kETech);
+        setColor(ILights.strip_gatherer, ILights.kETech);
+        setColor(ILights.strip_underglow, ILights.kETech);
     }
 
     /**
@@ -97,56 +90,29 @@ public class Lights extends BadSubsystem implements ILights
      */   
     public void turnOff()
     {
-        redChannel.updateDutyCycle(0);
-        greenChannel.updateDutyCycle(0);
-        blueChannel.updateDutyCycle(0);
+        led.write(address, encodeRGB(ILights.strip_body, 0));
+        led.write(address, encodeRGB(ILights.strip_gatherer, 0));
+        led.write(address, encodeRGB(ILights.strip_underglow, 0));
+    }
+    
+    public void setColor(int id, int color) 
+    {
+        led.write(address, encodeRGB(id, color));
     }
 
-    /**
-     * ALL values are to be in between 0 and 255
-     * @param r red
-     * @param g green
-     * @param b blue
-     */
-    public void setColor(int r, int g, int b)
+    public int encodeRGB(int id, int r, int g, int b) 
     {
-        redChannel.updateDutyCycle(byteToPWM(Math.abs(r)));
-        greenChannel.updateDutyCycle(byteToPWM(Math.abs(g)));
-        blueChannel.updateDutyCycle(byteToPWM(Math.abs(b)));
-        
-        log("Set color to: "+r+"   "+g+"   "+b);
+        return -1;
     }
 
-    /**
-     * Sets color of lights to predefined enumerable color
-     * @param color predefined enumerable color
-     */
-    public void setColor(int color)
+    public int encodeRGB(int id, int color) 
     {
-        switch(color)
-        {
-            case(ILights.kBlue):
-                setColor(0,0,255);
-                break;
-            case(ILights.kRed):
-                setColor(255,0,0);
-                break;
-            case(ILights.kGreen):
-                setColor(0,255,0);
-                break;
-            case(ILights.kWhite):
-                setColor(255,255,255);
-                break;
-            case(ILights.kYellow):
-                setColor(255,255,0);
-                break;
-            case(ILights.kETech):
-                setColor(255,0,255);
-                break;
-                        }
         currentColor = color;
+        id = id<<4;
+        id += color;
+        return id;
     }
-
+    
     /**
      * Gets the current color.
      * @return current enumerated color as specified in interface

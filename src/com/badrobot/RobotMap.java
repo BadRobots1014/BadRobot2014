@@ -62,15 +62,15 @@ public class RobotMap
     public static final int gathererMotorRelay = Sidecar.RELAY2;
     
     //Solenoid Ports
-    public static final int shiftDownSolenoid = Sidecar.PNEUMATIC_BUMPER7;
-    public static final int shiftUpSolenoid = Sidecar.PNEUMATIC_BUMPER8;
+    public static final int shiftDownSolenoid = Sidecar.PNEUMATIC_BUMPER8;
+    public static final int shiftUpSolenoid = Sidecar.PNEUMATIC_BUMPER7;
     public static final int engageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER2;
     public static final int disengageWinchSolenoid = Sidecar.PNEUMATIC_BUMPER1;
     
-    public static final int pullGathererSolenoid = Sidecar.PNEUMATIC_BUMPER5;
-    public static final int pushGathererSolenoid = Sidecar.PNEUMATIC_BUMPER6;
-    public static final int leftExhaust = Sidecar.PNEUMATIC_BUMPER5;
-    public static final int rightExhaust = Sidecar.PNEUMATIC_BUMPER6;
+    public static final int pullGathererSolenoid = Sidecar.PNEUMATIC_BUMPER6;
+    public static final int pushGathererSolenoid = Sidecar.PNEUMATIC_BUMPER5;
+//    public static final int leftExhaust = Sidecar.PNEUMATIC_BUMPER5;
+//    public static final int rightExhaust = Sidecar.PNEUMATIC_BUMPER6;
     
     //Lights
     public static int redChannel;

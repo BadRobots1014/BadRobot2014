@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class GatherBall extends BadCommand
 {
+    int debugState;
+    
     /**
      * Constructor for the command;
      * Requires the subsystem to override any 
@@ -50,23 +52,7 @@ public class GatherBall extends BadCommand
      * Continuously called while the command is active.
      */
     protected void execute() 
-    {   
-        /*
-        if (lights != null) {
-            if (!shooter.isCockedBack()) {
-                if (!gatherer.isFolded()) {
-                    lights.setColor(ILights.kETech);
-                }
-                else {
-                    lights.setColor(RobotMain.ALLIANCE_COLOR);
-                }       
-            }
-        }
-        */
-        
-        //lights.setColor((int)SmartDashboard.getNumber("Red Channel"),(int) SmartDashboard.getNumber("Green Channel"),(int)SmartDashboard.getNumber("Blue Channel"));
-        //lights.setColor(255, 0, 0);
-        
+    {
         //Used when two controllers will be used
         if (!OI.isSingleControllerMode())
         {
@@ -124,14 +110,35 @@ public class GatherBall extends BadCommand
         if (controller.isRBButtonPressed())
         {
             gatherer.gatherBall();
+            if (lights != null) {
+                if (debugState != 0) {                    
+                    log("setting lights to green");
+                    debugState = 0;
+                }
+                lights.setColor(ILights.strip_body, ILights.kGreen);
+            }
         }
         else if (controller.isLBButtonPressed())
         {
             gatherer.ejectBall();
+            if (lights != null) {
+                if (debugState != 1) {                    
+                    log("setting lights to white");
+                    debugState = 1;
+                }
+                lights.setColor(ILights.strip_body, ILights.kWhite);
+            }
         }
         else
         {
             gatherer.stopGatherWheels();
+            if (lights != null) {
+                if (debugState != 2) {                    
+                    log("setting lights to red");
+                    debugState = 2;
+                }
+                lights.setColor(ILights.strip_body, ILights.kRed);
+            }
         }
     }
     

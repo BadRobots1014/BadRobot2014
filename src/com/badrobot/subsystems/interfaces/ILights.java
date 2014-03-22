@@ -14,14 +14,17 @@ public interface ILights extends Logger
 {   
     /**
      * Convenience names for the integer cases
+     * k for color.
      */
-    public static final int kBlue = 0,
-                            kRed = 1,
-                            kGreen = 2,
-                            kWhite = 3,
-                            kYellow = 4,
-                            kGold = 5,
-                            kETech = 6;
+    public static final int kRed = 1,
+                            kBlue = 2,
+                            kGreen = 3,
+                            kETech = 4,
+                            kWhite = 5,
+                            kYellow = 6,
+                            strip_underglow = 1,
+                            strip_body = 2,
+                            strip_gatherer = 3;
     /**
      *  Turns on Lights
      */                        
@@ -33,18 +36,27 @@ public interface ILights extends Logger
     public void turnOff();
     
     /**
+     * Sets the color of the LEDs on the identified led strip.
+     * @param id LED strip id
+     * @param color predefined enumerable color
+     */
+    public void setColor(int id, int color);
+    
+    /**
      * ALL values are to be in between 0 and 255
      * @param r red
      * @param g green
      * @param b blue
      */
-    public void setColor(int r, int g, int b);
+    public int encodeRGB(int id, int r, int g, int b);
     
     /**
      * Sets color of lights to predefined enumerable color
+     * on the identified LED strip.
+     * @param id LED strip id
      * @param color predefined enumerable color
      */
-    public void setColor(int color);
+    public int encodeRGB(int id, int color);
     
     /**
      * Gets the current color.

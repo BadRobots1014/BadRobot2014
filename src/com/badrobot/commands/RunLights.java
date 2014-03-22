@@ -4,8 +4,8 @@
  */
 package com.badrobot.commands;
 
+import com.badrobot.subsystems.interfaces.ILights;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.tables.ITable;
 
 /**
  * Sets the lights to run at the specified color (all colors and values 
@@ -25,13 +25,14 @@ public class RunLights extends BadCommand
     // Called just before this Command runs the first time
     protected void initialize()
     {
-        lights.setColor(color);
+        lights.setColor(ILights.strip_body, color);
+        lights.setColor(ILights.strip_gatherer, color);
+        lights.setColor(ILights.strip_underglow, color);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute()
     {
-        
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -51,16 +52,7 @@ public class RunLights extends BadCommand
     {
     }
 
-    public void valueChanged(ITable itable, String key, Object value, boolean bln) {
-    }
-
-    protected void addNetworkTableValues(ITable table) {
-    }
-
     public String getConsoleIdentity() {
         return "RunLights";
-    }
-
-    public void registerPreferencesValues() {
     }
 }
