@@ -21,10 +21,14 @@ public class AutoGather extends BadCommand
     
     Timer timer;
     
-    double stopWheeling;
-    double cockbackStart;
-    double cockbackEnd;
-    double autoGatherEnd;
+    double stopWheelingTime;
+    double cockBackStartTime;
+    double cockBackStopTime;
+    double autoGatherEndTime;
+    
+    boolean stopGatherWheels;
+    boolean cockBackStart;
+    boolean cockBackStop;
     
     public AutoGather()
     {
@@ -39,10 +43,12 @@ public class AutoGather extends BadCommand
         
         timer = new Timer();
         
-        stopWheeling = 2.0;
-        cockbackStart = 3.0;
-        cockbackEnd = 4.0;
-        autoGatherEnd = 4.5;
+        stopGatherWheels = false;
+        cockBackStop = false;
+        
+        stopWheelingTime = 2.0;
+        cockBackStartTime = 3.0;
+        cockBackStopTime = 4.0;
     }
 
     public String getConsoleIdentity() 
@@ -52,28 +58,48 @@ public class AutoGather extends BadCommand
 
     protected void execute() 
     {
-        SmartDashboard.putNumber("Start folding gatherer", 0);
+        SmartDashboard.putNumber("End Gatherer Wheeling Time", stopWheelingTime);
+        SmartDashboard.putNumber("Start Cock Back Time", cockBackStartTime);
+        SmartDashboard.putNumber("Stop Cock Back Time", cockBackStopTime);
+        
         
         timePassed = timer.get();
 
-        if (timeBetween(0, stopWheeling))
-        {
-            gatherer.stopGatherWheels();
-        }
-        else if (timeBetween( 1.0, 4.0))
-        {
-            gatherer.stopGatherWheels();
-            shooter.cockBack(1.0);
-        }
-        else if (timeBetween(4.0, 4.5))
-        {
-            shooter.cockBack(0);
-        }
+        gatherWheelProcess();
+        cockBackStartProcess();
+        cockBackStopProcess();
     }
 
+    public void gatherWheelProcess()
+    {
+        if (!stopGatherWheels && timePassed > stopWheelingTime)
+        {
+            gatherer.stopGatherWheels();
+            stopGatherWheels = true;
+        }
+    }
+    
+    public void cockBackStartProcess()
+    {
+        if (!cockBackStart && timePassed > cockBackStartTime)
+        {
+            shooter.cockBack(1.0);
+            cockBackStart = true;
+        }
+    }
+    
+    public void cockBackStopProcess()
+    {
+        if (!cockBackStop && timePassed > cockBackStopTime)
+        {
+            shooter.cockBack(0);
+            cockBackStop = true;
+        }
+    }
+    
     protected boolean isFinished() 
     {
-        if (timePassed > 4.0)
+        if (timePassed > cockBackStopTime)
         {
             return true;
         }
@@ -85,10 +111,4 @@ public class AutoGather extends BadCommand
 
     protected void interrupted() {
     }
-    
-    private boolean timeBetween(double start, double end)
-    {
-        return (timePassed > start && timePassed < end);
-    }
-    
 }
