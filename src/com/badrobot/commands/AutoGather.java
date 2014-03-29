@@ -8,6 +8,7 @@ import com.badrobot.OI;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -20,6 +21,11 @@ public class AutoGather extends BadCommand
     
     Timer timer;
     
+    double stopWheeling;
+    double cockbackStart;
+    double cockbackEnd;
+    double autoGatherEnd;
+    
     public AutoGather()
     {
         requires((Subsystem) gatherer);
@@ -28,13 +34,15 @@ public class AutoGather extends BadCommand
 
     protected void initialize() 
     {
-        timer = new Timer();
-        startSequence = false;
-        
-        //This code will be called from the initiation of the command until 2.0 seconds (defined below)
-        gatherer.extendGatherer();
-        shooter.disengageWinch();
         gatherer.gatherBall();
+        gatherer.foldGatherer();
+        
+        timer = new Timer();
+        
+        stopWheeling = 2.0;
+        cockbackStart = 3.0;
+        cockbackEnd = 4.0;
+        autoGatherEnd = 4.5;
     }
 
     public String getConsoleIdentity() 
@@ -44,35 +52,22 @@ public class AutoGather extends BadCommand
 
     protected void execute() 
     {
-        //If the gatherer optical sensor is triggered, start the timer and sequence of events
-        if (OI.driverStation.getDigitalIn(3) && !startSequence)
-        {
-            startSequence = true;
-            timer.start();
-        }
+        SmartDashboard.putNumber("Start folding gatherer", 0);
         
-        //The sequence of events:
-        if (startSequence)
+        timePassed = timer.get();
+
+        if (timeBetween(0, stopWheeling))
         {
-            timePassed = timer.get();
-            log("Starting Sequence: 0");
-            
-            if (timeBetween(2.0, 3.0))
-            {
-                log("Changing Actions: 1");
-                gatherer.foldGatherer();
-            }
-            else if (timeBetween(3.0, 4.0))
-            {
-                log("Changing Actions: 2");
-                gatherer.stopGatherWheels();
-                shooter.cockBack(1.0);
-            }
-            else if (timeBetween(4.0, 4.5))
-            {
-                log("Changing Actions: 3");
-                shooter.cockBack(0);
-            }
+            gatherer.stopGatherWheels();
+        }
+        else if (timeBetween( 1.0, 4.0))
+        {
+            gatherer.stopGatherWheels();
+            shooter.cockBack(1.0);
+        }
+        else if (timeBetween(4.0, 4.5))
+        {
+            shooter.cockBack(0);
         }
     }
 
