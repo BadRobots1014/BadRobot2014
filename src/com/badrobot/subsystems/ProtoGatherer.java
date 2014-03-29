@@ -57,7 +57,7 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
     protected void initialize() 
     {
         gathererSwitch = new Relay(RobotMap.gathererMotorRelay);
-        gathererOpticalSensor = new DigitalInput(RobotMap.gathererOpticalSensor);
+        //gathererOpticalSensor = new DigitalInput(RobotMap.gathererOpticalSensor);
 
         pullGatherer = new Solenoid(RobotMap.pullGathererSolenoid);
         pushGatherer = new Solenoid(RobotMap.pushGathererSolenoid);
@@ -150,7 +150,8 @@ public class ProtoGatherer extends BadSubsystem implements IGatherer
      */
     public boolean getOpticalSensorValue() 
     {
-        return gathererOpticalSensor.get();
+        return false;
+        //return gathererOpticalSensor.get();
     }
     
     /**

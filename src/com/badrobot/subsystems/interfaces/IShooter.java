@@ -25,4 +25,6 @@ public interface IShooter
      * Engages the shooter winch, allowing it to be winched back.
      */
     public void engageWinch();
+    
+    public boolean isCockedBack();
 }

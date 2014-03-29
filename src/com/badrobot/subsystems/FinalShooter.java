@@ -109,5 +109,9 @@ public class FinalShooter extends BadSubsystem implements IShooter
 //        engageSolenoid.set(true);
         winchSolenoid.set(DoubleSolenoid.Value.kForward);
     }
+
+    public boolean isCockedBack() {
+        return false;
+    }
     
 }
