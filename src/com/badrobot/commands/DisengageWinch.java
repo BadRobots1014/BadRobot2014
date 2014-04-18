@@ -6,7 +6,9 @@
 
 package com.badrobot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -15,14 +17,20 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DisengageWinch extends BadCommand
 {
     private static boolean finishedExecuting;
+    boolean shouldShoot;
+    boolean started;
+    
+    Timer timer;
     
     public DisengageWinch()
     {
-        requires((Subsystem)shooter);
+        requires((Subsystem) kinect);
+        requires((Subsystem) shooter);
     }
 
     protected void initialize() {
         finishedExecuting = false;
+        timer = new Timer();
     }
 
     public String getConsoleIdentity() {
@@ -30,12 +38,24 @@ public class DisengageWinch extends BadCommand
     }
 
     protected void execute() {
-        shooter.disengageWinch();
-        try {
-            Thread.sleep(500);
-        } catch (Exception ex) {
+        if (!started) {
+            timer.start();
+            started = true;
         }
-        finishedExecuting = true;
+        if (kinect.isRightHandRaised() || timer.get() > (8 - SmartDashboard.getNumber("DriveStraightForwardTime")))
+        {
+            shouldShoot = true;
+        }
+        
+        if (shouldShoot)
+        {
+            shooter.disengageWinch();
+            try {
+                Thread.sleep(500);
+            } catch (Exception ex) {
+            }
+            finishedExecuting = true;
+        }
     }
 
     protected boolean isFinished() {
