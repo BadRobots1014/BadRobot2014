@@ -59,8 +59,8 @@ public class FinalShooter extends BadSubsystem implements IShooter
     protected void initialize() 
     {
         winch = new Talon(RobotMap.winchController);
-//        engageSolenoid = new Solenoid(RobotMap.engageWinchSolenoid);
-//        disengageSolenoid = new Solenoid(RobotMap.disengageWinchSolenoid);
+        engageSolenoid = new Solenoid(RobotMap.engageWinchSolenoid);
+        disengageSolenoid = new Solenoid(RobotMap.disengageWinchSolenoid);
         winchSolenoid = new DoubleSolenoid(RobotMap.engageWinchSolenoid, RobotMap.disengageWinchSolenoid);
 
         shooterDIO = new DigitalInput(RobotMap.shooterDIO);

@@ -77,8 +77,8 @@ public class ProtoDriveTrain extends BadSubsystem implements IDriveTrain
         //rightEncoder.start();
         //leftEncoder.start();
 
-//        gyro = new Gyro(RobotMap.driveTrainGyro);
-//        gyro.reset();
+        gyro = new Gyro(RobotMap.driveTrainGyro);
+        gyro.reset();
 
         ultrasonic = new Ultrasonic(RobotMap.ultrasonicPing, RobotMap.ultrasonicEcho);
         ultrasonic.setEnabled(true);

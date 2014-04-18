@@ -53,7 +53,7 @@ public abstract class CommandBase extends Command {
         else
         {
             driveTrain = ProtoDriveTrain.getInstance();
-            //shooter = ProtoShooter.getInstance();
+            shooter = ProtoShooter.getInstance();
             gatherer = ProtoGatherer.getInstance();
         }
         

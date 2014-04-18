@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class XboxController extends Joystick
 {
-    public static double DEADZONE_MAGIC_NUMBER = .15;
+    public static double DEADZONE_MAGIC_NUMBER = .20;
     
     private static int LEFT_STICK_X = 1, LEFT_STICK_Y = 2, RIGHT_STICK_X = 4, RIGHT_STICK_Y = 5;
     private static int A_BUTTON = 1, B_BUTTON = 2, X_BUTTON = 3, Y_BUTTON = 4, 

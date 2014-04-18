@@ -89,7 +89,7 @@ public class OI {
         
         if (!isSingleControllerMode())
         {
-            driveStraight.whenPressed(new DriveStraightForward());
+            //driveStraight.whenPressed(new DriveStraightForward());
         }
         
         //autoGather.whenPressed(new AutoGather());
