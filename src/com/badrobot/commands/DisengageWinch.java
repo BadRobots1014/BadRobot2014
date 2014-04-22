@@ -45,10 +45,6 @@ public class DisengageWinch extends BadCommand
         if (kinect.isRightHandRaised() || timer.get() > (8 - SmartDashboard.getNumber("DriveStraightForwardTime")))
         {
             shouldShoot = true;
-        }
-        
-        if (shouldShoot)
-        {
             shooter.disengageWinch();
             try {
                 Thread.sleep(500);
